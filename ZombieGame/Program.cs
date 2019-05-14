@@ -6,6 +6,8 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
+            GameSettings settings = new GameSettings(args);
+
             byte x;
             byte y;
             byte z;
