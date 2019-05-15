@@ -6,7 +6,6 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            Render render = new Render;
             byte x;
             byte y;
             byte z;
@@ -15,6 +14,8 @@ namespace ZombieGame
             byte hp;
             byte maxTurns;
 
+            // If user try's to start within the program the
+            // Code will still run
             try
             {
                 // Convert entered values to be used
