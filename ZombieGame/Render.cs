@@ -7,7 +7,7 @@ namespace ZombieGame
     class Render
     {
         // If program isn't run through the console we have a back up
-        internal string EnterVaLues ()
+        internal void EnterVaLues ()
         {
             Console.Write("Insert the map's x value: ");
 
