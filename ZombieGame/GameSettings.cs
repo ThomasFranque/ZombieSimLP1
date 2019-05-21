@@ -13,43 +13,43 @@ namespace ZombieGame
         */
 
         /// <summary>
-        /// 
+        /// Get and set map size horizontaly
         /// </summary>
         public int x { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set map size verticaly
         /// </summary>
         public int y { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of AI controlled zombies
         /// </summary>
         public int z { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of AI controlled humans
         /// </summary>
         public int h { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of playable zombies
         /// </summary>
         public int Z { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of playable humans
         /// </summary>
         public int H { get; private set; }
 
         /// <summary>
-        /// 
+        ///  Get and set max game turns
         /// </summary>
         public int t { get; private set; }
 
 
         /// <summary>
-        /// Constructor will initialize the game variables
+        /// Constructor will initialize the game variables from console args
         /// </summary>
         public GameSettings(string[] args)
         {
@@ -77,14 +77,13 @@ namespace ZombieGame
                         default:
                             break;
                     }
-
                 }
             }
 
             // #############
             // ### Debug ###
             // #############
-            Console.WriteLine("x = " + x + "\nH = " + H);
+            //Console.WriteLine("x = " + x + "\nH = " + H);
             // #############
         }
 
@@ -133,6 +132,27 @@ namespace ZombieGame
                     t = Convert.ToInt32(numArg);
                     break;
             }
+        }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="h"></param>
+        /// <param name="Z"></param>
+        /// <param name="H"></param>
+        /// <param name="t"></param>
+        public GameSettings(int x, int y, int z, int h, int Z, int H, int t)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.h = h;
+            this.Z = Z;
+            this.H = H;
+            this.t = t;
         }
     }
 }
