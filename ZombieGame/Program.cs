@@ -8,15 +8,6 @@ namespace ZombieGame
         {
             Map map = new Map();
 
-            //if (args.Length == 0)
-            //{
-            //    Console.WriteLine("Default values have been set");
-
-            //    GameSettings defSets = new GameSettings(10, 10, 10, 5, 0, 0, 20);
-            //    map.ShowMap
-            //        (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
-            //}
-
             // If user try's to start within the program the
             // Code will still run
             try
@@ -41,6 +32,7 @@ namespace ZombieGame
                 "\t - Said small program.cs ");
             Console.ResetColor();
 
+            // Tests checker
             Console.WriteLine($"Map x: {map.X}");
             Console.WriteLine($"Map y: {map.Y}");
 
@@ -49,6 +41,7 @@ namespace ZombieGame
 
             Console.WriteLine($"Your zombies: {map.PZ}");
             Console.WriteLine($"Your humans: {map.PH}");
+
         }
     }
 }

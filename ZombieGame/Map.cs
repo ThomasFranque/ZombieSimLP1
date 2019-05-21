@@ -8,7 +8,6 @@ namespace ZombieGame
     {
         // Declare instance vars
         CharEnum agent;
-
         
         public int X { get; set; }
         public int Y { get; set; }
