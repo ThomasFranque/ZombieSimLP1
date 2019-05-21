@@ -26,7 +26,7 @@ namespace ZombieGame
             map.ShowMap
                 (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
 
-            Console.WriteLine($"{map.PH}");
+            Console.WriteLine($"{map.Y}");
 
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -35,7 +35,7 @@ namespace ZombieGame
                 "\t - Said small program.cs ");
             Console.ResetColor();
 
-            Console.WriteLine($"{map.PH}");
+            Console.WriteLine($"{map.X}");
         }
     }
 }
