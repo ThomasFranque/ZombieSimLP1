@@ -19,12 +19,14 @@ namespace ZombieGame
             // Case program isn't run through the console
             catch
             {
-                GameSettings defSets = new GameSettings(25, 25, 10, 5, 0, 0, 20);
-                map.ShowMap
-                    (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
 
-                Console.WriteLine($"{map.PH}");
             }
+
+            GameSettings defSets = new GameSettings(10, 10, 10, 5, 0, 0, 20);
+            map.ShowMap
+                (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
+
+            Console.WriteLine($"{map.PH}");
 
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
