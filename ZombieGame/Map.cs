@@ -7,7 +7,7 @@ namespace ZombieGame
     class Map
     {
 
-        public void ShowMap(int x, int y, byte h, byte z)
+        public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
         {
             for (int i = 0; i < x; i++)
                 for (int j = 0; j < y; j++)
