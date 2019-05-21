@@ -6,10 +6,11 @@ namespace ZombieGame
 {
     class Map
     {
-        public void ShowMap()
+
+        public void ShowMap(int x, int y, byte h, byte z)
         {
-            for (int i = 0; i < larg; i++)
-                for (int j = 0; j < comp; j++)
+            for (int i = 0; i < x; i++)
+                for (int j = 0; j < y; j++)
                     Console.WriteLine("map");
         }
     }
