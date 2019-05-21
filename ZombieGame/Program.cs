@@ -6,7 +6,16 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            Map map = new Map();    
+            Map map = new Map();
+
+            //if (args.Length == 0)
+            //{
+            //    Console.WriteLine("Default values have been set");
+
+            //    GameSettings defSets = new GameSettings(10, 10, 10, 5, 0, 0, 20);
+            //    map.ShowMap
+            //        (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
+            //}
 
             // If user try's to start within the program the
             // Code will still run
@@ -19,14 +28,11 @@ namespace ZombieGame
             // Case program isn't run through the console
             catch
             {
-
+                Console.WriteLine("Default values have been set");
+                GameSettings defSets = new GameSettings(10, 10, 10, 5, 0, 0, 20);
+                map.ShowMap
+                    (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
             }
-
-            GameSettings defSets = new GameSettings(10, 10, 10, 5, 0, 0, 20);
-            map.ShowMap
-                (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
-
-            Console.WriteLine($"{map.Y}");
 
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -35,7 +41,14 @@ namespace ZombieGame
                 "\t - Said small program.cs ");
             Console.ResetColor();
 
-            Console.WriteLine($"{map.X}");
+            Console.WriteLine($"Map x: {map.X}");
+            Console.WriteLine($"Map y: {map.Y}");
+
+            Console.WriteLine($"Zombies: {map.Z}");
+            Console.WriteLine($"Humans: {map.H}");
+
+            Console.WriteLine($"Your zombies: {map.PZ}");
+            Console.WriteLine($"Your humans: {map.PH}");
         }
     }
 }

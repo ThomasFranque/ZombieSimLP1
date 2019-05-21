@@ -77,14 +77,13 @@ namespace ZombieGame
                         default:
                             break;
                     }
-
                 }
             }
 
             // #############
             // ### Debug ###
             // #############
-            Console.WriteLine("x = " + x + "\nH = " + H);
+            //Console.WriteLine("x = " + x + "\nH = " + H);
             // #############
         }
 
