@@ -6,6 +6,7 @@ namespace ZombieGame
 {
     class Agents
     {
+        protected bool Infected { get; set; }
 
     }
 }
