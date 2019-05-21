@@ -4,8 +4,13 @@ using System.Text;
 
 namespace ZombieGame
 {
-    class Agents
+    class Human : Agents
     {
+        // Human constructor
+        internal Human ()
+        {
+
+        }
 
     }
 }
