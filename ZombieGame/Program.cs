@@ -6,6 +6,7 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
+            Map map = new Map();
             GameSettings settings = new GameSettings(args);
 
             byte x;
@@ -47,6 +48,11 @@ namespace ZombieGame
             Console.WriteLine("\t When i'm big, I want to be a game! \n" +
                 "\t - Said small program.cs ");
             Console.ResetColor();
+
+
+
+
+            map.ShowMap(x, y, h, z);
         }
     }
 }
