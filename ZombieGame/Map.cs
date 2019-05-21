@@ -15,6 +15,15 @@ namespace ZombieGame
 
         public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
         {
+            // Save parameter values in class properties
+            X = x;
+            Y = y;
+            H = h;
+            Z = z;
+            PH = pH;
+            PZ = pZ;
+
+            // For cicle to print map
             for (int i = 0; i < x; i++)
             {
                 for (int j = 0; j < y; j++)
