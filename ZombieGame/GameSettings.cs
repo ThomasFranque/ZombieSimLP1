@@ -13,43 +13,43 @@ namespace ZombieGame
         */
 
         /// <summary>
-        /// 
+        /// Get and set map size horizontaly
         /// </summary>
         public int x { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set map size verticaly
         /// </summary>
         public int y { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of AI controlled zombies
         /// </summary>
         public int z { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of AI controlled humans
         /// </summary>
         public int h { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of playable zombies
         /// </summary>
         public int Z { get; private set; }
 
         /// <summary>
-        /// 
+        /// Get and set number of playable humans
         /// </summary>
         public int H { get; private set; }
 
         /// <summary>
-        /// 
+        ///  Get and set max game turns
         /// </summary>
         public int t { get; private set; }
 
 
         /// <summary>
-        /// Constructor will initialize the game variables
+        /// Constructor will initialize the game variables from console args
         /// </summary>
         public GameSettings(string[] args)
         {
