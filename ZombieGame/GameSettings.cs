@@ -134,5 +134,26 @@ namespace ZombieGame
                     break;
             }
         }
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="h"></param>
+        /// <param name="Z"></param>
+        /// <param name="H"></param>
+        /// <param name="t"></param>
+        public GameSettings(int x, int y, int z, int h, int Z, int H, int t)
+        {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.h = h;
+            this.Z = Z;
+            this.H = H;
+            this.t = t;
+        }
     }
 }

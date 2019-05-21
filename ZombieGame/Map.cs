@@ -6,6 +6,12 @@ namespace ZombieGame
 {
     class Map
     {
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int H { get; set; }
+        public int Z { get; set; }
+        public int PH { get; set; }
+        public int PZ { get; set; }
 
         public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
         {

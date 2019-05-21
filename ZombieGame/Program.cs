@@ -6,53 +6,34 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            Map map = new Map();
-            GameSettings settings = new GameSettings(args);
-
-            byte x;
-            byte y;
-            byte z;
-            byte h;
-            byte zp;
-            byte hp;
-            byte maxTurns;
+            Map map = new Map();    
 
             // If user try's to start within the program the
             // Code will still run
             try
             {
-                // Convert entered values to be used
-                x = Convert.ToByte(args[0]);
-                y = Convert.ToByte(args[1]);
-                z = Convert.ToByte(args[2]);
-                h = Convert.ToByte(args[3]);
-                zp = Convert.ToByte(args[4]);
-                hp = Convert.ToByte(args[5]);
-                maxTurns = Convert.ToByte(args[6]);
+                GameSettings sets = new GameSettings(args);
+                map.ShowMap(sets.x, sets.y, sets.h, sets.z, sets.H, sets.Z);
 
-                /* Known problems: User can't choose
-                Wich variable to type in first
-                order is defined automatically.
-                When back will create method for 
-                new values in render and agents' classes
-                */
             }
+            // Case program isn't run through the console
             catch
             {
+                GameSettings defSets = new GameSettings(25, 25, 10, 5, 0, 0, 20);
+                map.ShowMap
+                    (defSets.x, defSets.y, defSets.z, defSets.h, defSets.H, defSets.Z);
 
+                Console.WriteLine($"{map.PH}");
             }
 
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            //Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("\t When i'm big, I want to be a game! \n" +
                 "\t - Said small program.cs ");
             Console.ResetColor();
 
-
-
-
-            map.ShowMap(x, y, h, z);
+            Console.WriteLine($"{map.PH}");
         }
     }
 }
