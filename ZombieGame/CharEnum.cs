@@ -7,7 +7,12 @@ namespace ZombieGame
     // Enum of chars to be used
     enum CharEnum
     {
-        h,
-        z,
+        Blank = ' ',
+
+        Human = 'h',
+        Zombie = 'z',
+
+        AI_Human = 'ɥ',
+        AI_Zombie = 'ʞ',
     }
 }
