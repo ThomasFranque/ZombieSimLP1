@@ -27,13 +27,23 @@ namespace ZombieGame
             PZ = pZ;
 
             // For cicle to print map
+            for (int k = 0; k < y * 4 + 1; k++)
+                Console.Write("-");
+
+            Console.WriteLine();
+
             for (int i = 0; i < x; i++)
             {
                 for (int j = 0; j < y; j++)
-                {
-                    Console.Write(" map ");
-                }
+                    Console.Write("| O ");
+
+                Console.WriteLine('|');
+
+                for (int k = 0; k < y * 4 + 1; k++)
+                    Console.Write("-");
+
                 Console.WriteLine();
+
             }
         }
     }
