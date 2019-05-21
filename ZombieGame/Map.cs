@@ -6,10 +6,12 @@ namespace ZombieGame
 {
     class Map
     {
+        GameSettings gmSet;
+
         public void ShowMap()
         {
-            for (int i = 0; i < larg; i++)
-                for (int j = 0; j < comp; j++)
+            for (int i = 0; i < gmSet.x; i++)
+                for (int j = 0; j < gmSet.y; j++)
                     Console.WriteLine("map");
         }
     }
