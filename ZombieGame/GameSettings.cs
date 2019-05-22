@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ZombieGame
 {
@@ -137,7 +138,7 @@ namespace ZombieGame
 
         /// <summary>
         /// Will check if any of the arguments was not given and set it 
-        /// to a "random" number
+        /// to a "random" number and if the zombies / humans fit 
         /// </summary>
         private void CheckArgs()
         {
@@ -164,7 +165,7 @@ namespace ZombieGame
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 3 + h / 2;
+                            z = (x * y) / 3 + h / 4;
                             break;
                         // Z
                         case 4:
@@ -181,6 +182,73 @@ namespace ZombieGame
                             break;
                     }
             }
+
+            // Check if humans plus zombies fit on the board
+            do
+            {
+                char decision;
+
+                Console.Write("\n\nIt seems that the total of Humans " +
+                    "and Zombies surpass the board capabilities.\n" +
+                    "Do you wish to generate a new board or generate new " +
+                    "agents?\n" +
+                    "Generate Board ......... <b>\n" +
+                    "Generate Agents ........ <a>\n>");
+
+                decision = Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+
+                // While not a valid input
+                while (decision != 'B' && decision != 'A')
+                {
+                    decision = Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+                    Console.Write("Sorry, not a valid input.\n>");
+                }
+
+                //FIX LATER ##################################
+                // If player chooses to change the board
+                if (decision == 'B')
+                {
+                    while (x * y <= z + h)
+                    {
+                        x = rand.Next(h + z, h + z * 2);
+                        y = rand.Next(h + z, h + z * 2);
+                    }
+                }
+                else
+                {
+                    Console.Write("\nGenerate new Zombies or new Humans?\n" +
+                        "Zombies ................ <z>\n" +
+                        "Humans ................. <h>\n>");
+
+                    decision = Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+                    // Validate input
+                    while (decision != 'Z' && decision != 'H')
+                    {
+                        decision = Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+                        Console.Write("Sorry, not a valid input.\n>");
+                    }
+                    // Reset Zombies
+                    if (decision == 'Z' && h < x * y - h)
+                        z /= 3;
+                    else if (decision == 'Z')
+                        Console.WriteLine("It seems that with the current board" +
+                            "size and Humans, it is impossible to set a new " +
+                            "balanced number of Zombies.");
+
+                    // Reset Humans
+                    if (decision == 'H' && z / 2 < x * y - z)
+                        h /= 3;
+                    else if (decision == 'H')
+                        Console.WriteLine("It seems that with the current board" +
+                            "size and Zombies, it is impossible to set a new " +
+                            "balanced number of Humans.");
+                }
+                Console.WriteLine($"\nTotal Agents: {z + h}\nBoard Area: {x * y}");
+
+            } while (x * y <= z + h);
+
+            Console.WriteLine("Successfully initialized game settings...");
+            Thread.Sleep(2000);
         }
     }
 }
