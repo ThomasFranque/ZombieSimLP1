@@ -9,9 +9,6 @@ namespace ZombieGame
             Map map = new Map();
             GameSettings setts = new GameSettings(args);
 
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.ForegroundColor = ConsoleColor.Black;
-
             map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
             Console.ResetColor();
 
