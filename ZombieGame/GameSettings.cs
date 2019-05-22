@@ -169,7 +169,7 @@ namespace ZombieGame
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 3 + h / 4;
+                            z = (x * y) / 4;
                             break;
                         // Z
                         case 4:
@@ -188,7 +188,7 @@ namespace ZombieGame
             }
 
             // Check if the board is valid
-            while (x * y <= z + h || x <= 2 || y <= 2 || BigBoardWarning())
+            while (x * y <= z + h || BoardWarning())
             {
                 Console.WriteLine($"\nUps...\nTotal Agents: {z + h}\n" +
                     $"Board Area: {x * y}");
@@ -244,7 +244,7 @@ namespace ZombieGame
             {
                 // Setting total
                 h = (x * y) / 3;
-                z = (x * y) / 3 + h / 4;
+                z = (x * y) / 4;
 
                 // Setting controlled
                 Z = rand.Next(0, z / 2);
@@ -268,17 +268,17 @@ namespace ZombieGame
         /// Will let the player know that the board is big
         /// </summary>
         /// <returns>True if the player doesn't want to proceed</returns>
-        private bool BigBoardWarning()
+        private bool BoardWarning()
         {
             bool restart = false;
-            if (x * y >= 600)
+            if (x * y >= 600 || x * y <= 6)
             {
                 char decision;
 
                 // Message
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Write("\nWARNING!\n" +
-                    $"The board has {x * y} cells.\n" +
+                    $"The board has {x * y} cells!\n" +
                     "Do you wish to proceed?\n| <y> or <n> |\n>");
 
                 decision = PlayerInput();
