@@ -9,6 +9,11 @@ namespace ZombieGame
         // Zombie constructor
         internal Zombie()
         {
+            Infected = true;
+        }
+
+        public void ZombieMaker()
+        {
 
         }
     }

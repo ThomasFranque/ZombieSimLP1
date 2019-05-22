@@ -47,7 +47,6 @@ namespace ZombieGame
         /// </summary>
         public int t { get; private set; }
 
-
         /// <summary>
         /// Constructor will initialize the game variables from console args
         /// </summary>
@@ -77,14 +76,15 @@ namespace ZombieGame
                         default:
                             break;
                     }
-
                 }
             }
+
+            CheckArgs();
 
             // #############
             // ### Debug ###
             // #############
-            Console.WriteLine("x = " + x + "\nH = " + H);
+            //Console.WriteLine("x = " + x + "\nH = " + H);
             // #############
         }
 
@@ -136,24 +136,51 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Default constructor
+        /// Will check if any of the arguments was not given and set it 
+        /// to a "random" number
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="h"></param>
-        /// <param name="Z"></param>
-        /// <param name="H"></param>
-        /// <param name="t"></param>
-        public GameSettings(int x, int y, int z, int h, int Z, int H, int t)
+        private void CheckArgs()
         {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.h = h;
-            this.Z = Z;
-            this.H = H;
-            this.t = t;
+            // Temporary method variables
+            Random rand = new Random();
+            int[] args = new int[7] { x, y, h, z, Z, H, t };
+
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (args[i] == 0)
+                    switch (i)
+                    {
+                        // x
+                        case 0:
+                            x = rand.Next(8, 16);
+                            break;
+                        // y
+                        case 1:
+                            y = rand.Next(8, 16);
+                            break;
+                        // h
+                        case 2:
+                            h = (x * y) / 3;
+                            break;
+                        // z
+                        case 3:
+                            z = (x * y) / 3 + h / 2;
+                            break;
+                        // Z
+                        case 4:
+                            Z = rand.Next(0, z / 2);
+                            break;
+                        // H
+                        case 5:
+                            H = rand.Next(0, h / 2);
+
+                            break;
+                        // t
+                        case 6:
+                            t = rand.Next(8, x * y);
+                            break;
+                    }
+            }
         }
     }
 }
