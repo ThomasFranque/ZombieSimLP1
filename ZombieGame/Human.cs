@@ -9,8 +9,7 @@ namespace ZombieGame
         // Human constructor
         internal Human ()
         {
-
+            Infected = false;
         }
-
     }
 }

@@ -6,47 +6,29 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            GameSettings settings = new GameSettings(args);
+            Map map = new Map();
+            GameSettings setts = new GameSettings(args);
 
-            byte x;
-            byte y;
-            byte z;
-            byte h;
-            byte zp;
-            byte hp;
-            byte maxTurns;
+            map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
+            Console.ResetColor();
 
-            // If user try's to start within the program the
-            // Code will still run
-            try
-            {
-                // Convert entered values to be used
-                x = Convert.ToByte(args[0]);
-                y = Convert.ToByte(args[1]);
-                z = Convert.ToByte(args[2]);
-                h = Convert.ToByte(args[3]);
-                zp = Convert.ToByte(args[4]);
-                hp = Convert.ToByte(args[5]);
-                maxTurns = Convert.ToByte(args[6]);
+            Console.WriteLine($"\nMap Lenght   x: {map.X}");
+            Console.WriteLine($"Map Height   y: {map.Y}");
 
-                /* Known problems: User can't choose
-                Wich variable to type in first
-                order is defined automatically.
-                When back will create method for 
-                new values in render and agents' classes
-                */
-            }
-            catch
-            {
+            Console.WriteLine($"Zombies      z: {map.Z}");
+            Console.WriteLine($"Humans       h: {map.H}");
 
-            }
+            Console.WriteLine($"Your zombies Z: {map.PZ}");
+            Console.WriteLine($"Your humans  H: {map.PH}");
+
 
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("\t When i'm big, I want to be a game! \n" +
-                "\t - Said small program.cs ");
+            //Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
+                "\t - Said small program.cs \n\n");
             Console.ResetColor();
+
         }
     }
 }
