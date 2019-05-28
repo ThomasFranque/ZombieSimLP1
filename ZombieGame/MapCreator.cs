@@ -7,7 +7,6 @@ namespace ZombieGame
     class MapCreator
     {
         CharEnum symbol;
-        Agents agents = new Agents();
 
         public MapCreator()
         {

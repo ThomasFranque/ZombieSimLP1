@@ -45,7 +45,7 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Agents> agents)
+        public virtual void CheckAgents(List<Agents> agents, int x, int y)
         {
             // Go through nº of agents in world
             foreach (Agents k in agents)
@@ -56,7 +56,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        MovePlayer(k);
+                        MoveAgents(k, x, y);
                     }
                     else if (k.Ai)
                     {
@@ -73,7 +73,7 @@ namespace ZombieGame
             // nHumans--; Remove from list
         }
 
-        public virtual void MovePlayer(Agents j)
+        public virtual void MoveAgents(Agents k, int x, int y)
         {
             char dir;
             // Asks for input, converts input
@@ -82,22 +82,57 @@ namespace ZombieGame
 
             switch (dir)
             {
+                // Up
                 case 'w':
 
+                    k.Ypos--; 
+                    
+                    if(k.Ypos < y) // Pick this way of condition or
+                    {
+                        k.Ypos = 0;
+                    }
                     break;
 
+                // Left
                 case 'a':
 
+                    if(--k.Xpos < 0) // This one
+                    {
+                        k.Xpos = x;
+                    }
+                    else
+                    {
+                        k.Xpos--;
+                    }
                     break;
 
+                // Right
                 case 's':
 
+                    if (++k.Xpos > x)
+                    {
+                        k.Xpos = 0;
+                    }
+                    else
+                    {
+                        k.Xpos++;
+                    }
+
                     break;
 
+                // Down
                 case 'd':
 
-                    break;
+                    if (++k.Ypos > y)
+                    {
+                        k.Ypos = 0;
+                    }
+                    else
+                    {
+                        k.Ypos++;
+                    }
 
+                    break;
             }
         }
 
