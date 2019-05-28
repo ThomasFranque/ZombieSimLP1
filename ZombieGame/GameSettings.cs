@@ -148,6 +148,9 @@ namespace ZombieGame
             // Temporary method variables
             Random rand = new Random();
             int[] args = new int[7] { x, y, h, z, Z, H, t };
+            int[] randArgs = new int[7];
+
+            Console.ForegroundColor = ConsoleColor.Red;
 
             // Check for ungiven values
             for (int i = 0; i < args.Length; i++)
@@ -158,34 +161,48 @@ namespace ZombieGame
                         // x
                         case 0:
                             x = rand.Next(8, 16);
+                            randArgs[0] = x;
+                            RandomNumMsg('x', x);
                             break;
                         // y
                         case 1:
                             y = rand.Next(8, 16);
+                            randArgs[1] = y;
+                            RandomNumMsg('y', y);
                             break;
                         // h
                         case 2:
                             h = (x * y) / 3;
+                            randArgs[2] = h;
+                            RandomNumMsg('h', h);
                             break;
                         // z
                         case 3:
                             z = (x * y) / 4;
+                            randArgs[3] = z;
+                            RandomNumMsg('z', z);
                             break;
                         // Z
                         case 4:
                             Z = rand.Next(0, z / 2);
+                            randArgs[4] = Z;
+                            RandomNumMsg('Z', Z);
                             break;
                         // H
                         case 5:
                             H = rand.Next(0, h / 2);
-
+                            randArgs[5] = H;
+                            RandomNumMsg('H', H);
                             break;
                         // t
                         case 6:
                             t = rand.Next(8, x * y);
+                            randArgs[6] = t;
+                            RandomNumMsg('t', t);
                             break;
                     }
             }
+            Console.ResetColor();
 
             // Check if the board is valid
             while (x * y <= z + h || BoardWarning())
@@ -197,6 +214,8 @@ namespace ZombieGame
 
                 InvalidArgs(rand);
             }
+
+            // Warn the player if any of the values was set to random
         }
 
         /// <summary>
@@ -252,18 +271,6 @@ namespace ZombieGame
             }
         }
 
-
-        // THIS MIGHT AND SHOULD GO TO ANOTHER CLASS
-        /// <summary>
-        /// Gets the player intention
-        /// </summary>
-        /// <returns>A char representing the first Upercase letter of 
-        /// the player input</returns>
-        private char PlayerInput()
-        {
-            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
-        }
-
         /// <summary>
         /// Will let the player know that the board is big
         /// </summary>
@@ -291,6 +298,28 @@ namespace ZombieGame
             }
 
             return restart;
+        }
+
+        // VVVVVVVVVVV THIS MIGHT AND SHOULD GO TO ANOTHER CLASS VVVVVVVVVVVV
+        /// <summary>
+        /// Gets the player intention
+        /// </summary>
+        /// <returns>A char representing the first Upercase letter of 
+        /// the player input</returns>
+        private char PlayerInput()
+        {
+            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+        }
+
+        /// <summary>
+        /// Will warn the player of a variable was set to random
+        /// </summary>
+        /// <param name="valN">Name of the variable</param>
+        /// <param name="val">Variable number</param>
+        private void RandomNumMsg(char valN, int val)
+        {
+            Console.WriteLine($"\nRandom Warning!\n" +
+                $"Not given argument {valN} was set to {val}\n");
         }
     }
 }
