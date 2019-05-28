@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ZombieGame
 {
-    class Agents
+    // All derived class' contain these methods
+    abstract class Agents
     {
         // Agents' Properties
         /// <summary>
         /// Is infected?
         /// </summary>
-        protected bool Infected { get; set; }
+        public bool Infected { get; protected set; }
 
         /// <summary>
         /// Agents' X position
         /// </summary>
-        protected int Xpos { get; set; }
+        public int Xpos { get; protected set; }
 
         /// <summary>
         /// Y position
         /// </summary>
-        protected int Ypos { get; set; }
+        public int Ypos { get; protected set; }
 
         /// <summary>
         /// Checks if agent is AI
@@ -28,45 +28,24 @@ namespace ZombieGame
         public bool Ai { get; protected set; }
 
         /// <summary>
-        /// Returns and sets total agents in map
-        /// </summary>
-        protected int AgentsInB { get; set; }
-
-        /// <summary>
         /// Agents controlled by AI
         /// </summary>
-        protected int AiAgents { get; set; }
+        public int AiAgents { get; protected set; }
 
         /// <summary>
         /// Number of zombies in board
         /// </summary>
-        protected int nZombies { get; set; }
+        public int nZombies { get; protected set; }
 
         /// <summary>
         /// Number of Humans in board
         /// </summary>
-        protected int nHumans { get; set; }
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Agents()
-        {
-        }
-
-        /// <summary>
-        /// Gets all agents in board
-        /// </summary>
-        /// <param name="gs"></param>
-        public Agents(GameSettings gs)
-        {
-            AgentsInB = gs.z + gs.h + gs.H + gs.Z;
-        }
+        public int nHumans { get; protected set; }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void CheckPlayer(List<Agents> agents)
+        public virtual void CheckAgents(List<Agents> agents)
         {
             // Go through nº of agents in world
             foreach (Agents k in agents)
@@ -79,22 +58,22 @@ namespace ZombieGame
                     {
                         MovePlayer(k);
                     }
-                    else
+                    else if (k.Ai)
                     {
-                        AI.CheckAgents();
+                        AI.CheckType(k);
                     }
                 }
             }
         }
 
-        public void Turn()
+        public virtual void Turn()
         {
             // if zombie pos adjacente ou == a human pos
             // Remove/Insert(new.Zombie in human pos)
             // nHumans--; Remove from list
         }
 
-        public void MovePlayer(Agents j)
+        public virtual void MovePlayer(Agents j)
         {
             char dir;
             // Asks for input, converts input

@@ -1,6 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Text;
 
 namespace ZombieGame
 {
@@ -11,6 +10,6 @@ namespace ZombieGame
         {
             nZombies++;
             Infected = true;
-        }
+        }        
     }
 }
