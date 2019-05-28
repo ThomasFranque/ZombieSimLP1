@@ -17,7 +17,6 @@ namespace ZombieGame
         /// <param name="i"></param>
         public void MoveAgentsAi(Agents i)
         {
-
         }
 
         /// <summary>
@@ -32,14 +31,24 @@ namespace ZombieGame
                 {
                     if (j is Human)
                     {
-                        MoveAgentsAi(j);
+                        MoveHumansAi(j);
                     }
                     if (j is Zombie)
                     {
-
+                        MoveZombiesAi(j);
                     }
                 }
             }
+        }
+
+        public void MoveHumansAi(Agents i)
+        {
+            // Check if there's zombies around, move way from them
+        }
+
+        public void MoveZombiesAi(Agents i)
+        {
+            // Check if there's humans around, move towards them
         }
     }
 }

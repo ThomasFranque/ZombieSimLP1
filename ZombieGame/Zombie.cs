@@ -7,14 +7,10 @@ namespace ZombieGame
     class Zombie : Agents
     {
         // Zombie constructor
-        internal Zombie()
+        public Zombie()
         {
+            nZombies++;
             Infected = true;
-        }
-
-        public void ZombieMaker()
-        {
-
         }
     }
 }

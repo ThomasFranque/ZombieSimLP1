@@ -7,11 +7,10 @@ namespace ZombieGame
     class Human : Agents
     {
         // Human constructor
-        internal Human ()
+        public Human ()
         {
+            nHumans++;
             Infected = false;
         }
-
-
     }
 }

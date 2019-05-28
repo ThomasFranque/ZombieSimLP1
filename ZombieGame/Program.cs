@@ -11,6 +11,31 @@ namespace ZombieGame
             Map map = new Map();
             GameSettings setts = new GameSettings(args);
 
+            //###############################################
+            // Debug ########################################
+            //###############################################
+            Random r = new Random();
+            int[] testAgentsForMap = new int[setts.x + setts.h];
+
+            // Add AI h
+            for (int i = 0;  i < setts.h - setts.H; i++)
+                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+
+            // Add player controled h
+            for (int i = setts.h - setts.H; i < setts.h; i++)
+                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+
+            // Add AI z
+            for (int i = setts.h; i < setts.z - setts.Z; i++)
+                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+
+            // Add player controled z
+            for (int i = setts.z - setts.Z; i < setts.z; i++)
+                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+            //###############################################
+            // Debug ########################################
+            //###############################################
+
             map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
             Console.ResetColor();
 
@@ -30,7 +55,6 @@ namespace ZombieGame
             Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
                 "\t - Said small program.cs \n\n");
             Console.ResetColor();
-
         }
     }
 }
