@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading;
 
 namespace ZombieGame
 {
     /// <summary>
     /// Contains all the game settings, such as how many player controlled
-    /// units and total rounds.
+    /// units and total turns.
     /// </summary>
     class GameSettings
     {
@@ -47,6 +48,7 @@ namespace ZombieGame
         /// </summary>
         public int t { get; private set; }
 
+
         /// <summary>
         /// Constructor will initialize the game variables from console args
         /// </summary>
@@ -81,11 +83,13 @@ namespace ZombieGame
 
             CheckArgs();
 
-            // #############
-            // ### Debug ###
-            // #############
-            //Console.WriteLine("x = " + x + "\nH = " + H);
-            // #############
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nSuccessfully initialized game settings...");
+            Console.WriteLine($"| Agents: {z + h}\n" +
+                $"| Playing Area: {x * y}\n");
+            Console.ResetColor();
+
+            Thread.Sleep(3600);
         }
 
         /// <summary>
@@ -137,7 +141,7 @@ namespace ZombieGame
 
         /// <summary>
         /// Will check if any of the arguments was not given and set it 
-        /// to a "random" number
+        /// to a "random" number and if the zombies / humans fit 
         /// </summary>
         private void CheckArgs()
         {
@@ -145,6 +149,7 @@ namespace ZombieGame
             Random rand = new Random();
             int[] args = new int[7] { x, y, h, z, Z, H, t };
 
+            // Check for ungiven values
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == 0)
@@ -164,7 +169,7 @@ namespace ZombieGame
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 3 + h / 2;
+                            z = (x * y) / 4;
                             break;
                         // Z
                         case 4:
@@ -181,6 +186,111 @@ namespace ZombieGame
                             break;
                     }
             }
+
+            // Check if the board is valid
+            while (x * y <= z + h || BoardWarning())
+            {
+                Console.WriteLine($"\nUps...\nTotal Agents: {z + h}\n" +
+                    $"Board Area: {x * y}");
+                Console.WriteLine("It seems that what you are trying to " +
+                    "do surpasses the board capabilities.\n");
+
+                InvalidArgs(rand);
+            }
+        }
+
+        /// <summary>
+        /// Used if the given arguments are invalid
+        /// </summary>
+        /// <param name="rand">Random object previously created</param>
+        private void InvalidArgs(Random rand)
+        {
+            char decision;
+
+            Console.Write("Do you wish to generate a new board or " +
+             "generate new agents?\n" +
+             "Generate New Board ......... <b>\n" +
+             "Generate New Agents ........ <a>\n>");
+
+            decision = PlayerInput();
+
+            // While not a valid input
+            while (decision != 'B' && decision != 'A')
+            {
+                Console.Write("Sorry, not a valid input.\n>");
+                decision = PlayerInput();
+            }
+
+            // If player chooses to change the board
+            if (decision == 'B')
+            {
+                // Set board x and y using agents
+                do
+                {
+                    try
+                    {
+                        x = rand.Next(h / 2, z / 2);
+                        y = rand.Next(h / 2, z / 2);
+                    }
+                    catch
+                    {
+                        x = rand.Next(z / 2, h / 2);
+                        y = rand.Next(z / 2, h / 2);
+                    }
+                } while (x * y <= z + h);
+            }
+            // Player wants to generate new agents
+            else
+            {
+                // Setting total
+                h = (x * y) / 3;
+                z = (x * y) / 4;
+
+                // Setting controlled
+                Z = rand.Next(0, z / 2);
+                H = rand.Next(0, h / 2);
+            }
+        }
+
+
+        // THIS MIGHT AND SHOULD GO TO ANOTHER CLASS
+        /// <summary>
+        /// Gets the player intention
+        /// </summary>
+        /// <returns>A char representing the first Upercase letter of 
+        /// the player input</returns>
+        private char PlayerInput()
+        {
+            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+        }
+
+        /// <summary>
+        /// Will let the player know that the board is big
+        /// </summary>
+        /// <returns>True if the player doesn't want to proceed</returns>
+        private bool BoardWarning()
+        {
+            bool restart = false;
+            if (x * y >= 600 || x * y <= 6)
+            {
+                char decision;
+
+                // Message
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Write("\nWARNING!\n" +
+                    $"The board has {x * y} cells!\n" +
+                    "Do you wish to proceed?\n| <y> or <n> |\n>");
+
+                decision = PlayerInput();
+                Console.ResetColor();
+
+                if (decision == 'N')
+                {
+                    restart = true;
+                }
+            }
+
+            return restart;
         }
     }
 }
