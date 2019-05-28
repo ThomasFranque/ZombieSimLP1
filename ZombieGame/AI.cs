@@ -11,35 +11,34 @@ namespace ZombieGame
 
         }
 
-        public void MoveAgents(Agents i)
+        /// <summary>
+        /// Automated agents' movement
+        /// </summary>
+        /// <param name="i"></param>
+        public void MoveAgentsAi(Agents i)
         {
-            if(i is Human)
-            {
-                // Checks map
-                // Moves away from zombie
-            }
-            if (i is Zombie)
-            {
-                // Checks map
-                // Moves toward human
-            }
-            else
-            {
 
-            }
         }
 
-        // Move to checker
-        protected void CheckAgents(Agents agents)
+        /// <summary>
+        /// Checks agents in List
+        /// </summary>
+        /// <param name="agents"></param>
+        public void CheckAgents(List <Agents> agents)
         {
-            while (AgentsInB > 0)
+            while (AiAgents > 0)
             {
-                //Agents j;
-                //foreach ()
-                //{
+                foreach (Agents j in agents)
+                {
+                    if (j is Human)
+                    {
+                        MoveAgentsAi(j);
+                    }
+                    if (j is Zombie)
+                    {
 
-                //}
-
+                    }
+                }
             }
         }
     }

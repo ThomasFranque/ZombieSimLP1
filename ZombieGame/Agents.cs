@@ -30,14 +30,12 @@ namespace ZombieGame
         /// <summary>
         /// Returns and sets total agents in map
         /// </summary>
-        public int AgentsInB
-        {
-            get => AgentsInB;
-            set
-            {
-                AgentsInB = Z + H + H + Z; 
-            }
-        }
+        public int AgentsInB { get; set; }
+
+        /// <summary>
+        /// Agents controlled by AI
+        /// </summary>
+        public int AiAgents { get; set; }
 
         /// <summary>
         /// Empty constructor
