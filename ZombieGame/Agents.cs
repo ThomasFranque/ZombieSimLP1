@@ -69,20 +69,28 @@ namespace ZombieGame
         protected void CheckPlayer(List<Agents> agents)
         {
             // Go through nº of agents in world
-            foreach(Agents k in agents)
+            foreach (Agents k in agents)
             {
-                // While nº of agents > 0 move 
-
-                // Humans
-
-                // Zombies
+                // While nº of agents !AI move
+                for (int ap = 0; ap < agents.Count; ap++)
+                {
+                    // If agents are not AI
+                    if (!k.Ai)
+                    {
+                        MovePlayer(k);
+                    }
+                    else
+                    {
+                        AI.CheckAgents();
+                    }
+                }
             }
         }
 
         public void Turn()
         {
             // if zombie pos adjacente ou == a human pos
-            // Add(new.Zombie in human pos)
+            // Remove/Insert(new.Zombie in human pos)
             // nHumans--; Remove from list
         }
 
