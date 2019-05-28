@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ZombieGame
 {
@@ -6,20 +7,21 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
+            List<Agents> agents = new List<Agents>();
             Map map = new Map();
             GameSettings setts = new GameSettings(args);
 
             map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
             Console.ResetColor();
 
-            Console.WriteLine($"\nMap Lenght   x: {map.X}");
-            Console.WriteLine($"Map Height   y: {map.Y}");
+            Console.WriteLine($"\nMap Lenght   x: {map.x}");
+            Console.WriteLine($"Map Height   y: {map.y}");
 
-            Console.WriteLine($"Zombies      z: {map.Z}");
-            Console.WriteLine($"Humans       h: {map.H}");
+            Console.WriteLine($"Zombies      z: {map.z}");
+            Console.WriteLine($"Humans       h: {map.h}");
 
-            Console.WriteLine($"Your zombies Z: {map.PZ}");
-            Console.WriteLine($"Your humans  H: {map.PH}");
+            Console.WriteLine($"Your zombies Z: {map.Z}");
+            Console.WriteLine($"Your humans  H: {map.H}");
 
 
             // Nice

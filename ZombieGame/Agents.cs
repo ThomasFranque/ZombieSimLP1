@@ -23,6 +23,11 @@ namespace ZombieGame
         protected int Ypos { get; set; }
 
         /// <summary>
+        /// Checks if agent is AI
+        /// </summary>
+        protected bool Ai { get; set; }
+
+        /// <summary>
         /// Returns and sets total agents in map
         /// </summary>
         public int AgentsInB
@@ -30,7 +35,7 @@ namespace ZombieGame
             get => AgentsInB;
             set
             {
-                AgentsInB = Z + H + PH + PZ; 
+                AgentsInB = Z + H + H + Z; 
             }
         }
 
@@ -39,13 +44,13 @@ namespace ZombieGame
         /// </summary>
         public Agents ()
         {
-            AgentsInB = Z + H + PH + PZ;
+            AgentsInB = Z + H + H + Z;
         }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void Move()
+        protected void MovePlayer()
         {
             char dir;
 
@@ -71,13 +76,13 @@ namespace ZombieGame
 
         }
 
-        // Move to checker
-        protected void CheckAgents()
+        /// <summary>
+        /// Returns Agent to string, 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
-            while (AgentsInB > 0)
-            {
-
-            }
+            return "Agent: ";
         }
     }
 }
