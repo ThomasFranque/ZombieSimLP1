@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ZombieGame
 {
-    // All derived class' contain these methods
-    abstract class Agents
+    // All derived class' contain these methods!
+    abstract class Agents : Node
     {
         // Agents' Properties
         /// <summary>
@@ -47,7 +47,7 @@ namespace ZombieGame
         /// </summary>
         public virtual void CheckAgents(List<Agents> agents)
         {
-            // Go through nº of agents in world
+            // Go through list of agents in world
             foreach (Agents k in agents)
             {
                 // While nº of agents !AI move
@@ -66,6 +66,7 @@ namespace ZombieGame
             }
         }
 
+        // Method to infect humans and turn them to zombies
         public virtual void Turn()
         {
             // if zombie pos adjacente ou == a human pos
@@ -73,6 +74,11 @@ namespace ZombieGame
             // nHumans--; Remove from list
         }
 
+
+        /// <summary>
+        /// Move agent to desired position
+        /// </summary>
+        /// <param name="j"></param>
         public virtual void MovePlayer(Agents j)
         {
             char dir;

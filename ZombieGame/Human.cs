@@ -9,5 +9,21 @@ namespace ZombieGame
             nHumans++;
             Infected = false;
         }
+
+        // Print symbol for human agents
+        public override char PrintPart(bool ai)
+        {
+            // If human is AI controlled
+            if (ai)
+            {
+                return 'ɥ';
+            }
+
+            // If human is player controlled
+            else
+            {
+                return 'h';
+            }
+        }
     }
 }
