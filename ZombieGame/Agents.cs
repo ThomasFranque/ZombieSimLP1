@@ -35,7 +35,7 @@ namespace ZombieGame
             get => AgentsInB;
             set
             {
-                AgentsInB = Z + H + PH + PZ; 
+                AgentsInB = Z + H + H + Z; 
             }
         }
 
@@ -44,7 +44,7 @@ namespace ZombieGame
         /// </summary>
         public Agents ()
         {
-            AgentsInB = Z + H + PH + PZ;
+            AgentsInB = Z + H + H + Z;
         }
 
         /// <summary>
