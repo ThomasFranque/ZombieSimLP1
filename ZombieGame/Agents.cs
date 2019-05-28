@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZombieGame
 {
-    class Agents : Map
+    class Agents
     {
         // Agents' Properties
         /// <summary>
@@ -30,48 +30,90 @@ namespace ZombieGame
         /// <summary>
         /// Returns and sets total agents in map
         /// </summary>
-        public int AgentsInB { get; set; }
+        protected int AgentsInB { get; set; }
 
         /// <summary>
         /// Agents controlled by AI
         /// </summary>
-        public int AiAgents { get; set; }
+        protected int AiAgents { get; set; }
+
+        /// <summary>
+        /// Number of zombies in board
+        /// </summary>
+        protected int nZombies { get; set; }
+
+        /// <summary>
+        /// Number of Humans in board
+        /// </summary>
+        protected int nHumans { get; set; }
 
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public Agents ()
+        public Agents()
         {
-            AgentsInB = Z + H + H + Z;
+        }
+
+        /// <summary>
+        /// Gets all agents in board
+        /// </summary>
+        /// <param name="gs"></param>
+        public Agents(GameSettings gs)
+        {            
+            AgentsInB = gs.z + gs.h + gs.H + gs.Z;
         }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void MovePlayer()
+        protected void MovePlayer(Agents i)
         {
-            char dir;
-
-            // Go through nº of agents in world
-            // Check if controled
-
-            // While nº of agents > 0 move 
-
-            // Humans
-
-            // Zombies
-
-            // Asks for input, converts input
-            Console.WriteLine("Use 'WASD' keys to move!");
-            dir = Convert.ToChar(Console.ReadLine());
-
-            switch (dir)
+            if (i is AI )
+            
             {
-                case 'w':
+                char dir;
 
-                    break;
+                // Go through nº of agents in world
+                // Check if controled
+
+                // While nº of agents > 0 move 
+
+                // Humans
+
+                // Zombies
+
+                // Asks for input, converts input
+                Console.WriteLine("Use 'WASD' keys to move!");
+                dir = Convert.ToChar(Console.ReadLine());
+
+                switch (dir)
+                {
+                    case 'w':
+
+                        break;
+
+                    case 'a':
+
+                        break;
+
+                    case 's':
+
+                        break;
+
+                    case 'd':
+
+                        break;
+
+                }
             }
 
+        }
+
+        public void Turn()
+        {
+            // if zombie pos adjacente ou == a human pos
+            // Add(new.Zombie in human pos)
+            // nHumans--; Remove from list
         }
 
         /// <summary>
