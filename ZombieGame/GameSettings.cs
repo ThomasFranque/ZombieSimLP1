@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Threading;
 
 namespace ZombieGame
 {
     /// <summary>
     /// Contains all the game settings, such as how many player controlled
-    /// units and total rounds.
+    /// units and total turns.
     /// </summary>
     class GameSettings
     {
@@ -47,6 +48,7 @@ namespace ZombieGame
         /// </summary>
         public int t { get; private set; }
 
+
         /// <summary>
         /// Constructor will initialize the game variables from console args
         /// </summary>
@@ -81,11 +83,13 @@ namespace ZombieGame
 
             CheckArgs();
 
-            // #############
-            // ### Debug ###
-            // #############
-            //Console.WriteLine("x = " + x + "\nH = " + H);
-            // #############
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("\nSuccessfully initialized game settings...");
+            Console.WriteLine($"| Agents: {z + h}\n" +
+                $"| Playing Area: {x * y}\n");
+            Console.ResetColor();
+
+            Thread.Sleep(3600);
         }
 
         /// <summary>
@@ -137,14 +141,18 @@ namespace ZombieGame
 
         /// <summary>
         /// Will check if any of the arguments was not given and set it 
-        /// to a "random" number
+        /// to a "random" number and if the zombies / humans fit 
         /// </summary>
         private void CheckArgs()
         {
             // Temporary method variables
             Random rand = new Random();
             int[] args = new int[7] { x, y, h, z, Z, H, t };
+            int[] randArgs = new int[7];
 
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            // Check for ungiven values
             for (int i = 0; i < args.Length; i++)
             {
                 if (args[i] == 0)
@@ -153,34 +161,165 @@ namespace ZombieGame
                         // x
                         case 0:
                             x = rand.Next(8, 16);
+                            randArgs[0] = x;
+                            RandomNumMsg('x', x);
                             break;
                         // y
                         case 1:
                             y = rand.Next(8, 16);
+                            randArgs[1] = y;
+                            RandomNumMsg('y', y);
                             break;
                         // h
                         case 2:
                             h = (x * y) / 3;
+                            randArgs[2] = h;
+                            RandomNumMsg('h', h);
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 3 + h / 2;
+                            z = (x * y) / 4;
+                            randArgs[3] = z;
+                            RandomNumMsg('z', z);
                             break;
                         // Z
                         case 4:
                             Z = rand.Next(0, z / 2);
+                            randArgs[4] = Z;
+                            RandomNumMsg('Z', Z);
                             break;
                         // H
                         case 5:
                             H = rand.Next(0, h / 2);
-
+                            randArgs[5] = H;
+                            RandomNumMsg('H', H);
                             break;
                         // t
                         case 6:
                             t = rand.Next(8, x * y);
+                            randArgs[6] = t;
+                            RandomNumMsg('t', t);
                             break;
                     }
             }
+            Console.ResetColor();
+
+            // Check if the board is valid
+            while (x * y <= z + h || BoardWarning())
+            {
+                Console.WriteLine($"\nUps...\nTotal Agents: {z + h}\n" +
+                    $"Board Area: {x * y}");
+                Console.WriteLine("It seems that what you are trying to " +
+                    "do surpasses the board capabilities.\n");
+
+                InvalidArgs(rand);
+            }
+
+            // Warn the player if any of the values was set to random
+        }
+
+        /// <summary>
+        /// Used if the given arguments are invalid
+        /// </summary>
+        /// <param name="rand">Random object previously created</param>
+        private void InvalidArgs(Random rand)
+        {
+            char decision;
+
+            Console.Write("Do you wish to generate a new board or " +
+             "generate new agents?\n" +
+             "Generate New Board ......... <b>\n" +
+             "Generate New Agents ........ <a>\n>");
+
+            decision = PlayerInput();
+
+            // While not a valid input
+            while (decision != 'B' && decision != 'A')
+            {
+                Console.Write("Sorry, not a valid input.\n>");
+                decision = PlayerInput();
+            }
+
+            // If player chooses to change the board
+            if (decision == 'B')
+            {
+                // Set board x and y using agents
+                do
+                {
+                    try
+                    {
+                        x = rand.Next(h / 2, z / 2);
+                        y = rand.Next(h / 2, z / 2);
+                    }
+                    catch
+                    {
+                        x = rand.Next(z / 2, h / 2);
+                        y = rand.Next(z / 2, h / 2);
+                    }
+                } while (x * y <= z + h);
+            }
+            // Player wants to generate new agents
+            else
+            {
+                // Setting total
+                h = (x * y) / 3;
+                z = (x * y) / 4;
+
+                // Setting controlled
+                Z = rand.Next(0, z / 2);
+                H = rand.Next(0, h / 2);
+            }
+        }
+
+        /// <summary>
+        /// Will let the player know that the board is big
+        /// </summary>
+        /// <returns>True if the player doesn't want to proceed</returns>
+        private bool BoardWarning()
+        {
+            bool restart = false;
+            if (x * y >= 600 || x * y <= 6)
+            {
+                char decision;
+
+                // Message
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.Write("\nWARNING!\n" +
+                    $"The board has {x * y} cells!\n" +
+                    "Do you wish to proceed?\n| <y> or <n> |\n>");
+
+                decision = PlayerInput();
+                Console.ResetColor();
+
+                if (decision == 'N')
+                {
+                    restart = true;
+                }
+            }
+
+            return restart;
+        }
+
+        // VVVVVVVVVVV THIS MIGHT AND SHOULD GO TO ANOTHER CLASS VVVVVVVVVVVV
+        /// <summary>
+        /// Gets the player intention
+        /// </summary>
+        /// <returns>A char representing the first Upercase letter of 
+        /// the player input</returns>
+        private char PlayerInput()
+        {
+            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+        }
+
+        /// <summary>
+        /// Will warn the player of a variable was set to random
+        /// </summary>
+        /// <param name="valN">Name of the variable</param>
+        /// <param name="val">Variable number</param>
+        private void RandomNumMsg(char valN, int val)
+        {
+            Console.WriteLine($"\nRandom Warning!\n" +
+                $"Not given argument {valN} was set to {val}\n");
         }
     }
 }
