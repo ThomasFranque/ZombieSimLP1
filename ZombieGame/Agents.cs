@@ -23,6 +23,11 @@ namespace ZombieGame
         protected int Ypos { get; set; }
 
         /// <summary>
+        /// Checks if agent is AI
+        /// </summary>
+        protected bool Ai { get; set; }
+
+        /// <summary>
         /// Returns and sets total agents in map
         /// </summary>
         public int AgentsInB
@@ -45,7 +50,7 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void Move()
+        protected void MovePlayer()
         {
             char dir;
 
