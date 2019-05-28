@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Text;
+using System.Collections.Generic;
 
 namespace ZombieGame
 {
     class MapCreator
     {
-        CharEnum agent;
+        CharEnum symbol;
         Agents agents = new Agents();
 
         public MapCreator()
@@ -14,12 +15,12 @@ namespace ZombieGame
         }
 
 
-        public void SelectChar()
+        public void SelectChar(List<Agents> agents)
         {
-            switch (agents)
-            {
-
-            }
+            foreach (Agents agent in agents)
+                if (agent is Human)
+                    if(agent.Ai)
+                    Console.Write(CharEnum.Human);
         }
     }
 }

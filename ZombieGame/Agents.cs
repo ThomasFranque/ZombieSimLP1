@@ -25,7 +25,7 @@ namespace ZombieGame
         /// <summary>
         /// Checks if agent is AI
         /// </summary>
-        protected bool Ai { get; set; }
+        public bool Ai { get; protected set; }
 
         /// <summary>
         /// Returns and sets total agents in map
