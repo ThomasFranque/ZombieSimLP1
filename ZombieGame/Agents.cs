@@ -59,54 +59,24 @@ namespace ZombieGame
         /// </summary>
         /// <param name="gs"></param>
         public Agents(GameSettings gs)
-        {            
+        {
             AgentsInB = gs.z + gs.h + gs.H + gs.Z;
         }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void MovePlayer(Agents i)
+        protected void CheckPlayer(List<Agents> agents)
         {
-            if (i is AI )
-            
+            // Go through nº of agents in world
+            foreach(Agents k in agents)
             {
-                char dir;
-
-                // Go through nº of agents in world
-                // Check if controled
-
                 // While nº of agents > 0 move 
 
                 // Humans
 
                 // Zombies
-
-                // Asks for input, converts input
-                Console.WriteLine("Use 'WASD' keys to move!");
-                dir = Convert.ToChar(Console.ReadLine());
-
-                switch (dir)
-                {
-                    case 'w':
-
-                        break;
-
-                    case 'a':
-
-                        break;
-
-                    case 's':
-
-                        break;
-
-                    case 'd':
-
-                        break;
-
-                }
             }
-
         }
 
         public void Turn()
@@ -114,6 +84,34 @@ namespace ZombieGame
             // if zombie pos adjacente ou == a human pos
             // Add(new.Zombie in human pos)
             // nHumans--; Remove from list
+        }
+
+        public void MovePlayer(Agents j)
+        {
+            char dir;
+            // Asks for input, converts input
+            Console.WriteLine("Use 'WASD' keys to move!");
+            dir = Convert.ToChar(Console.ReadLine());
+
+            switch (dir)
+            {
+                case 'w':
+
+                    break;
+
+                case 'a':
+
+                    break;
+
+                case 's':
+
+                    break;
+
+                case 'd':
+
+                    break;
+
+            }
         }
 
         /// <summary>
