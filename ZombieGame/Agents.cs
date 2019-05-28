@@ -76,13 +76,13 @@ namespace ZombieGame
 
         }
 
-        // Move to checker
-        protected void CheckAgents()
+        /// <summary>
+        /// Returns Agent to string, 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
         {
-            while (AgentsInB > 0)
-            {
-
-            }
+            return "Agent: ";
         }
     }
 }
