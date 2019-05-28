@@ -11,5 +11,7 @@ namespace ZombieGame
         {
             Infected = false;
         }
+
+
     }
 }
