@@ -1,20 +1,18 @@
-﻿
-namespace ZombieGame
+﻿namespace ZombieGame
 {
     class Human : Agents
     {
         // Human constructor
-        public Human (bool AIUnit)
+        public Human (bool AIUnit) :base(AIUnit)
         {
-            Ai = AIUnit;
             Infected = false;
         }
 
         // Print symbol for human agents
-        public override char PrintPart(bool ai)
+        public override char PrintPart()
         {
             // If human is AI controlled
-            if (ai)
+            if (Ai)
             {
                 return 'ɥ';
             }
@@ -25,5 +23,7 @@ namespace ZombieGame
                 return 'h';
             }
         }
+
+        public override string ToString() => base.ToString() + "Human";
     }
 }

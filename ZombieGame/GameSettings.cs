@@ -90,7 +90,7 @@ namespace ZombieGame
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nSuccessfully initialized game settings...");
-            Console.WriteLine($"| Agents: {z + h}\n" +
+            Console.WriteLine($"| Agents: {z + h + Z + H}\n" +
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
 
@@ -218,7 +218,7 @@ namespace ZombieGame
             // Check if the board is valid
             while (x * y <= z + h || BoardWarning())
             {
-                Console.WriteLine($"\nUps...\nTotal Agents: {z + h}\n" +
+                Console.WriteLine($"\nUps...\nTotal Agents: {z + h + Z + H}\n" +
                     $"Board Area: {x * y}");
                 Console.WriteLine("It seems that what you are trying to " +
                     "do surpasses the board capabilities.\n");

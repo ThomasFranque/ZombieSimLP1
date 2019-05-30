@@ -1,11 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace ZombieGame
 {
     abstract class Node
     {
+        // Property
+        public bool Ai { get; }
+
+        // Constructor to get AI value
+        public Node(bool AiUnit)
+        {
+            Ai = AiUnit;
+        }
+
+
         /// <summary>
         /// Defines text output encoding
         /// </summary>
@@ -19,6 +28,6 @@ namespace ZombieGame
         /// </summary>
         /// <param name="infected"></param>
         /// <returns></returns>
-        public abstract char PrintPart(bool ai);
+        public abstract char PrintPart();
     }
 }
