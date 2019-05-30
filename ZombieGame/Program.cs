@@ -14,9 +14,9 @@ namespace ZombieGame
             TestMap map = new TestMap(setts.x, setts.y);
 
             // Save the settings
-            FileManager.Save(setts.GetAllVars());
+            //FileManager.Save(setts.GetAllVars());
             // Load settings
-            setts = FileManager.LoadSetts();
+            //setts = FileManager.LoadSetts();
 
             //###############################################
             // Debug ########################################
@@ -42,13 +42,6 @@ namespace ZombieGame
                 i++)
                 agents.Add(new Blank(false));
 
-            int k = 0;
-            foreach (Node a in agents)
-            {
-                Console.WriteLine($"{a.ToString()}; Count:{k}");
-                k++;
-            }
-
             Console.WriteLine("List count:" + agents.Count);
             Console.WriteLine("Map size:" + map.Board.Length);
             Console.WriteLine();
@@ -59,7 +52,7 @@ namespace ZombieGame
 
 
             //map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
-            map.FillMap(agents, map.Board);
+            map.FillMap(agents);
             map.ShowMap();
             Console.ResetColor();
 

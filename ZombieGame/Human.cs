@@ -14,7 +14,7 @@
             // If human is AI controlled
             if (Ai)
             {
-                return 'ɥ';
+                return 'H';
             }
 
             // If human is player controlled

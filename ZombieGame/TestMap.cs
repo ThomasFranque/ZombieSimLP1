@@ -15,24 +15,24 @@ namespace ZombieGame
         {
             BoardX = x;
             BoardY = y;
-            Board = new Node[BoardX, BoardY];
+            Board = new Node[1000, 1000];
         }
 
         // Instanciate bi-dim array of nodes with gameSettings x e y do mapa
-        public void FillMap(List<Node> node, Node[,] nodes)
+        public void FillMap(List<Node> node)
         {
-            for (int i = 0; i < BoardY; i++)
+            int a = 0;
+            for (int i = 0; i < BoardY ; i++)
             {
-                int a = 0;
-
                 for (int j = 0; j < BoardX; j++)
                 {
                     Board[i, j] = node[a];
-                    
+                    //Console.WriteLine(node[a]);
+                    a++;
                 }
-
                 a++;
             }
+            //Console.Clear();
         }
 
         // For cycle to print array

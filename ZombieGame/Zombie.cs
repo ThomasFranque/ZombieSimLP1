@@ -14,7 +14,7 @@
             // If zombie is AI controlled
             if (Ai)
             {
-                return 'ʞ';
+                return 'Z';
             }
 
             // If zombie is player controlled
