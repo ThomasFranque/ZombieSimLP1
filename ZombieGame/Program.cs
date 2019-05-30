@@ -10,8 +10,8 @@ namespace ZombieGame
         {
             // Declare variables
             GameSettings setts = new GameSettings(args);
-            TestMap map = new TestMap(setts.x, setts.y);
             List<Node> agents = new List<Node>();
+            TestMap map = new TestMap(setts.x, setts.y);
 
             // Save the settings
             FileManager.Save(setts.GetAllVars());
@@ -37,10 +37,10 @@ namespace ZombieGame
             for (int i = 0; i < setts.z; i++)
                 agents.Add(new Zombie(false));
 
-            Console.WriteLine(agents.Count);
-            Console.WriteLine();
-            Console.WriteLine(map.Board.Length);
-            Console.WriteLine();
+            for (int i = 0;
+                i < (setts.x * setts.y) - (setts.h + setts.z + setts.H + setts.Z);
+                i++)
+                agents.Add(new Blank(false));
 
             int k = 0;
             foreach (Node a in agents)
@@ -48,6 +48,11 @@ namespace ZombieGame
                 Console.WriteLine($"{a.ToString()}; Count:{k}");
                 k++;
             }
+
+            Console.WriteLine("List count:" + agents.Count);
+            Console.WriteLine("Map size:" + map.Board.Length);
+            Console.WriteLine();
+
             //###############################################
             // Debug ########################################
             //###############################################

@@ -6,7 +6,7 @@ namespace ZombieGame
 {
     class Blank : Node
     {
-        public Blank() : base(false)
+        public Blank(bool ai) : base(ai)
         {
         }
 
@@ -14,5 +14,8 @@ namespace ZombieGame
         {
             return ' ';
         }
+
+        public override string ToString() => $"Ai: {Ai} ; Blank";
+
     }
 }

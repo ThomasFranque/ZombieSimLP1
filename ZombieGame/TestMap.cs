@@ -21,15 +21,17 @@ namespace ZombieGame
         // Instanciate bi-dim array of nodes with gameSettings x e y do mapa
         public void FillMap(List<Node> node, Node[,] nodes)
         {
-            int a = 0;
-
             for (int i = 0; i < BoardY; i++)
             {
+                int a = 0;
+
                 for (int j = 0; j < BoardX; j++)
                 {
                     Board[i, j] = node[a];
-                    a++;
+                    
                 }
+
+                a++;
             }
         }
 
@@ -44,8 +46,7 @@ namespace ZombieGame
             for (int i = 0; i < BoardY; i++)
             {
                 for (int j = 0; j < BoardX; j++)
-                    foreach (Node a in Board)
-                        Console.Write($"| {Board[i, j].PrintPart()} ");
+                    Console.Write($"| {Board[i, j].PrintPart()} ");
 
                 Console.WriteLine('|');
 
