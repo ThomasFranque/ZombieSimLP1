@@ -6,9 +6,9 @@ namespace ZombieGame
     class Zombie : Agents
     {
         // Zombie constructor
-        public Zombie()
+        public Zombie(bool AIUnit)
         {
-            nZombies++;
+            Ai = AIUnit;
             Infected = true;
         }
         

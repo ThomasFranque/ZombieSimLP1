@@ -33,16 +33,6 @@ namespace ZombieGame
         public int AiAgents { get; protected set; }
 
         /// <summary>
-        /// Number of zombies in board
-        /// </summary>
-        public int nZombies { get; protected set; }
-
-        /// <summary>
-        /// Number of Humans in board
-        /// </summary>
-        public int nHumans { get; protected set; }
-
-        /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
         public virtual void CheckAgents(List<Agents> agents)
