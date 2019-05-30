@@ -49,11 +49,16 @@ namespace ZombieGame
             // nHumans--; Remove from list
         }
 
+        /// <summary>
+        /// Player moves agents with keys
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public virtual void Move(int x, int y)
         {
             char dir;
             // Asks for input, converts input
-            Console.WriteLine("Use 'WASD' keys to move!");
+            Render.InstMove();
             dir = Convert.ToChar(Console.ReadLine());
 
             switch (dir)

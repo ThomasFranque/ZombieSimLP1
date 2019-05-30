@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Threading;
 
 namespace ZombieGame
 {
@@ -24,9 +23,29 @@ namespace ZombieGame
                     }
                     else if (k.Ai)
                     {
-                        AI.CheckType(k);
+                        CheckType(k);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Checks Ai agents in List, calls correct movement based
+        /// On agents' state (human or zombie)
+        /// </summary>
+        /// <param name="agents"></param>
+        static public void CheckType(Agents j)
+        {
+            // Human, runs from zombie
+            if (j is Human)
+            {
+                AI.MoveHumansAi(j);
+            }
+            // Zombie, runs towards human
+            if (j is Zombie)
+            {
+                AI.MoveZombiesAi(j);
+                Thread.Sleep(2000);
             }
         }
     }
