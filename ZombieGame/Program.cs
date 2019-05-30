@@ -12,6 +12,11 @@ namespace ZombieGame
             GameSettings setts = new GameSettings(args);
             List<Agents> agents = new List<Agents>(setts.h * setts.z);
 
+            // Save the settings
+            FileManager.Save(setts.GetAllVars());
+            // Load settings
+            setts = FileManager.LoadSetts();
+
             //###############################################
             // Debug ########################################
             //###############################################
