@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 namespace ZombieGame
 {
-    // All derived class' contain these methods
-    abstract class Agents
+    // All derived class' contain these methods!
+    abstract class Agents : Node
     {
         // Agents' Properties
         /// <summary>
@@ -33,14 +33,6 @@ namespace ZombieGame
         public int AiAgents { get; protected set; }
 
         /// <summary>
-        /// Number of zombies in board
-        /// </summary>
-        public int nZombies { get; protected set; }
-
-        /// <summary>
-        /// Number of Humans in board
-        /// </summary>
-        public int nHumans { get; protected set; }
 
         public virtual void Turn()
         {

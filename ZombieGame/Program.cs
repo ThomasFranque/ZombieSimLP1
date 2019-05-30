@@ -8,31 +8,28 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            List<Agents> agents = new List<Agents>();
             Map map = new Map();
             GameSettings setts = new GameSettings(args);
+            List<Agents> agents = new List<Agents>(setts.h * setts.z);
 
             //###############################################
             // Debug ########################################
             //###############################################
-            Random r = new Random();
-            int[] testAgentsForMap = new int[setts.x + setts.h];
-
             // Add AI h
-            for (int i = 0;  i < setts.h - setts.H; i++)
-                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+            for (int i = 0; i < setts.h - setts.H; i++)
+                agents.Add(new Human(true));
 
             // Add player controled h
             for (int i = setts.h - setts.H; i < setts.h; i++)
-                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+                agents.Add(new Human(false));
 
             // Add AI z
             for (int i = setts.h; i < setts.z - setts.Z; i++)
-                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+                agents.Add(new Zombie(true));
 
             // Add player controled z
             for (int i = setts.z - setts.Z; i < setts.z; i++)
-                testAgentsForMap[i] = r.Next(1, setts.x * setts.y);
+                agents.Add(new Zombie(false));
             //###############################################
             // Debug ########################################
             //###############################################
