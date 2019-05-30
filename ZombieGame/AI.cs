@@ -5,7 +5,7 @@ namespace ZombieGame
     static class AI
     {
         /// <summary>
-        /// Checks Ai agents in List
+        /// Accepts a human agent and does it's movement accordingly
         /// </summary>
         /// <param name="agents"></param>
         static public void CheckType(Node j)

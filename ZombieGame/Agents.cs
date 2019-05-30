@@ -51,34 +51,127 @@ namespace ZombieGame
             // nHumans--; Remove from list
         }
 
-
         /// <summary>
-        /// Move agent to desired position
+        /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
         public virtual void MovePlayer(Node j)
         {
+            // Variables
             char dir;
-            // Asks for input, converts input
-            Console.WriteLine("Use 'WASD' keys to move!");
-            dir = Convert.ToChar(Console.ReadLine());
+            string conv;
+
+            Render.AskInput(); // Asks for input, converts input           
+            conv = Console.ReadLine(); // Stores input
+            conv = conv.ToLower(); // Converts to lowercase
+            dir = Convert.ToChar(conv);// Converts to char
 
             switch (dir)
             {
+                // Up
                 case 'w':
 
+                    Ypos--; 
+                    
+                    if(Ypos < y) // Pick this way of condition or
+                    {
+                        Ypos = 0;
+                    }
                     break;
 
+                // Left
                 case 'a':
 
+                    if(--Xpos < 0) // This one
+                    {
+                        Xpos = x;
+                    }
+                    else
+                    {
+                        Xpos--;
+                    }
                     break;
 
+                // Right
                 case 's':
 
+                    if (++Xpos > x)
+                    {
+                        Xpos = 0;
+                    }
+                    else
+                    {
+                        Xpos++;
+                    }
+
                     break;
 
+                // Down
                 case 'd':
-
+                    if (++Ypos > y)
+                    {
+                        Ypos = 0;
+                    }
+                    else
+                    {
+                        Ypos++;
+                    }
+                    break;
+                // Diagonals
+                // Up Left
+                case 'q':
+                    if(--Ypos < 0 && --Xpos < 0)
+                    {
+                        Ypos = y;
+                        Xpos = x;
+                    }
+                    else
+                    {
+                        Ypos--;
+                        Xpos--;
+                    }
+                    break;
+                // Up right
+                case 'e':
+                    if(--Ypos < 0 && Xpos > x)
+                    {
+                        Ypos = y;
+                        Xpos = 0;
+                    }
+                    else
+                    {
+                        Ypos--;
+                        Xpos++;
+                    }
+                    break;
+                // Down left
+                case 'z':
+                    if(++Ypos > y && --Xpos < 0)
+                    {
+                        Ypos = 0;
+                        Xpos = x;
+                    }
+                    else
+                    {
+                        Ypos++;
+                        Xpos--;
+                    }
+                    break;
+                // Down right
+                case 'c':
+                    if(++Ypos > y && ++Xpos > x)
+                    {
+                        Ypos = 0;
+                        Xpos = 0;
+                    }
+                    else
+                    {
+                        Ypos++;
+                        Xpos++;
+                    }
+                    break;
+                default:
+                    Move(x, y);
                     break;
 
             }

@@ -6,8 +6,7 @@
         public Zombie(bool AIUnit) : base(AIUnit)
         {
             Infected = true;
-        }
-        
+        }    
 
         // Print symbols for zombie agents
         public override char PrintPart()
