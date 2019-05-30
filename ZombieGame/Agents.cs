@@ -33,7 +33,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        MovePlayer(k);
+                        Move(k);
                     }
                     else if (k.Ai)
                     {
@@ -55,7 +55,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public virtual void MovePlayer(Node j)
+        public virtual void Move(TestMap map, int x, int y)
         {
             // Variables
             char dir;
@@ -70,10 +70,11 @@ namespace ZombieGame
             {
                 // Up
                 case 'w':
-
-                    Ypos--; 
-                    
-                    if(Ypos < y) // Pick this way of condition or
+                    if (--j. < 0)
+                    {
+                        j.BoardY = map.BoardY;
+                    }                    
+                    else
                     {
                         Ypos = 0;
                     }
@@ -81,7 +82,6 @@ namespace ZombieGame
 
                 // Left
                 case 'a':
-
                     if(--Xpos < 0) // This one
                     {
                         Xpos = x;
@@ -94,7 +94,6 @@ namespace ZombieGame
 
                 // Right
                 case 's':
-
                     if (++Xpos > x)
                     {
                         Xpos = 0;
@@ -103,7 +102,6 @@ namespace ZombieGame
                     {
                         Xpos++;
                     }
-
                     break;
 
                 // Down
@@ -173,7 +171,13 @@ namespace ZombieGame
                     }
                     else if (++Ypos > y) // Down
                     {
-
+                        Ypos = 0;
+                        Xpos--;
+                    }
+                    else if(--Xpos < 0) // Left
+                    {
+                        Ypos++;
+                        Xpos = x;
                     }
                     else
                     {
@@ -183,9 +187,19 @@ namespace ZombieGame
                     break;
                 // Down right
                 case 'c':
-                    if(++Ypos > y && ++Xpos > x)
+                    if(++Ypos > y && ++Xpos > x) // Corner
                     {
                         Ypos = 0;
+                        Xpos = 0;
+                    }
+                    else if(++Ypos > y) // Base
+                    {
+                        Ypos = 0;
+                        Xpos++;
+                    }
+                    else if (++Xpos > x) // Right
+                    {
+                        Ypos++;
                         Xpos = 0;
                     }
                     else
@@ -197,7 +211,6 @@ namespace ZombieGame
                 default:
                     Move(x, y);
                     break;
-
             }
         }
 

@@ -10,7 +10,7 @@ namespace ZombieGame
         public Node[,] Board { get; set; }
         public int BoardX { get; }
         public int BoardY { get; }
-
+        
         public TestMap(int x, int y)
         {
             BoardX = x;
