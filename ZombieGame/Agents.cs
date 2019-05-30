@@ -32,8 +32,6 @@ namespace ZombieGame
         /// </summary>
         public int AiAgents { get; protected set; }
 
-        /// <summary>
-
         public virtual void Turn()
         {
             // if zombie pos adjacente ou == a human pos

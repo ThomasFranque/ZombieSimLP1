@@ -8,13 +8,13 @@ namespace ZombieGame
         /// <summary>
         /// Checks all agents in world, accepts max x and y of map 
         /// </summary>
-        public static void CheckAgents(List<Agents> agents, int x, int y)
+        public static void CheckAgents(List<Node> nodes, int x, int y)
         {
             // Go through nº of agents in world
-            foreach (Agents k in agents)
+            foreach (Agents k in nodes)
             {
                 // While nº of agents !AI move
-                for (int ap = 0; ap < agents.Count; ap++)
+                for (int ap = 0; ap < nodes.Count; ap++)
                 {
                     // If agents are not AI
                     if (!k.Ai)
