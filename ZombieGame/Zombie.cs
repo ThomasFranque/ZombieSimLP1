@@ -1,23 +1,19 @@
-﻿
-using System.Collections.Generic;
-
-namespace ZombieGame
+﻿namespace ZombieGame
 {
     class Zombie : Agents
     {
         // Zombie constructor
-        public Zombie(bool AIUnit)
+        public Zombie(bool AIUnit) : base(AIUnit)
         {
-            Ai = AIUnit;
             Infected = true;
         }
         
 
         // Print symbols for zombie agents
-        public override char PrintPart(bool ai)
+        public override char PrintPart()
         {
             // If zombie is AI controlled
-            if (ai)
+            if (Ai)
             {
                 return 'ʞ';
             }
@@ -29,9 +25,6 @@ namespace ZombieGame
             }
         }
 
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
+        public override string ToString() => base.ToString() + "Zombie";
     }
 }

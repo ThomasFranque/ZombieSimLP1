@@ -7,35 +7,49 @@ namespace ZombieGame
     class TestMap
     {
         // Declare Variables
-        private Node[,] board;
+        public Node[,] Board { get; set; }
+        public int BoardX { get; }
+        public int BoardY { get; }
 
-
-        // For cycle to print array
-        public void ShowMap(int x, int y, List<Node> agent)
+        public TestMap(int x, int y)
         {
-            // Instanciate bi-dim array of nodes with gameSettings x e y do mapa
-            for(int i = 0; i < y; i++)
+            BoardX = x;
+            BoardY = y;
+            Board = new Node[BoardX, BoardY];
+        }
+
+        // Instanciate bi-dim array of nodes with gameSettings x e y do mapa
+        public void FillMap(List<Node> node, Node[,] nodes)
+        {
+            int a = 0;
+
+            for (int i = 0; i < BoardY; i++)
             {
-                for(int j = 0; j < x; j++)
+                for (int j = 0; j < BoardX; j++)
                 {
-                    foreach (Node a in agent)
-                        board[i, j] = a;
+                    Board[i, j] = node[a];
+                    a++;
                 }
             }
+        }
 
-            for (int k = 0; k < x * 4 + 1; k++)
+        // For cycle to print array
+        public void ShowMap()
+        {
+            for (int k = 0; k < BoardX * 4 + 1; k++)
                 Console.Write("-");
 
             Console.WriteLine();
 
-            for (int i = 0; i < y; i++)
+            for (int i = 0; i < BoardY; i++)
             {
-                for (int j = 0; j < x; j++)
-                    Console.Write($"| {board[i,j].PrintPart(agent.Contains())} ");
+                for (int j = 0; j < BoardX; j++)
+                    foreach (Node a in Board)
+                        Console.Write($"| {Board[i, j].PrintPart()} ");
 
                 Console.WriteLine('|');
 
-                for (int k = 0; k < x * 4 + 1; k++)
+                for (int k = 0; k < BoardX * 4 + 1; k++)
                     Console.Write("-");
 
                 Console.WriteLine();
@@ -79,3 +93,4 @@ namespace ZombieGame
             //}
         }
     }
+}

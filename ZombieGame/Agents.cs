@@ -12,33 +12,20 @@ namespace ZombieGame
         /// </summary>
         public bool Infected { get; protected set; }
 
-        /// <summary>
-        /// Agents' X position
-        /// </summary>
-        public int Xpos { get; protected set; }
 
-        /// <summary>
-        /// Y position
-        /// </summary>
-        public int Ypos { get; protected set; }
-
-        /// <summary>
-        /// Checks if agent is AI
-        /// </summary>
-        public bool Ai { get; protected set; }
-
-        /// <summary>
-        /// Agents controlled by AI
-        /// </summary>
-        public int AiAgents { get; protected set; }
+        // Agent constructor
+        public Agents(bool ai) : base(ai)
+        {
+            ai = Ai;
+        }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Agents> agents)
+        public virtual void CheckAgents(List<Node> agents)
         {
             // Go through list of agents in world
-            foreach (Agents k in agents)
+            foreach (Node k in agents)
             {
                 // While nº of agents !AI move
                 for (int ap = 0; ap < agents.Count; ap++)
@@ -69,7 +56,7 @@ namespace ZombieGame
         /// Move agent to desired position
         /// </summary>
         /// <param name="j"></param>
-        public virtual void MovePlayer(Agents j)
+        public virtual void MovePlayer(Node j)
         {
             char dir;
             // Asks for input, converts input
@@ -101,9 +88,6 @@ namespace ZombieGame
         /// Returns Agent to string, 
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
-        {
-            return "Agent: ";
-        }
+        public override string ToString() => $"Ai: {Ai}; Agent: ";
     }
 }
