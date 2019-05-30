@@ -19,7 +19,7 @@ namespace ZombieGame
         public static void MenuOp()
         {
             // Plays a simple tune
-            Console.Beep();
+            Songs.TuneHappy();
 
             // Variable, saves user's input
             char choice;
@@ -82,6 +82,9 @@ namespace ZombieGame
         /// </summary>
         public static void AllHumansDead()
         {
+            // Plays death tune
+            Songs.TuneDeath();
+
             Console.WriteLine("All humans have died...");
             // Saves stats
             Thread.Sleep(10000);
