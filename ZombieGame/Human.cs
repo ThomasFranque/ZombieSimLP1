@@ -4,9 +4,9 @@ namespace ZombieGame
     class Human : Agents
     {
         // Human constructor
-        public Human ()
+        public Human (bool AIUnit)
         {
-            nHumans++;
+            Ai = AIUnit;
             Infected = false;
         }
 
