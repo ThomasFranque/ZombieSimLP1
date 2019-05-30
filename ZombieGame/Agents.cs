@@ -1,63 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ZombieGame
 {
-    class Agents : Map
+    // All derived class' contain these methods!
+    abstract class Agents : Node
     {
         // Agents' Properties
         /// <summary>
         /// Is infected?
         /// </summary>
-        protected bool Infected { get; set; }
+        public bool Infected { get; protected set; }
 
-        /// <summary>
-        /// Agents' X position
-        /// </summary>
-        protected int Xpos { get; set; }
 
-        /// <summary>
-        /// Y position
-        /// </summary>
-        protected int Ypos { get; set; }
-
-        /// <summary>
-        /// Returns and sets total agents in map
-        /// </summary>
-        public int AgentsInB
+        // Agent constructor
+        public Agents(bool ai) : base(ai)
         {
-            get => AgentsInB;
-            set
-            {
-                AgentsInB = Z + H + PH + PZ; 
-            }
-        }
-
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Agents ()
-        {
-            AgentsInB = Z + H + PH + PZ;
+            ai = Ai;
         }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void Move()
+        public virtual void CheckAgents(List<Node> agents)
+        {
+            // Go through list of agents in world
+            foreach (Node k in agents)
+            {
+                // While nº of agents !AI move
+                for (int ap = 0; ap < agents.Count; ap++)
+                {
+                    // If agents are not AI
+                    if (!k.Ai)
+                    {
+                        MovePlayer(k);
+                    }
+                    else if (k.Ai)
+                    {
+                        AI.CheckType(k);
+                    }
+                }
+            }
+        }
+
+        // Method to infect humans and turn them to zombies
+        public virtual void Turn()
+        {
+            // if zombie pos adjacente ou == a human pos
+            // Remove/Insert(new.Zombie in human pos)
+            // nHumans--; Remove from list
+        }
+
+
+        /// <summary>
+        /// Move agent to desired position
+        /// </summary>
+        /// <param name="j"></param>
+        public virtual void MovePlayer(Node j)
         {
             char dir;
-
-            // Go through nº of agents in world
-            // Check if controled
-
-            // While nº of agents > 0 move 
-
-            // Humans
-
-            // Zombies
-
             // Asks for input, converts input
             Console.WriteLine("Use 'WASD' keys to move!");
             dir = Convert.ToChar(Console.ReadLine());
@@ -67,17 +68,26 @@ namespace ZombieGame
                 case 'w':
 
                     break;
-            }
 
+                case 'a':
+
+                    break;
+
+                case 's':
+
+                    break;
+
+                case 'd':
+
+                    break;
+
+            }
         }
 
-        // Move to checker
-        protected void CheckAgents()
-        {
-            while (AgentsInB > 0)
-            {
-
-            }
-        }
+        /// <summary>
+        /// Returns Agent to string, 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => $"Ai: {Ai}; Agent: ";
     }
 }

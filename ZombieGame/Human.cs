@@ -1,15 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ZombieGame
+﻿namespace ZombieGame
 {
     class Human : Agents
     {
         // Human constructor
-        internal Human ()
+        public Human (bool AIUnit) :base(AIUnit)
         {
             Infected = false;
         }
+
+        // Print symbol for human agents
+        public override char PrintPart()
+        {
+            // If human is AI controlled
+            if (Ai)
+            {
+                return 'ɥ';
+            }
+
+            // If human is player controlled
+            else
+            {
+                return 'h';
+            }
+        }
+
+        public override string ToString() => base.ToString() + "Human";
     }
 }

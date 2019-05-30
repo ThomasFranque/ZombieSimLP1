@@ -6,25 +6,23 @@ namespace ZombieGame
 {
     class Map
     {
-        // Declare instance vars
-        CharEnum agent;
-        
-        public int X { get; set; }
-        public int Y { get; set; }
+        // Declare instance variables   
+        public int x { get; set; }
+        public int y { get; set; }
+        public int h { get; set; }
+        public int z { get; set; }
         public int H { get; set; }
         public int Z { get; set; }
-        public int PH { get; set; }
-        public int PZ { get; set; }
 
         public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
         {
             // Save parameter values in class properties
-            X = x;
-            Y = y;
-            H = h;
-            Z = z;
-            PH = pH;
-            PZ = pZ;
+            this.x = x;
+            this.y = y;
+            this.h = h;
+            this.z = z;
+            H = pH;
+            Z = pZ;
 
             // For cicle to print map
             for (int k = 0; k < x * 4 + 1; k++)
