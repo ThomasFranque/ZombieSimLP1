@@ -13,6 +13,11 @@ namespace ZombieGame
             TestMap map = new TestMap(setts.x, setts.y);
             List<Node> agents = new List<Node>();
 
+            // Save the settings
+            FileManager.Save(setts.GetAllVars());
+            // Load settings
+            setts = FileManager.LoadSetts();
+
             //###############################################
             // Debug ########################################
             //###############################################

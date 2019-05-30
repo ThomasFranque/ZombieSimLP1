@@ -16,37 +16,42 @@ namespace ZombieGame
         /// <summary>
         /// Get and set map size horizontaly
         /// </summary>
-        public int x { get; private set; }
+        public int x { get; set; }
 
         /// <summary>
         /// Get and set map size verticaly
         /// </summary>
-        public int y { get; private set; }
+        public int y { get; set; }
 
         /// <summary>
         /// Get and set number of AI controlled zombies
         /// </summary>
-        public int z { get; private set; }
+        public int z { get; set; }
 
         /// <summary>
         /// Get and set number of AI controlled humans
         /// </summary>
-        public int h { get; private set; }
+        public int h { get; set; }
 
         /// <summary>
         /// Get and set number of playable zombies
         /// </summary>
-        public int Z { get; private set; }
+        public int Z { get; set; }
 
         /// <summary>
         /// Get and set number of playable humans
         /// </summary>
-        public int H { get; private set; }
+        public int H { get; set; }
 
         /// <summary>
         ///  Get and set max game turns
         /// </summary>
-        public int t { get; private set; }
+        public int t { get; set; }
+
+        /// <summary>
+        ///  Get and set current game turns
+        /// </summary>
+        public int T { get; set; }
 
 
         /// <summary>
@@ -71,7 +76,7 @@ namespace ZombieGame
                         case '6':
                         case '7':
                         case '8':
-                        case '9':
+                        case '9':   
                             AssignValue(args[i - 1], args[i]);
                             break;
 
@@ -136,7 +141,13 @@ namespace ZombieGame
                 case 't':
                     t = Convert.ToInt32(numArg);
                     break;
+
+                case 'T':
+                    T = Convert.ToInt32(numArg);
+                    break;
             }
+
+            T = 0;
         }
 
         /// <summary>
@@ -321,5 +332,11 @@ namespace ZombieGame
             Console.WriteLine($"\nRandom Warning!\n" +
                 $"Not given argument {valN} was set to {val}\n");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>An array with all the values</returns>
+        public int[] GetAllVars() => new int[8] { x, y, h, z, Z, H, t, T };
     }
 }
