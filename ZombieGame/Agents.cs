@@ -109,12 +109,22 @@ namespace ZombieGame
                 // Diagonals
                 // Up Left
                 case 'q':
-                    if(--Ypos < 0 && --Xpos < 0)
+                    if(--Ypos < 0 && --Xpos < 0) // Corner condition
                     {
                         Ypos = y;
                         Xpos = x;
                     }
-                    else
+                    else if(--Ypos < 0) // Up wall condition
+                    {
+                        Ypos = y;
+                        Xpos--;
+                    }
+                    else if(--Xpos < 0) // Left wall condition
+                    {
+                        Ypos--;
+                        Xpos = x;
+                    }
+                    else // Other place in map
                     {
                         Ypos--;
                         Xpos--;
@@ -122,12 +132,22 @@ namespace ZombieGame
                     break;
                 // Up right
                 case 'e':
-                    if(--Ypos < 0 && Xpos > x)
+                    if(--Ypos < 0 && Xpos > x) // Corner condition
                     {
                         Ypos = y;
                         Xpos = 0;
                     }
-                    else
+                    else if(--Ypos < 0) // Up wall condition
+                    {
+                        Ypos = 0;
+                        Xpos--;
+                    }
+                    else if(--Xpos > x) // Right wall condition
+                    {
+                        Ypos--;
+                        Xpos = 0;
+                    }
+                    else // Normal
                     {
                         Ypos--;
                         Xpos++;
@@ -135,10 +155,14 @@ namespace ZombieGame
                     break;
                 // Down left
                 case 'z':
-                    if(++Ypos > y && --Xpos < 0)
+                    if(++Ypos > y && --Xpos < 0) // Corner
                     {
                         Ypos = 0;
                         Xpos = x;
+                    }
+                    else if (++Ypos > y) // Down
+                    {
+
                     }
                     else
                     {
