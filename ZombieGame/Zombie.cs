@@ -1,6 +1,4 @@
 ﻿
-using System.Collections.Generic;
-
 namespace ZombieGame
 {
     class Zombie : Agents
@@ -10,8 +8,7 @@ namespace ZombieGame
         {
             Ai = AIUnit;
             Infected = true;
-        }
-        
+        }    
 
         // Print symbols for zombie agents
         public override char PrintPart(bool ai)
