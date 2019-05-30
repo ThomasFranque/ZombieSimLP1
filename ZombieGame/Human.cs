@@ -1,16 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace ZombieGame
 {
     class Human : Agents
     {
         // Human constructor
-        internal Human ()
+        public Human ()
         {
+            nHumans++;
             Infected = false;
         }
 
+        // Print symbol for human agents
+        public override char PrintPart(bool ai)
+        {
+            // If human is AI controlled
+            if (ai)
+            {
+                return 'ɥ';
+            }
+
+            // If human is player controlled
+            else
+            {
+                return 'h';
+            }
+        }
     }
 }

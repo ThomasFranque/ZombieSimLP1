@@ -1,68 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ZombieGame
 {
-    class Agents : Map
+    // All derived class' contain these methods!
+    abstract class Agents : Node
     {
         // Agents' Properties
         /// <summary>
         /// Is infected?
         /// </summary>
-        protected bool Infected { get; set; }
+        public bool Infected { get; protected set; }
 
         /// <summary>
         /// Agents' X position
         /// </summary>
-        protected int Xpos { get; set; }
+        public int Xpos { get; protected set; }
 
         /// <summary>
         /// Y position
         /// </summary>
-        protected int Ypos { get; set; }
+        public int Ypos { get; protected set; }
 
         /// <summary>
         /// Checks if agent is AI
         /// </summary>
-        protected bool Ai { get; set; }
+        public bool Ai { get; protected set; }
 
         /// <summary>
-        /// Returns and sets total agents in map
+        /// Agents controlled by AI
         /// </summary>
-        public int AgentsInB
-        {
-            get => AgentsInB;
-            set
-            {
-                AgentsInB = Z + H + H + Z; 
-            }
-        }
+        public int AiAgents { get; protected set; }
 
         /// <summary>
-        /// Empty constructor
+        /// Number of zombies in board
         /// </summary>
-        public Agents ()
-        {
-            AgentsInB = Z + H + H + Z;
-        }
+        public int nZombies { get; protected set; }
+
+        /// <summary>
+        /// Number of Humans in board
+        /// </summary>
+        public int nHumans { get; protected set; }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void MovePlayer()
+        public virtual void CheckAgents(List<Agents> agents)
+        {
+            // Go through list of agents in world
+            foreach (Agents k in agents)
+            {
+                // While nº of agents !AI move
+                for (int ap = 0; ap < agents.Count; ap++)
+                {
+                    // If agents are not AI
+                    if (!k.Ai)
+                    {
+                        MovePlayer(k);
+                    }
+                    else if (k.Ai)
+                    {
+                        AI.CheckType(k);
+                    }
+                }
+            }
+        }
+
+        // Method to infect humans and turn them to zombies
+        public virtual void Turn()
+        {
+            // if zombie pos adjacente ou == a human pos
+            // Remove/Insert(new.Zombie in human pos)
+            // nHumans--; Remove from list
+        }
+
+
+        /// <summary>
+        /// Move agent to desired position
+        /// </summary>
+        /// <param name="j"></param>
+        public virtual void MovePlayer(Agents j)
         {
             char dir;
-
-            // Go through nº of agents in world
-            // Check if controled
-
-            // While nº of agents > 0 move 
-
-            // Humans
-
-            // Zombies
-
             // Asks for input, converts input
             Console.WriteLine("Use 'WASD' keys to move!");
             dir = Convert.ToChar(Console.ReadLine());
@@ -72,8 +91,20 @@ namespace ZombieGame
                 case 'w':
 
                     break;
-            }
 
+                case 'a':
+
+                    break;
+
+                case 's':
+
+                    break;
+
+                case 'd':
+
+                    break;
+
+            }
         }
 
         /// <summary>

@@ -1,46 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading;
 
 namespace ZombieGame
 {
-    class AI : Agents
+    static class AI
     {
-        public AI ()
+        /// <summary>
+        /// Checks Ai agents in List
+        /// </summary>
+        /// <param name="agents"></param>
+        static public void CheckType(Agents j)
         {
-
-        }
-
-        public void MoveAgents(Agents i)
-        {
-            if(i is Human)
+            // Human, runs from zombie
+            if (j is Human)
             {
-                // Checks map
-                // Moves away from zombie
+                MoveHumansAi(j);
             }
-            if (i is Zombie)
+            // Zombie, runs towards human
+            if (j is Zombie)
             {
-                // Checks map
-                // Moves toward human
-            }
-            else
-            {
-
+                MoveZombiesAi(j);
+                Thread.Sleep(2000);
             }
         }
 
-        // Move to checker
-        protected void CheckAgents(Agents agents)
+        static public void MoveHumansAi(Agents i)
         {
-            while (AgentsInB > 0)
-            {
-                //Agents j;
-                //foreach ()
-                //{
+            // Check if there's zombies around, move way from them
+        }
 
-                //}
-
-            }
+        static public void MoveZombiesAi(Agents i)
+        {
+            // Check if there's humans around, move towards them
         }
     }
 }

@@ -6,9 +6,7 @@ namespace ZombieGame
 {
     class Map
     {
-        // Declare instance vars
-        CharEnum agent;
-        
+        // Declare instance variables   
         public int x { get; set; }
         public int y { get; set; }
         public int h { get; set; }
@@ -43,8 +41,6 @@ namespace ZombieGame
                     Console.Write("-");
 
                 Console.WriteLine();
-
-                //[[2,0,0][0,4,0][21,0,0]]
 
             }
         }
