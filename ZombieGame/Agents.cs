@@ -42,30 +42,6 @@ namespace ZombieGame
         /// </summary>
         public int nHumans { get; protected set; }
 
-        /// <summary>
-        /// Agents move, Calls CheckAgents
-        /// </summary>
-        public virtual void CheckAgents(List<Agents> agents, int x, int y)
-        {
-            // Go through nº of agents in world
-            foreach (Agents k in agents)
-            {
-                // While nº of agents !AI move
-                for (int ap = 0; ap < agents.Count; ap++)
-                {
-                    // If agents are not AI
-                    if (!k.Ai)
-                    {
-                        MoveAgents(k, x, y);
-                    }
-                    else if (k.Ai)
-                    {
-                        AI.CheckType(k);
-                    }
-                }
-            }
-        }
-
         public virtual void Turn()
         {
             // if zombie pos adjacente ou == a human pos
@@ -73,7 +49,7 @@ namespace ZombieGame
             // nHumans--; Remove from list
         }
 
-        public virtual void MoveAgents(Agents k, int x, int y)
+        public virtual void Move(int x, int y)
         {
             char dir;
             // Asks for input, converts input
@@ -85,37 +61,37 @@ namespace ZombieGame
                 // Up
                 case 'w':
 
-                    k.Ypos--; 
+                    Ypos--; 
                     
-                    if(k.Ypos < y) // Pick this way of condition or
+                    if(Ypos < y) // Pick this way of condition or
                     {
-                        k.Ypos = 0;
+                        Ypos = 0;
                     }
                     break;
 
                 // Left
                 case 'a':
 
-                    if(--k.Xpos < 0) // This one
+                    if(--Xpos < 0) // This one
                     {
-                        k.Xpos = x;
+                        Xpos = x;
                     }
                     else
                     {
-                        k.Xpos--;
+                        Xpos--;
                     }
                     break;
 
                 // Right
                 case 's':
 
-                    if (++k.Xpos > x)
+                    if (++Xpos > x)
                     {
-                        k.Xpos = 0;
+                        Xpos = 0;
                     }
                     else
                     {
-                        k.Xpos++;
+                        Xpos++;
                     }
 
                     break;
@@ -123,13 +99,13 @@ namespace ZombieGame
                 // Down
                 case 'd':
 
-                    if (++k.Ypos > y)
+                    if (++Ypos > y)
                     {
-                        k.Ypos = 0;
+                        Ypos = 0;
                     }
                     else
                     {
-                        k.Ypos++;
+                        Ypos++;
                     }
 
                     break;
