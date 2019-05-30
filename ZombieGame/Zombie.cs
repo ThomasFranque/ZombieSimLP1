@@ -28,5 +28,10 @@ namespace ZombieGame
                 return 'z';
             }
         }
+
+        //public override string ToString()
+        //{
+        //    return base.ToString();
+        //}
     }
 }

@@ -7,49 +7,75 @@ namespace ZombieGame
     class TestMap
     {
         // Declare Variables
-
-
-        // Instanciate bi-dim array of nodes with gameSettings (ai-H + ai-Z) + (player-H + player-Z) OU x e y do mapa
-
+        private Node[,] board;
 
 
         // For cycle to print array
+        public void ShowMap(int x, int y, List<Node> agent)
+        {
+            // Instanciate bi-dim array of nodes with gameSettings x e y do mapa
+            for(int i = 0; i < y; i++)
+            {
+                for(int j = 0; j < x; j++)
+                {
+                    foreach (Node a in agent)
+                        board[i, j] = a;
+                }
+            }
 
-        //
+            for (int k = 0; k < x * 4 + 1; k++)
+                Console.Write("-");
+
+            Console.WriteLine();
+
+            for (int i = 0; i < y; i++)
+            {
+                for (int j = 0; j < x; j++)
+                    Console.Write($"| {board[i,j].PrintPart(agent.Contains())} ");
+
+                Console.WriteLine('|');
+
+                for (int k = 0; k < x * 4 + 1; k++)
+                    Console.Write("-");
+
+                Console.WriteLine();
+            }
+
+            //
 
 
 
 
 
-        //public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
-        //{
-        //    // Save parameter values in class properties
-        //    this.x = x;
-        //    this.y = y;
-        //    this.h = h;
-        //    this.z = z;
-        //    H = pH;
-        //    Z = pZ;
+            //public void ShowMap(int x, int y, int h, int z, int pH, int pZ)
+            //{
+            //    // Save parameter values in class properties
+            //    this.x = x;
+            //    this.y = y;
+            //    this.h = h;
+            //    this.z = z;
+            //    H = pH;
+            //    Z = pZ;
 
-        //    // For cicle to print map
-        //    for (int k = 0; k < x * 4 + 1; k++)
-        //        Console.Write("-");
+            //    // For cicle to print map
+            //    for (int k = 0; k < x * 4 + 1; k++)
+            //        Console.Write("-");
 
-        //    Console.WriteLine();
+            //Console.WriteLine();
 
-        //    for (int i = 0; i < y; i++)
-        //    {
-        //        for (int j = 0; j < x; j++)
-        //            Console.Write("| O ");
+            //    for (int i = 0; i<y; i++)
+            //    {
+            //        for (int j = 0; j<x; j++)
+            //            Console.Write("| O ");
 
-        //        Console.WriteLine('|');
+            //        Console.WriteLine('|');
 
-        //        for (int k = 0; k < x * 4 + 1; k++)
-        //            Console.Write("-");
+            //        for (int k = 0; k<x* 4 + 1; k++)
+            //            Console.Write("-");
 
-        //        Console.WriteLine();
+            //        Console.WriteLine();
 
-        //    }
-        //}
+            //    }
+            //}
+        }
     }
-}
