@@ -16,37 +16,42 @@ namespace ZombieGame
         /// <summary>
         /// Get and set map size horizontaly
         /// </summary>
-        public int x { get; private set; }
+        public int x { get; set; }
 
         /// <summary>
         /// Get and set map size verticaly
         /// </summary>
-        public int y { get; private set; }
+        public int y { get; set; }
 
         /// <summary>
         /// Get and set number of AI controlled zombies
         /// </summary>
-        public int z { get; private set; }
+        public int z { get; set; }
 
         /// <summary>
         /// Get and set number of AI controlled humans
         /// </summary>
-        public int h { get; private set; }
+        public int h { get; set; }
 
         /// <summary>
         /// Get and set number of playable zombies
         /// </summary>
-        public int Z { get; private set; }
+        public int Z { get; set; }
 
         /// <summary>
         /// Get and set number of playable humans
         /// </summary>
-        public int H { get; private set; }
+        public int H { get; set; }
 
         /// <summary>
         ///  Get and set max game turns
         /// </summary>
-        public int t { get; private set; }
+        public int t { get; set; }
+
+        /// <summary>
+        ///  Get and set current game turns
+        /// </summary>
+        public int T { get; set; }
 
 
         /// <summary>
@@ -71,7 +76,7 @@ namespace ZombieGame
                         case '6':
                         case '7':
                         case '8':
-                        case '9':
+                        case '9':   
                             AssignValue(args[i - 1], args[i]);
                             break;
 
@@ -85,11 +90,11 @@ namespace ZombieGame
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nSuccessfully initialized game settings...");
-            Console.WriteLine($"| Agents: {z + h}\n" +
+            Console.WriteLine($"| Agents: {z + h + Z + H}\n" +
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
 
-            Thread.Sleep(3600);
+            //Thread.Sleep(3600);
         }
 
         /// <summary>
@@ -136,7 +141,13 @@ namespace ZombieGame
                 case 't':
                     t = Convert.ToInt32(numArg);
                     break;
+
+                case 'T':
+                    T = Convert.ToInt32(numArg);
+                    break;
             }
+
+            T = 0;
         }
 
         /// <summary>
@@ -148,6 +159,9 @@ namespace ZombieGame
             // Temporary method variables
             Random rand = new Random();
             int[] args = new int[7] { x, y, h, z, Z, H, t };
+            int[] randArgs = new int[7];
+
+            Console.ForegroundColor = ConsoleColor.Red;
 
             // Check for ungiven values
             for (int i = 0; i < args.Length; i++)
@@ -158,45 +172,61 @@ namespace ZombieGame
                         // x
                         case 0:
                             x = rand.Next(8, 16);
+                            randArgs[0] = x;
+                            RandomNumMsg('x', x);
                             break;
                         // y
                         case 1:
                             y = rand.Next(8, 16);
+                            randArgs[1] = y;
+                            RandomNumMsg('y', y);
                             break;
                         // h
                         case 2:
                             h = (x * y) / 3;
+                            randArgs[2] = h;
+                            RandomNumMsg('h', h);
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 3 + h / 4;
+                            z = (x * y) / 4;
+                            randArgs[3] = z;
+                            RandomNumMsg('z', z);
                             break;
                         // Z
                         case 4:
                             Z = rand.Next(0, z / 2);
+                            randArgs[4] = Z;
+                            RandomNumMsg('Z', Z);
                             break;
                         // H
                         case 5:
                             H = rand.Next(0, h / 2);
-
+                            randArgs[5] = H;
+                            RandomNumMsg('H', H);
                             break;
                         // t
                         case 6:
                             t = rand.Next(8, x * y);
+                            randArgs[6] = t;
+                            RandomNumMsg('t', t);
                             break;
                     }
             }
+            Console.ResetColor();
 
             // Check if the board is valid
-            while (x * y <= z + h || x <= 2 || y <= 2 || BigBoardWarning())
+            while (x * y <= z + h || BoardWarning())
             {
-                Console.WriteLine($"\nUps...\nTotal Agents: {z + h}\n" +
+                Console.WriteLine($"\nUps...\nTotal Agents: {z + h + Z + H}\n" +
                     $"Board Area: {x * y}");
                 Console.WriteLine("It seems that what you are trying to " +
                     "do surpasses the board capabilities.\n");
 
                 InvalidArgs(rand);
             }
+
+            // Warn the player if any of the values was set to random
         }
 
         /// <summary>
@@ -244,7 +274,7 @@ namespace ZombieGame
             {
                 // Setting total
                 h = (x * y) / 3;
-                z = (x * y) / 3 + h / 4;
+                z = (x * y) / 4;
 
                 // Setting controlled
                 Z = rand.Next(0, z / 2);
@@ -252,33 +282,21 @@ namespace ZombieGame
             }
         }
 
-
-        // THIS MIGHT AND SHOULD GO TO ANOTHER CLASS
-        /// <summary>
-        /// Gets the player intention
-        /// </summary>
-        /// <returns>A char representing the first Upercase letter of 
-        /// the player input</returns>
-        private char PlayerInput()
-        {
-            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
-        }
-
         /// <summary>
         /// Will let the player know that the board is big
         /// </summary>
         /// <returns>True if the player doesn't want to proceed</returns>
-        private bool BigBoardWarning()
+        private bool BoardWarning()
         {
             bool restart = false;
-            if (x * y >= 600)
+            if (x * y >= 600 || x * y <= 6)
             {
                 char decision;
 
                 // Message
                 Console.BackgroundColor = ConsoleColor.Red;
                 Console.Write("\nWARNING!\n" +
-                    $"The board has {x * y} cells.\n" +
+                    $"The board has {x * y} cells!\n" +
                     "Do you wish to proceed?\n| <y> or <n> |\n>");
 
                 decision = PlayerInput();
@@ -292,5 +310,33 @@ namespace ZombieGame
 
             return restart;
         }
+
+        // VVVVVVVVVVV THIS MIGHT AND SHOULD GO TO ANOTHER CLASS VVVVVVVVVVVV
+        /// <summary>
+        /// Gets the player intention
+        /// </summary>
+        /// <returns>A char representing the first Upercase letter of 
+        /// the player input</returns>
+        private char PlayerInput()
+        {
+            return Convert.ToChar(Console.ReadLine().ToUpper()[0]);
+        }
+
+        /// <summary>
+        /// Will warn the player of a variable was set to random
+        /// </summary>
+        /// <param name="valN">Name of the variable</param>
+        /// <param name="val">Variable number</param>
+        private void RandomNumMsg(char valN, int val)
+        {
+            Console.WriteLine($"\nRandom Warning!\n" +
+                $"Not given argument {valN} was set to {val}\n");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>An array with all the values</returns>
+        public int[] GetAllVars() => new int[8] { x, y, h, z, Z, H, t, T };
     }
 }

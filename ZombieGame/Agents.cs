@@ -1,83 +1,202 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ZombieGame
 {
-    class Agents : Map
+    // All derived class' contain these methods!
+    abstract class Agents : Node
     {
         // Agents' Properties
         /// <summary>
         /// Is infected?
         /// </summary>
-        protected bool Infected { get; set; }
+        public bool Infected { get; protected set; }
 
         /// <summary>
-        /// Agents' X position
+        /// Readonly property of the position of the agent on the X axis
         /// </summary>
-        protected int Xpos { get; set; }
+        public int X { get; private set; }
 
         /// <summary>
-        /// Y position
+        /// Readonly property of the position of the agent on the Y axis
         /// </summary>
-        protected int Ypos { get; set; }
+        public int Y { get; private set; }
 
-        /// <summary>
-        /// Returns and sets total agents in map
-        /// </summary>
-        public int AgentsInB
+
+        // Agent constructor
+        public Agents(bool ai) : base(ai)
         {
-            get => AgentsInB;
-            set
-            {
-                AgentsInB = Z + H + PH + PZ; 
-            }
-        }
+            Random r = new Random();
+            // Default position is x = 1 and y = 1
+            // Random is set for debugging
+            X = r.Next(1, 8);
+            Y = r.Next(1, 8); ;
 
-        /// <summary>
-        /// Empty constructor
-        /// </summary>
-        public Agents ()
-        {
-            AgentsInB = Z + H + PH + PZ;
+            ai = Ai;
         }
 
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        protected void Move()
+        public virtual void CheckAgents(List<Node> agents)
         {
+            // Go through list of agents in world
+            foreach (Node k in agents)
+            {
+                // While nº of agents !AI move
+                for (int ap = 0; ap < agents.Count; ap++)
+                {
+                    // If agents are not AI
+                    if (!k.Ai)
+                    {
+                        MovePlayer(k);
+                    }
+                    else if (k.Ai)
+                    {
+                        AI.CheckType(k);
+                    }
+                }
+            }
+        }
+
+        // Method to infect humans and turn them to zombies
+        public virtual void Turn()
+        {
+            // if zombie pos adjacente ou == a human pos
+            // Remove/Insert(new.Zombie in human pos)
+            // nHumans--; Remove from list
+        }
+
+        /// <summary>
+        /// Player moves agents with keys
+        /// </summary>
+        /// <param name="j"></param>
+        public virtual void MovePlayer(Node j)
+        {
+            // Variables
             char dir;
+            string conv;
 
-            // Go through nº of agents in world
-            // Check if controled
+            Render.AskInput(); // Asks for input, converts input           
+            conv = Console.ReadLine(); // Stores input
+            conv = conv.ToLower(); // Converts to lowercase
+            dir = Convert.ToChar(conv);// Converts to char
 
-            // While nº of agents > 0 move 
+            //switch (dir)
+            //{
+            //    // Up
+            //    case 'w':
 
-            // Humans
+            //        Ypos--; 
+                    
+            //        if(Ypos < y) // Pick this way of condition or
+            //        {
+            //            Ypos = 0;
+            //        }
+            //        break;
 
-            // Zombies
+            //    // Left
+            //    case 'a':
 
-            // Asks for input, converts input
-            Console.WriteLine("Use 'WASD' keys to move!");
-            dir = Convert.ToChar(Console.ReadLine());
+            //        if(--Xpos < 0) // This one
+            //        {
+            //            Xpos = x;
+            //        }
+            //        else
+            //        {
+            //            Xpos--;
+            //        }
+            //        break;
 
-            switch (dir)
-            {
-                case 'w':
+            //    // Right
+            //    case 's':
 
-                    break;
-            }
+            //        if (++Xpos > x)
+            //        {
+            //            Xpos = 0;
+            //        }
+            //        else
+            //        {
+            //            Xpos++;
+            //        }
 
+            //        break;
+
+            //    // Down
+            //    case 'd':
+            //        if (++Ypos > y)
+            //        {
+            //            Ypos = 0;
+            //        }
+            //        else
+            //        {
+            //            Ypos++;
+            //        }
+            //        break;
+            //    // Diagonals
+            //    // Up Left
+            //    case 'q':
+            //        if(--Ypos < 0 && --Xpos < 0)
+            //        {
+            //            Ypos = y;
+            //            Xpos = x;
+            //        }
+            //        else
+            //        {
+            //            Ypos--;
+            //            Xpos--;
+            //        }
+            //        break;
+            //    // Up right
+            //    case 'e':
+            //        if(--Ypos < 0 && Xpos > x)
+            //        {
+            //            Ypos = y;
+            //            Xpos = 0;
+            //        }
+            //        else
+            //        {
+            //            Ypos--;
+            //            Xpos++;
+            //        }
+            //        break;
+            //    // Down left
+            //    case 'z':
+            //        if(++Ypos > y && --Xpos < 0)
+            //        {
+            //            Ypos = 0;
+            //            Xpos = x;
+            //        }
+            //        else
+            //        {
+            //            Ypos++;
+            //            Xpos--;
+            //        }
+            //        break;
+            //    // Down right
+            //    case 'c':
+            //        if(++Ypos > y && ++Xpos > x)
+            //        {
+            //            Ypos = 0;
+            //            Xpos = 0;
+            //        }
+            //        else
+            //        {
+            //            Ypos++;
+            //            Xpos++;
+            //        }
+            //        break;
+            //    default:
+            //        Move(x, y);
+            //        break;
+
+            //}
         }
 
-        // Move to checker
-        protected void CheckAgents()
-        {
-            while (AgentsInB > 0)
-            {
-
-            }
-        }
+        /// <summary>
+        /// Returns Agent to string, 
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() => $"Ai: {Ai}; Agent: ";
     }
 }
