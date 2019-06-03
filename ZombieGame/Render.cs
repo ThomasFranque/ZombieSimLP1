@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ZombieGame
@@ -6,7 +7,7 @@ namespace ZombieGame
     static class Render
     {
         /// <summary>
-        /// Asks for input, agents' movement
+        /// Asks for input, agents movement
         /// </summary>
         public static void AskInput()
         {
@@ -86,8 +87,89 @@ namespace ZombieGame
             Songs.TuneDeath();
 
             Console.WriteLine("All humans have died...");
-            // Saves stats
+            // Saves stats / why?
             Thread.Sleep(10000);
         }
+
+        public static void PrintBoard(int length, int height)
+        {
+            Console.Clear();
+            // For cicle to print map
+            for (int k = 0; k < length * 4 + 1; k++)
+                Console.Write("-");
+
+            Console.WriteLine();
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < length; j++)
+                    Console.Write("|   ");
+
+                Console.WriteLine('|');
+
+                for (int k = 0; k < length * 4 + 1; k++)
+                    Console.Write("-");
+
+                Console.WriteLine();
+
+            }
+        }
+
+        /// <summary>
+        /// Will write the agents on the console
+        /// </summary>
+        /// <param name="boardHeight">Height of the board</param>
+        /// <param name="agents">List of agents to be placed</param>
+        public static void PlaceAgents
+            (int boardHeight, IEnumerable<Agents> agents)
+        {
+            string identifier;
+            foreach (Agents agent in agents)
+            {
+                // Get normalized position
+                int[] normalizedPos = NormalizePosition(agent.X, agent.Y);
+
+                // Check if it is a Zombie or human
+                identifier = (agent is Zombie) ? "z" : "h";
+
+                // Check if it is AI controlled
+                if (agent.Ai == true)
+                    identifier = identifier.ToUpper();
+
+                // Set the color
+                ConsoleColor unitColor = ConsoleColor.White;
+                switch (identifier)
+                {
+                    case "z":
+                        unitColor = ConsoleColor.DarkGreen;
+                        break;
+                    case "Z":
+                        unitColor = ConsoleColor.DarkYellow;
+                        break;
+                    case "h":
+                        unitColor = ConsoleColor.DarkCyan;
+                        break;
+                    case "H":
+                        unitColor = ConsoleColor.DarkBlue;
+                        break;
+                }
+                Console.ForegroundColor = unitColor;
+
+                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+                Console.WriteLine(identifier);
+
+            }
+            Console.ResetColor();
+            Console.SetCursorPosition(0,boardHeight * 2 + 1);
+        }
+
+        /// <summary>
+        /// Normalizes the agent X and Y for the console coordinates
+        /// </summary>
+        /// <param name="x">Agent's X</param>
+        /// <param name="y">Agent's Y</param>
+        /// <returns>Normalized Coordinates</returns>
+        private static int[] NormalizePosition(int x, int y) => 
+            new int[2] { x * 4 - 2, y * 2 - 1 };
     }
 }
