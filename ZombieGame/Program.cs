@@ -8,9 +8,10 @@ namespace ZombieGame
     {
         static void Main(string[] args)
         {
-            Map map = new Map();
+            // Declare variables
             GameSettings setts = new GameSettings(args);
-            List<Agents> agents = new List<Agents>(setts.h * setts.z);
+            List<Node> agents = new List<Node>();
+            TestMap map = new TestMap(setts.x, setts.y);
 
             // Save the settings
             FileManager.Save(setts.GetAllVars());
@@ -21,35 +22,55 @@ namespace ZombieGame
             // Debug ########################################
             //###############################################
             // Add AI h
-            for (int i = 0; i < setts.h - setts.H; i++)
+            for (int i = 0; i < setts.H; i++)
                 agents.Add(new Human(true));
 
             // Add player controled h
-            for (int i = setts.h - setts.H; i < setts.h; i++)
+            for (int i = 0; i < setts.h; i++)
                 agents.Add(new Human(false));
 
             // Add AI z
-            for (int i = setts.h; i < setts.z - setts.Z; i++)
+            for (int i = 0; i < setts.Z; i++)
                 agents.Add(new Zombie(true));
 
             // Add player controled z
-            for (int i = setts.z - setts.Z; i < setts.z; i++)
+            for (int i = 0; i < setts.z; i++)
                 agents.Add(new Zombie(false));
+
+            for (int i = 0;
+                i < (setts.x * setts.y) - (setts.h + setts.z + setts.H + setts.Z);
+                i++)
+                agents.Add(new Blank(false));
+
+            int k = 0;
+            foreach (Node a in agents)
+            {
+                Console.WriteLine($"{a.ToString()}; Count:{k}");
+                k++;
+            }
+
+            Console.WriteLine("List count:" + agents.Count);
+            Console.WriteLine("Map size:" + map.Board.Length);
+            Console.WriteLine();
+
             //###############################################
             // Debug ########################################
             //###############################################
 
-            map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
+
+            //map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
+            map.FillMap(agents, map.Board);
+            map.ShowMap();
             Console.ResetColor();
 
-            Console.WriteLine($"\nMap Lenght   x: {map.x}");
-            Console.WriteLine($"Map Height   y: {map.y}");
+            Console.WriteLine($"\nMap Lenght   x: {map.BoardX}");
+            Console.WriteLine($"Map Height   y: {map.BoardY}");
 
-            Console.WriteLine($"Zombies      z: {map.z}");
-            Console.WriteLine($"Humans       h: {map.h}");
+            Console.WriteLine($"Zombies      z: {setts.z}");
+            Console.WriteLine($"Humans       h: {setts.h}");
 
-            Console.WriteLine($"Your zombies Z: {map.Z}");
-            Console.WriteLine($"Your humans  H: {map.H}");
+            Console.WriteLine($"Your zombies Z: {setts.Z}");
+            Console.WriteLine($"Your humans  H: {setts.H}");
 
 
             // Nice
