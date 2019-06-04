@@ -62,35 +62,32 @@ namespace ZombieGame
             //  Declare block variables
             string option;
 
+
             //###############################################
             // Debug ########################################
             //###############################################
             // Add AI h
             for (int i = 0; i < setts.H; i++)
             {
-                agents.Add(new Human(true));
-
+                agents.Add(NewAgent(false, true));
             }
 
             // Add player controled h
             for (int i = 0; i < setts.h; i++)
             {
-                agents.Add(new Human(false));
-
+                agents.Add(NewAgent(false, false));
             }
 
             // Add AI z
             for (int i = 0; i < setts.Z; i++)
             {
-                agents.Add(new Zombie(true));
-
+                agents.Add(NewAgent(true, true));
             }
 
             // Add player controled z
             for (int i = 0; i < setts.z; i++)
             {
-                agents.Add(new Zombie(false));
-
+                agents.Add(NewAgent(true, false));
             }
 
 
@@ -114,8 +111,6 @@ namespace ZombieGame
 
             do
             {
-
-
                 //PrintMap();
                 //FillBoard(setts.y, agents);
 
@@ -171,6 +166,20 @@ namespace ZombieGame
             //Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
             //"\t - Said small program.cs \n\n");
             Console.ResetColor();
+        }
+
+        private Agents NewAgent(bool zombie, bool ai)
+        {
+            Agents tempA;
+            if (zombie)
+                tempA = new Zombie(ai);
+            else
+                tempA = new Human(ai);
+
+            while (agents.Contains(tempA))
+                tempA = new Human(true);
+
+            return tempA;
         }
     }
 }
