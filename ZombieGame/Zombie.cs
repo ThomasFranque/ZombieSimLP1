@@ -24,6 +24,7 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Zombie";
+        public override string ToString() => base.ToString() + "Zombie" +
+            $" X: {X}\tY: {Y}";
     }
 }

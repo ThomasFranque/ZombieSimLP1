@@ -9,6 +9,7 @@ namespace ZombieGame
         // Declare class variables
         private List<Agents> agents;
         private GameSettings setts;
+        private Agents agent;
 
         private Program(string[] args)
         {
@@ -108,29 +109,37 @@ namespace ZombieGame
             // Debug ########################################
             //###############################################
 
-
             // Ensure console doesn't get cluttered up
             Console.Clear();
 
-            PrintMap();
-            FillBoard(setts, agents);
-
-
-
             do
             {
-                Render.MenuOp();
 
+
+                //PrintMap();
+                //FillBoard(setts.y, agents);
+
+                // Get user choice
                 option = Console.ReadLine();
 
                 switch (option)
                 {
                     case "1":
-                        // Insert option
+                        Render.MenuOp();
                         break;
 
                     case "2":
-                        // Insert option
+                        foreach (Agents agent in agents)
+                        {
+                            PrintMap();
+                            FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
+                            Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
+                            Console.WriteLine(agent.GetType());
+                            foreach (Agents agent1 in agents)
+                                Console.WriteLine(agent1);
+                            agent.Move(agent, setts.BoardSize);
+                        }
+
                         break;
 
                     case "3":
@@ -148,9 +157,9 @@ namespace ZombieGame
             } while (option != "4");
         }
 
-        private void FillBoard(GameSettings setts, List<Agents> agents)
+        private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
         {
-            Render.PlaceAgents(setts.y, agents);
+            Render.PlaceAgents(y, agents, targetUnit);
         }
 
         private void PrintMap()
@@ -159,8 +168,8 @@ namespace ZombieGame
             Render.PrintBoard(setts.x, setts.y);
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
-            "\t - Said small program.cs \n\n");
+            //Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
+            //"\t - Said small program.cs \n\n");
             Console.ResetColor();
         }
     }

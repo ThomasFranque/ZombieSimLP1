@@ -17,7 +17,8 @@ namespace ZombieGame
             // Human, runs from zombie
             if (j is Human)
             {
-                MoveHumansAi(j);
+                //MoveHumansAi(j);
+                
             }
             // Zombie, runs towards human
             if (j is Zombie)

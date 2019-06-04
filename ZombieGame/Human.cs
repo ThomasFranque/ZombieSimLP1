@@ -24,6 +24,7 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Human";
+        public override string ToString() => base.ToString() + "Human" +
+            $" X: {X}\tY: {Y}";
     }
 }
