@@ -55,7 +55,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        MovePlayer(k);
+                        Move(k);
                     }
                     else if (k.Ai)
                     {
@@ -77,7 +77,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public virtual void MovePlayer(Agents j)
+        public virtual void Move(Agents j, GameSettings setts)
         {
             // Variables
             char dir;
@@ -88,115 +88,114 @@ namespace ZombieGame
             conv = conv.ToLower(); // Converts to lowercase
             dir = Convert.ToChar(conv);// Converts to char
 
-            //switch (dir)
-            //{
-            //    // Up
-            //    case 'w':
+            switch (dir)
+            {
+                // Up
+                case 'w':
+                    if(--Y < 1)
+                    {
+                        Y = setts.y;
+                    }
+                    else
+                    {
+                        Y = 0;
+                    }
+                    break;
 
-            //        Ypos--; 
-                    
-            //        if(Ypos < y) // Pick this way of condition or
-            //        {
-            //            Ypos = 0;
-            //        }
-            //        break;
+                // Left
+                case 'a':
+                    if (--X < 1)
+                    {
+                        X = setts.x;
+                    }
+                    else
+                    {
+                        X--;
+                    }
+                    break;
 
-            //    // Left
-            //    case 'a':
+                // Right
+                case 's':
+                    if (++X > setts.x)
+                    {
+                        X = 1;
+                    }
+                    else
+                    {
+                        X++;
+                    }
+                    break;
 
-            //        if(--Xpos < 0) // This one
-            //        {
-            //            Xpos = x;
-            //        }
-            //        else
-            //        {
-            //            Xpos--;
-            //        }
-            //        break;
+                // Down
+                case 'd':
+                    if (++Y > setts.y)
+                    {
+                        Y = 1;
+                    }
+                    else
+                    {
+                        Y++;
+                    }
+                    break;
 
-            //    // Right
-            //    case 's':
+                // Diagonals
+                // Up Left
+                case 'q':
+                    if (--Ypos < 0 && --Xpos < 0)
+                    {
+                        Ypos = y;
+                        Xpos = x;
+                    }
+                    else
+                    {
+                        Ypos--;
+                        Xpos--;
+                    }
+                    break;
+                // Up right
+                case 'e':
+                    if (--Ypos < 0 && Xpos > x)
+                    {
+                        Ypos = y;
+                        Xpos = 0;
+                    }
+                    else
+                    {
+                        Ypos--;
+                        Xpos++;
+                    }
+                    break;
+                // Down left
+                case 'z':
+                    if (++Ypos > y && --Xpos < 0)
+                    {
+                        Ypos = 0;
+                        Xpos = x;
+                    }
+                    else
+                    {
+                        Ypos++;
+                        Xpos--;
+                    }
+                    break;
+                // Down right
+                case 'c':
+                    if (++Ypos > y && ++Xpos > x)
+                    {
+                        Ypos = 0;
+                        Xpos = 0;
+                    }
+                    else
+                    {
+                        Ypos++;
+                        Xpos++;
+                    }
+                    break;
+                default:
+                    Move(x, y);
+                    break;
 
-            //        if (++Xpos > x)
-            //        {
-            //            Xpos = 0;
-            //        }
-            //        else
-            //        {
-            //            Xpos++;
-            //        }
-
-            //        break;
-
-            //    // Down
-            //    case 'd':
-            //        if (++Ypos > y)
-            //        {
-            //            Ypos = 0;
-            //        }
-            //        else
-            //        {
-            //            Ypos++;
-            //        }
-            //        break;
-            //    // Diagonals
-            //    // Up Left
-            //    case 'q':
-            //        if(--Ypos < 0 && --Xpos < 0)
-            //        {
-            //            Ypos = y;
-            //            Xpos = x;
-            //        }
-            //        else
-            //        {
-            //            Ypos--;
-            //            Xpos--;
-            //        }
-            //        break;
-            //    // Up right
-            //    case 'e':
-            //        if(--Ypos < 0 && Xpos > x)
-            //        {
-            //            Ypos = y;
-            //            Xpos = 0;
-            //        }
-            //        else
-            //        {
-            //            Ypos--;
-            //            Xpos++;
-            //        }
-            //        break;
-            //    // Down left
-            //    case 'z':
-            //        if(++Ypos > y && --Xpos < 0)
-            //        {
-            //            Ypos = 0;
-            //            Xpos = x;
-            //        }
-            //        else
-            //        {
-            //            Ypos++;
-            //            Xpos--;
-            //        }
-            //        break;
-            //    // Down right
-            //    case 'c':
-            //        if(++Ypos > y && ++Xpos > x)
-            //        {
-            //            Ypos = 0;
-            //            Xpos = 0;
-            //        }
-            //        else
-            //        {
-            //            Ypos++;
-            //            Xpos++;
-            //        }
-            //        break;
-            //    default:
-            //        Move(x, y);
-            //        break;
-
-            //}
+            }
         }
 
         /// <summary>
