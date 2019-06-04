@@ -19,7 +19,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        k.Move(k, setts);
+                        k.Move(k, setts.BoardSize);
                     }
                     else if (k.Ai)
                     {

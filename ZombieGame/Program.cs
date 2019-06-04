@@ -9,6 +9,7 @@ namespace ZombieGame
         // Declare class variables
         private List<Agents> agents;
         private GameSettings setts;
+        private Agents agent;
 
         private Program(string[] args)
         {
@@ -108,14 +109,16 @@ namespace ZombieGame
             // Debug ########################################
             //###############################################
 
+            // Ensure console doesn't get cluttered up
+            Console.Clear();
+
             do
             {
-                // Ensure console doesn't get cluttered up
-                //Console.Clear();
 
-                PrintMap();
-                FillBoard(setts, agents);
-                
+
+                //PrintMap();
+                //FillBoard(setts.y, agents);
+
                 // Get user choice
                 option = Console.ReadLine();
 
@@ -126,7 +129,17 @@ namespace ZombieGame
                         break;
 
                     case "2":
-                        
+                        foreach (Agents agent in agents)
+                        {
+                            PrintMap();
+                            FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
+                            Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
+                            Console.WriteLine(agent.GetType());
+                            foreach (Agents agent1 in agents)
+                                Console.WriteLine(agent1);
+                            agent.Move(agent, setts.BoardSize);
+                        }
+
                         break;
 
                     case "3":
@@ -144,9 +157,9 @@ namespace ZombieGame
             } while (option != "4");
         }
 
-        private void FillBoard(GameSettings setts, List<Agents> agents)
+        private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
         {
-            Render.PlaceAgents(setts.y, agents);
+            Render.PlaceAgents(y, agents, targetUnit);
         }
 
         private void PrintMap()

@@ -49,6 +49,7 @@ namespace ZombieGame
             // Go through list of agents in world
             foreach (Agents k in agents)
             {
+
                 // While nº of agents !AI move
                 for (int ap = 0; ap < agents.Count; ap++)
                 {
@@ -59,7 +60,8 @@ namespace ZombieGame
                     }
                     else if (k.Ai)
                     {
-                        artint.CheckType(k);
+                        AI artInt = new AI(k.Ai);
+                        artInt.CheckType(k);
                     }
                 }
             }
@@ -77,7 +79,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        private void Move(Agents j, int[] size)
+        public void Move(Agents j, int[] size)
         {
             // Variables
             char dir;
@@ -87,6 +89,7 @@ namespace ZombieGame
             conv = Console.ReadLine();  // Stores input
             conv = conv.ToLower();      // Converts to lowercase
             dir = Convert.ToChar(conv); // Converts to char
+
 
             switch (dir)
             {
@@ -98,7 +101,7 @@ namespace ZombieGame
                     }
                     else
                     {
-                        Y = 0;
+                        Y--;
                     }
                     break;
 
@@ -115,7 +118,7 @@ namespace ZombieGame
                     break;
 
                 // Right
-                case 's':
+                case 'd':
                     if (++X > size[0])
                     {
                         X = 1;
@@ -127,7 +130,7 @@ namespace ZombieGame
                     break;
 
                 // Down
-                case 'd':
+                case 's':
                     if (++Y > size[1])
                     {
                         Y = 1;
