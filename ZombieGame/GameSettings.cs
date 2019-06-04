@@ -94,7 +94,7 @@ namespace ZombieGame
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
 
-            Thread.Sleep(3600);
+            //Thread.Sleep(3600);
         }
 
         /// <summary>

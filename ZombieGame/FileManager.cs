@@ -10,11 +10,20 @@ namespace ZombieGame
         private static string dirPath;
         private static string filePath;
 
+        /// <summary>
+        /// 
+        /// </summary>
         static FileManager()
         {
-            dirPath = @"C:\ZombieSimMBT";
+            // Get the location of the AppData dir
+            dirPath = Environment.GetFolderPath
+                (Environment.SpecialFolder.ApplicationData);
 
-            filePath = dirPath + @"\sav.ini";
+            // Name of the folder
+            dirPath += @"\ZombieSimMBT";
+
+            // File name and format
+            filePath = dirPath + @"\sav.ini";                  
         }
 
         /// <summary>
@@ -78,7 +87,7 @@ namespace ZombieGame
                 }
             }
 
-            Console.WriteLine("A new save file was created on\n" +
+            Console.WriteLine("The save file was stored on\n" +
                 $"{dirPath}");
         }
 
