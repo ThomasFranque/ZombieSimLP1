@@ -44,7 +44,7 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Agents> agents, GameSettings setts)
+        public virtual void CheckAgents(List<Agents> agents, GameSettings setts, AI artint)
         {
             // Go through list of agents in world
             foreach (Agents k in agents)
@@ -59,7 +59,7 @@ namespace ZombieGame
                     }
                     else if (k.Ai)
                     {
-                        AI.CheckType(k);
+                        artint.CheckType(k);
                     }
                 }
             }
