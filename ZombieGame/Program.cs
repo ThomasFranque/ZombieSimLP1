@@ -69,28 +69,24 @@ namespace ZombieGame
             for (int i = 0; i < setts.H; i++)
             {
                 agents.Add(new Human(true));
-
             }
 
             // Add player controled h
             for (int i = 0; i < setts.h; i++)
             {
                 agents.Add(new Human(false));
-
             }
 
             // Add AI z
             for (int i = 0; i < setts.Z; i++)
             {
                 agents.Add(new Zombie(true));
-
             }
 
             // Add player controled z
             for (int i = 0; i < setts.z; i++)
             {
                 agents.Add(new Zombie(false));
-
             }
 
 
