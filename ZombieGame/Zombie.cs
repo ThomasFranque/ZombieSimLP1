@@ -9,7 +9,7 @@
         }    
 
         // Print symbols for zombie agents
-        public override char PrintPart()
+        public char PrintPart()
         {
             // If zombie is AI controlled
             if (Ai)

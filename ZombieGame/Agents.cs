@@ -4,8 +4,14 @@ using System.Collections.Generic;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents : Node
+    abstract class Agents
     {
+        // Class variables
+        /// <summary>
+        /// Bool to check if agent is AI controlled or not, read-only property
+        /// </summary>
+        public bool Ai { get; }
+
         // Agents' Properties
         /// <summary>
         /// Is infected?
@@ -24,7 +30,7 @@ namespace ZombieGame
 
 
         // Agent constructor
-        public Agents(bool ai) : base(ai)
+        public Agents(bool ai) 
         {
             Random r = new Random();
             // Default position is x = 1 and y = 1
@@ -38,10 +44,10 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Node> agents)
+        public virtual void CheckAgents(List<Agents> agents)
         {
             // Go through list of agents in world
-            foreach (Node k in agents)
+            foreach (Agents k in agents)
             {
                 // While nº of agents !AI move
                 for (int ap = 0; ap < agents.Count; ap++)
@@ -71,7 +77,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public virtual void MovePlayer(Node j)
+        public virtual void MovePlayer(Agents j)
         {
             // Variables
             char dir;

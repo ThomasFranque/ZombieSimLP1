@@ -8,7 +8,7 @@ namespace ZombieGame
         /// <summary>
         /// Checks all agents in world, accepts max x and y of map 
         /// </summary>
-        public static void CheckAgents(List<Node> nodes, int x, int y)
+        public static void CheckAgents(List<Agents> nodes, int x, int y)
         {
             // Go through nº of agents in world
             foreach (Agents k in nodes)

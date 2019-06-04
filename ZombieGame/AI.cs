@@ -8,7 +8,7 @@ namespace ZombieGame
         /// Accepts a human agent and does it's movement accordingly
         /// </summary>
         /// <param name="agents"></param>
-        static public void CheckType(Node j)
+        static public void CheckType(Agents j)
         {
             // Human, runs from zombie
             if (j is Human)
@@ -23,12 +23,12 @@ namespace ZombieGame
             }
         }
 
-        static public void MoveHumansAi(Node i)
+        static public void MoveHumansAi(Agents i)
         {
             // Check if there's zombies around, move way from them
         }
 
-        static public void MoveZombiesAi(Node i)
+        static public void MoveZombiesAi(Agents i)
         {
             // Check if there's humans around, move towards them
         }
