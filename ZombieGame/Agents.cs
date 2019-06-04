@@ -44,7 +44,7 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Agents> agents)
+        public virtual void CheckAgents(List<Agents> agents, GameSettings setts)
         {
             // Go through list of agents in world
             foreach (Agents k in agents)
@@ -55,7 +55,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        Move(k);
+                        Move(k, setts);
                     }
                     else if (k.Ai)
                     {
@@ -83,10 +83,10 @@ namespace ZombieGame
             char dir;
             string conv;
 
-            Render.AskInput(); // Asks for input, converts input           
-            conv = Console.ReadLine(); // Stores input
-            conv = conv.ToLower(); // Converts to lowercase
-            dir = Convert.ToChar(conv);// Converts to char
+            Render.AskInput();          // Asks for input, converts input           
+            conv = Console.ReadLine();  // Stores input
+            conv = conv.ToLower();      // Converts to lowercase
+            dir = Convert.ToChar(conv); // Converts to char
 
             switch (dir)
             {
@@ -141,60 +141,104 @@ namespace ZombieGame
                 // Diagonals
                 // Up Left
                 case 'q':
-                    if (--Ypos < 0 && --Xpos < 0)
+                    if (--Y < 1 && --X < 1) // Corner condition
                     {
-                        Ypos = y;
-                        Xpos = x;
+                        Y = setts.y;
+                        X = setts.x;
                     }
-                    else
+                    else if (--Y < 1) // Up wall condition
                     {
-                        Ypos--;
-                        Xpos--;
+                        Y = setts.y;
+                        X--;
                     }
-                    break;
-                // Up right
-                case 'e':
-                    if (--Ypos < 0 && Xpos > x)
+                    else if (--X < 1) // Left wall condition
                     {
-                        Ypos = y;
-                        Xpos = 0;
+                        Y--;
+                        X = setts.x;
                     }
-                    else
+                    else // Other place in map
                     {
-                        Ypos--;
-                        Xpos++;
+                        Y--;
+                        X--;
                     }
-                    break;
-                // Down left
-                case 'z':
-                    if (++Ypos > y && --Xpos < 0)
-                    {
-                        Ypos = 0;
-                        Xpos = x;
-                    }
-                    else
-                    {
-                        Ypos++;
-                        Xpos--;
-                    }
-                    break;
-                // Down right
-                case 'c':
-                    if (++Ypos > y && ++Xpos > x)
-                    {
-                        Ypos = 0;
-                        Xpos = 0;
-                    }
-                    else
-                    {
-                        Ypos++;
-                        Xpos++;
-                    }
-                    break;
-                default:
-                    Move(x, y);
                     break;
 
+                // Up right
+                case 'e':
+                    if (--Y < 1 && ++X > setts.x) // Corner condition
+                    {
+                        Y = setts.y;
+                        X = 1;
+                    }
+                    else if (--Y < 1) // Up wall condition
+                    {
+                        Y = 1;
+                        X++;
+                    }
+                    else if (++X > setts.x) // Right wall condition
+                    {
+                        Y--;
+                        X = 1;
+                    }
+                    else // Normal
+                    {
+                        Y--;
+                        X++;
+                    }
+                    break;
+
+                // Down left
+                case 'z':
+                    if (++Y > setts.y && --X < 1) // Corner
+                    {
+                        Y = 1;
+                        X = setts.x;
+                    }
+                    else if (++Y > setts.y) // Down
+                    {
+                        Y = 1;
+                        X--;
+                    }
+                    else if (--X < 1) // Left
+                    {
+                        Y++;
+                        X = setts.x;
+                    }
+                    else
+                    {
+                        Y++;
+                        X--;
+                    }
+                    break;
+
+                // Down right
+                case 'c':
+                    if (++Y > setts.y && ++X > setts.x) // Corner
+                    {
+                        Y = 1;
+                        X = 1;
+                    }
+                    else if (++Y > setts.y) // Base
+                    {
+                        Y = 1;
+                        X++;
+                    }
+                    else if (++X > setts.x) // Right
+                    {
+                        Y++;
+                        X = 1;
+                    }
+                    else
+                    {
+                        Y++;
+                        X++;
+                    }
+                    break;
+
+                // Case input is invalid
+                default:
+                    Move(j, setts);
+                    break;
             }
         }
 
