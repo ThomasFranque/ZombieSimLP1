@@ -18,7 +18,7 @@ namespace ZombieGame
             Console.Beep(659, 100);
             Thread.Sleep(380);
             Console.Beep(784, 500);
-            Console.Beep(392, 300);
+            Console.Beep(392, 500);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace ZombieGame
             Console.Beep(522, 300);
             Console.Beep(392, 300);
             Console.Beep(392, 200);
-            Console.Beep(322, 200);
+            Console.Beep(322, 300);
         }
     }
 }
