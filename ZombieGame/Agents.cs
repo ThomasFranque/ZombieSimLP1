@@ -95,7 +95,7 @@ namespace ZombieGame
             {
                 // Up
                 case 'w':
-                    if(--Y < 1)
+                    if(Y < 1)
                     {
                         Y = size[1];
                     }
@@ -107,7 +107,7 @@ namespace ZombieGame
 
                 // Left
                 case 'a':
-                    if (--X < 1)
+                    if (X < 1)
                     {
                         X = size[0];
                     }
@@ -119,7 +119,7 @@ namespace ZombieGame
 
                 // Right
                 case 'd':
-                    if (++X > size[0])
+                    if (X > size[0])
                     {
                         X = 1;
                     }
@@ -131,7 +131,7 @@ namespace ZombieGame
 
                 // Down
                 case 's':
-                    if (++Y > size[1])
+                    if (Y > size[1])
                     {
                         Y = 1;
                     }
@@ -144,17 +144,17 @@ namespace ZombieGame
                 // Diagonals
                 // Up Left
                 case 'q':
-                    if (--Y < 1 && --X < 1) // Corner condition
+                    if (Y < 1 && X < 1) // Corner condition
                     {
                         Y = size[1];
                         X = size[0];
                     }
-                    else if (--Y < 1) // Up wall condition
+                    else if (Y < 1) // Up wall condition
                     {
                         Y = size[1];
                         X--;
                     }
-                    else if (--X < 1) // Left wall condition
+                    else if (X < 1) // Left wall condition
                     {
                         Y--;
                         X = size[0];
@@ -168,17 +168,17 @@ namespace ZombieGame
 
                 // Up right
                 case 'e':
-                    if (--Y < 1 && ++X > size[0]) // Corner condition
+                    if (Y < 1 && X > size[0]) // Corner condition
                     {
                         Y = size[1];
                         X = 1;
                     }
-                    else if (--Y < 1) // Up wall condition
+                    else if (Y < 1) // Up wall condition
                     {
                         Y = 1;
                         X++;
                     }
-                    else if (++X > size[0]) // Right wall condition
+                    else if (X > size[0]) // Right wall condition
                     {
                         Y--;
                         X = 1;
@@ -192,17 +192,17 @@ namespace ZombieGame
 
                 // Down left
                 case 'z':
-                    if (++Y > size[1] && --X < 1) // Corner
+                    if (Y > size[1] && X < 1) // Corner
                     {
                         Y = 1;
                         X = size[0];
                     }
-                    else if (++Y > size[1]) // Down
+                    else if (Y > size[1]) // Down
                     {
                         Y = 1;
                         X--;
                     }
-                    else if (--X < 1) // Left
+                    else if (X < 1) // Left
                     {
                         Y++;
                         X = size[0];
@@ -217,17 +217,17 @@ namespace ZombieGame
                 // Down right
                 case 'c':
                     // Corner
-                    if (++Y > size[1] && ++X > size[0]) 
+                    if (Y > size[1] && X > size[0]) 
                     {
                         Y = 1;
                         X = 1;
                     }
-                    else if (++Y > size[1]) // Base
+                    else if (Y > size[1]) // Base
                     {
                         Y = 1;
                         X++;
                     }
-                    else if (++X > size[0]) // Right
+                    else if (X > size[0]) // Right
                     {
                         Y++;
                         X = 1;
@@ -259,8 +259,6 @@ namespace ZombieGame
             else if (X == other.X && Y == other.Y) return true;
 
             else return false;
-
-
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ZombieGame
             if (j is Zombie)
             {
                 MoveZombiesAi(j);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000);               
             }
         }
 

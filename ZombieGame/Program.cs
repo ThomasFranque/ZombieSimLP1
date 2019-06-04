@@ -130,11 +130,10 @@ namespace ZombieGame
                             FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
                             Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
                             Console.WriteLine(agent.GetType());
-                            foreach (Agents agent1 in agents)
-                                Console.WriteLine(agent1);
+                            //foreach (Agents agent1 in agents)
+                            //    Console.WriteLine(agent1);
                             agent.Move(agent, setts.BoardSize);
                         }
-
                         break;
 
                     case "3":
