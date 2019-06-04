@@ -38,7 +38,7 @@ namespace ZombieGame
             X = r.Next(1, 8);
             Y = r.Next(1, 8);
 
-            ai = Ai;
+            Ai = ai;
         }
 
         /// <summary>

@@ -110,42 +110,42 @@ namespace ZombieGame
 
 
             // Ensure console doesn't get cluttered up
-            //Console.Clear();
+            Console.Clear();
 
             PrintMap();
             FillBoard(setts, agents);
 
-            
 
-            //do
-            //{
-            //    // Render options or print them right here?
 
-            //    option = Console.ReadLine();
+            do
+            {
+                Render.MenuOp();
 
-            //    switch(option)
-            //    {
-            //        case "1":
-            //            // Insert option
-            //            break;
+                option = Console.ReadLine();
 
-            //        case "2":
-            //            // Insert option
-            //            break;
+                switch (option)
+                {
+                    case "1":
+                        // Insert option
+                        break;
 
-            //        case "3":
-            //            // Insert option
-            //            break;
+                    case "2":
+                        // Insert option
+                        break;
 
-            //        case "4":
-            //            break;
+                    case "3":
+                        // Insert option
+                        break;
 
-            //        default:
-            //            Console.WriteLine("Invalid");
-            //            break;
-            //    }
+                    case "4":
+                        break;
 
-            //} while (option != "4");
+                    default:
+                        Console.WriteLine("Invalid");
+                        break;
+                }
+
+            } while (option != "4");
         }
 
         private void FillBoard(GameSettings setts, List<Agents> agents)
@@ -160,7 +160,7 @@ namespace ZombieGame
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
-    "\t - Said small program.cs \n\n");
+            "\t - Said small program.cs \n\n");
             Console.ResetColor();
         }
     }
