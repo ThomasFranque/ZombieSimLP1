@@ -36,7 +36,7 @@ namespace ZombieGame
             // Default position is x = 1 and y = 1
             // Random is set for debugging
             X = r.Next(1, 8);
-            Y = r.Next(1, 8); ;
+            Y = r.Next(1, 8);
 
             ai = Ai;
         }

@@ -93,7 +93,7 @@ namespace ZombieGame
 
         public static void PrintBoard(int length, int height)
         {
-            Console.Clear();
+            //Console.Clear();
             // For cicle to print map
             for (int k = 0; k < length * 4 + 1; k++)
                 Console.Write("-");
