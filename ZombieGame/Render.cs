@@ -29,6 +29,7 @@ namespace ZombieGame
             Console.WriteLine("Press 'I' for instructions");
             Console.WriteLine("Press 'Q' to Quit simulation");
             Console.WriteLine("Press 'S' to Save and Quit simulation");
+
             choice = Convert.ToChar(Console.ReadLine());
 
             switch (choice)
