@@ -108,29 +108,25 @@ namespace ZombieGame
             // Debug ########################################
             //###############################################
 
-
-            // Ensure console doesn't get cluttered up
-            Console.Clear();
-
-            PrintMap();
-            FillBoard(setts, agents);
-
-
-
             do
             {
-                Render.MenuOp();
+                // Ensure console doesn't get cluttered up
+                //Console.Clear();
 
+                PrintMap();
+                FillBoard(setts, agents);
+                
+                // Get user choice
                 option = Console.ReadLine();
 
                 switch (option)
                 {
                     case "1":
-                        // Insert option
+                        Render.MenuOp();
                         break;
 
                     case "2":
-                        // Insert option
+                        
                         break;
 
                     case "3":
@@ -159,8 +155,8 @@ namespace ZombieGame
             Render.PrintBoard(setts.x, setts.y);
             // Nice
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
-            "\t - Said small program.cs \n\n");
+            //Console.WriteLine("\n\n\t When i'm big, I want to be a game! \n" +
+            //"\t - Said small program.cs \n\n");
             Console.ResetColor();
         }
     }

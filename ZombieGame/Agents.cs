@@ -44,7 +44,7 @@ namespace ZombieGame
         /// <summary>
         /// Agents move, Calls CheckAgents
         /// </summary>
-        public virtual void CheckAgents(List<Agents> agents, GameSettings setts, AI artint)
+        public void CheckAgents(List<Agents> agents, int[] size)
         {
             // Go through list of agents in world
             foreach (Agents k in agents)
@@ -55,7 +55,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        Move(k, setts);
+                        Move(k, size);
                     }
                     else if (k.Ai)
                     {
@@ -77,7 +77,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public virtual void Move(Agents j, GameSettings setts)
+        private void Move(Agents j, int[] size)
         {
             // Variables
             char dir;
@@ -94,7 +94,7 @@ namespace ZombieGame
                 case 'w':
                     if(--Y < 1)
                     {
-                        Y = setts.y;
+                        Y = size[1];
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace ZombieGame
                 case 'a':
                     if (--X < 1)
                     {
-                        X = setts.x;
+                        X = size[0];
                     }
                     else
                     {
@@ -116,7 +116,7 @@ namespace ZombieGame
 
                 // Right
                 case 's':
-                    if (++X > setts.x)
+                    if (++X > size[0])
                     {
                         X = 1;
                     }
@@ -128,7 +128,7 @@ namespace ZombieGame
 
                 // Down
                 case 'd':
-                    if (++Y > setts.y)
+                    if (++Y > size[1])
                     {
                         Y = 1;
                     }
@@ -143,18 +143,18 @@ namespace ZombieGame
                 case 'q':
                     if (--Y < 1 && --X < 1) // Corner condition
                     {
-                        Y = setts.y;
-                        X = setts.x;
+                        Y = size[1];
+                        X = size[0];
                     }
                     else if (--Y < 1) // Up wall condition
                     {
-                        Y = setts.y;
+                        Y = size[1];
                         X--;
                     }
                     else if (--X < 1) // Left wall condition
                     {
                         Y--;
-                        X = setts.x;
+                        X = size[0];
                     }
                     else // Other place in map
                     {
@@ -165,9 +165,9 @@ namespace ZombieGame
 
                 // Up right
                 case 'e':
-                    if (--Y < 1 && ++X > setts.x) // Corner condition
+                    if (--Y < 1 && ++X > size[0]) // Corner condition
                     {
-                        Y = setts.y;
+                        Y = size[1];
                         X = 1;
                     }
                     else if (--Y < 1) // Up wall condition
@@ -175,7 +175,7 @@ namespace ZombieGame
                         Y = 1;
                         X++;
                     }
-                    else if (++X > setts.x) // Right wall condition
+                    else if (++X > size[0]) // Right wall condition
                     {
                         Y--;
                         X = 1;
@@ -189,12 +189,12 @@ namespace ZombieGame
 
                 // Down left
                 case 'z':
-                    if (++Y > setts.y && --X < 1) // Corner
+                    if (++Y > size[1] && --X < 1) // Corner
                     {
                         Y = 1;
-                        X = setts.x;
+                        X = size[0];
                     }
-                    else if (++Y > setts.y) // Down
+                    else if (++Y > size[1]) // Down
                     {
                         Y = 1;
                         X--;
@@ -202,7 +202,7 @@ namespace ZombieGame
                     else if (--X < 1) // Left
                     {
                         Y++;
-                        X = setts.x;
+                        X = size[0];
                     }
                     else
                     {
@@ -213,17 +213,18 @@ namespace ZombieGame
 
                 // Down right
                 case 'c':
-                    if (++Y > setts.y && ++X > setts.x) // Corner
+                    // Corner
+                    if (++Y > size[1] && ++X > size[0]) 
                     {
                         Y = 1;
                         X = 1;
                     }
-                    else if (++Y > setts.y) // Base
+                    else if (++Y > size[1]) // Base
                     {
                         Y = 1;
                         X++;
                     }
-                    else if (++X > setts.x) // Right
+                    else if (++X > size[0]) // Right
                     {
                         Y++;
                         X = 1;
@@ -237,7 +238,7 @@ namespace ZombieGame
 
                 // Case input is invalid
                 default:
-                    Move(j, setts);
+                    
                     break;
             }
         }

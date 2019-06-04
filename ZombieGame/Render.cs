@@ -41,6 +41,7 @@ namespace ZombieGame
                 // Shows instructions
                 case 'i':
                     InstMove();
+                    Console.ReadKey(true);
                     break;
 
                 // Quits program
@@ -157,6 +158,7 @@ namespace ZombieGame
                 Console.ForegroundColor = unitColor;
 
                 Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
                 Console.WriteLine(identifier);
 
             }
