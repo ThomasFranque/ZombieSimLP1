@@ -264,7 +264,7 @@ namespace ZombieGame
                     }
                     else if (Y <= 1) // Up wall condition
                     {
-                        if (Occupied(new int[] { X + offSett,  offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X + offSett,  size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northeast position is occupied");
                         }
