@@ -49,14 +49,13 @@ namespace ZombieGame
             // Go through list of agents in world
             foreach (Agents k in agents)
             {
-
                 // While nº of agents !AI move
                 for (int ap = 0; ap < agents.Count; ap++)
                 {
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        Move(k, size);
+                        Move(k, size, agents);   
                     }
                     else if (k.Ai)
                     {
@@ -79,7 +78,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public void Move(Agents j, int[] size)
+        public void Move(Agents j, int[] size, List<Agents> agents)
         {
             // Variables
             char dir;
@@ -90,6 +89,7 @@ namespace ZombieGame
             conv = conv.ToLower();      // Converts to lowercase
             dir = Convert.ToChar(conv); // Converts to char
 
+            //// Goes through list and verifies if exist an agent with said coordinates
 
             switch (dir)
             {
@@ -97,7 +97,11 @@ namespace ZombieGame
                 case 'w':
                     if(Y <= 1)
                     {
-                        Y = size[1];
+                        if (Occupied(new int[] { X - 1, Y }, agents)) // Lock agent j left movement
+                        {
+
+                        }
+                            Y = size[1];
                     }
                     else
                     {
@@ -110,10 +114,20 @@ namespace ZombieGame
                     if (X <= 1)
                     {
                         X = size[0];
+                        //if (agents.Exists(x => x.X == j.X)) // Lock agent j left movement
+                        //    X = 1;
                     }
                     else
                     {
-                        X--;
+
+                        if (Occupied(new int[] {X -1, Y },agents)) // Lock agent j left movement
+                        {
+                            Console.WriteLine("Position occupied");
+                            Console.ReadLine();
+                        }
+
+                        else
+                            X--;
                     }
                     break;
 
@@ -258,7 +272,20 @@ namespace ZombieGame
 
             else if (X == other.X && Y == other.Y) return true;
 
+            //else if (X == other.X || Y == other.Y) return true;
+
             else return false;
+        }
+
+        private bool Occupied(int[] newPos, List<Agents> agents)
+        {
+            foreach(Agents a in agents)
+            {
+                if (newPos[0] == a.X && newPos[1] == a.Y)
+                    return true;
+                
+            }
+            return false;
         }
     }
 }
