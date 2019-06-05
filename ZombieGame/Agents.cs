@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents
+    abstract class Agents : IEquatable<Agents>
     {
         // Class variables
         /// <summary>
@@ -251,5 +251,14 @@ namespace ZombieGame
         /// </summary>
         /// <returns></returns>
         public override string ToString() => $"Ai: {Ai}; Agent: ";
+
+        public bool Equals(Agents other)
+        {
+            if (other == null) return false;
+
+            else if (X == other.X && Y == other.Y) return true;
+
+            else return false;
+        }
     }
 }
