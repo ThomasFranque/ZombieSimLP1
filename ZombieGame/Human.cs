@@ -9,7 +9,7 @@
         }
 
         // Print symbol for human agents
-        public override char PrintPart()
+        public char PrintPart()
         {
             // If human is AI controlled
             if (Ai)
@@ -24,6 +24,7 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Human";
+        public override string ToString() => base.ToString() + "Human" +
+            $" X: {X}\tY: {Y}";
     }
 }

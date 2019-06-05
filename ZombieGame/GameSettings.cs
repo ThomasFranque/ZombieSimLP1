@@ -53,6 +53,11 @@ namespace ZombieGame
         /// </summary>
         public int T { get; set; }
 
+        /// <summary>
+        /// Get 
+        /// </summary>
+        public int[] BoardSize { get; }
+
 
         /// <summary>
         /// Constructor will initialize the game variables from console args
@@ -93,6 +98,8 @@ namespace ZombieGame
             Console.WriteLine($"| Agents: {z + h + Z + H}\n" +
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
+
+            BoardSize = new int[2] { x, y };
 
             //Thread.Sleep(3600);
         }
@@ -183,13 +190,13 @@ namespace ZombieGame
                             break;
                         // h
                         case 2:
-                            h = (x * y) / 3;
+                            h = (x * y) / 6;
                             randArgs[2] = h;
                             RandomNumMsg('h', h);
                             break;
                         // z
                         case 3:
-                            z = (x * y) / 4;
+                            z = (x * y) / 7;
                             randArgs[3] = z;
                             RandomNumMsg('z', z);
                             break;

@@ -9,7 +9,7 @@
         }    
 
         // Print symbols for zombie agents
-        public override char PrintPart()
+        public char PrintPart()
         {
             // If zombie is AI controlled
             if (Ai)
@@ -24,6 +24,7 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Zombie";
+        public override string ToString() => base.ToString() + "Zombie" +
+            $" X: {X}\tY: {Y}";
     }
 }

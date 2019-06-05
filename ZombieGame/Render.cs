@@ -29,6 +29,7 @@ namespace ZombieGame
             Console.WriteLine("Press 'I' for instructions");
             Console.WriteLine("Press 'Q' to Quit simulation");
             Console.WriteLine("Press 'S' to Save and Quit simulation");
+
             choice = Convert.ToChar(Console.ReadLine());
 
             switch (choice)
@@ -40,6 +41,7 @@ namespace ZombieGame
                 // Shows instructions
                 case 'i':
                     InstMove();
+                    Console.ReadKey(true);
                     break;
 
                 // Quits program
@@ -121,7 +123,7 @@ namespace ZombieGame
         /// <param name="boardHeight">Height of the board</param>
         /// <param name="agents">List of agents to be placed</param>
         public static void PlaceAgents
-            (int boardHeight, IEnumerable<Agents> agents)
+            (int boardHeight, IEnumerable<Agents> agents, int[] targetUnit)
         {
             string identifier;
             foreach (Agents agent in agents)
@@ -133,7 +135,7 @@ namespace ZombieGame
                 identifier = (agent is Zombie) ? "z" : "h";
 
                 // Check if it is AI controlled
-                if (agent.Ai == true)
+                if (agent.Ai)
                     identifier = identifier.ToUpper();
 
                 // Set the color
@@ -155,12 +157,18 @@ namespace ZombieGame
                 }
                 Console.ForegroundColor = unitColor;
 
+                if (agent.X == targetUnit[0] && agent.Y == targetUnit[1])
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                }
+
                 Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+
                 Console.WriteLine(identifier);
+                Console.ResetColor();
 
             }
-            Console.ResetColor();
-            Console.SetCursorPosition(0,boardHeight * 2 + 1);
+            Console.SetCursorPosition(0, boardHeight * 2 + 1);
         }
 
         /// <summary>
@@ -169,7 +177,18 @@ namespace ZombieGame
         /// <param name="x">Agent's X</param>
         /// <param name="y">Agent's Y</param>
         /// <returns>Normalized Coordinates</returns>
-        private static int[] NormalizePosition(int x, int y) => 
+        private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-    }
+
+        // Print for error messages
+        public static void PressKey(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(msg +
+            "\nPress any key to continue...");
+            Console.ResetColor();
+            Console.ReadKey();
+            
+        }
+}
 }
