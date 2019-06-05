@@ -19,6 +19,9 @@ namespace ZombieGame
 
             // Save the settings
             FileManager.Save(setts.GetAllVars());
+
+            // Load settings
+            setts = FileManager.LoadSetts();
         }
 
         private static void Main(string[] args)
@@ -28,32 +31,6 @@ namespace ZombieGame
             prgm.Start();
 
 
-            // Load settings
-            //setts = FileManager.LoadSetts();
-
-
-
-
-
-
-            //map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
-            // map.FillMap(agents, map.Board);
-            //map.ShowMap();
-
-
-
-            //Console.WriteLine($"\nMap Lenght   x: {setts.x}");
-            //Console.WriteLine($"Map Height   y: {setts.y}");
-
-            //Console.WriteLine($"Zombies      z: {setts.z}");
-            //Console.WriteLine($"Humans       h: {setts.h}");
-
-            //Console.WriteLine($"Your zombies Z: {setts.Z}");
-            //Console.WriteLine($"Your humans  H: {setts.H}");
-
-
-
-            //Console.BackgroundColor = ConsoleColor.DarkGreen;
 
         }
 
@@ -61,7 +38,6 @@ namespace ZombieGame
         {
             //  Declare block variables
             string option;
-
 
             //###############################################
             // Debug ########################################
@@ -132,7 +108,7 @@ namespace ZombieGame
                             Console.WriteLine(agent.GetType());
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
-                            agent.Move(agent, setts.BoardSize);
+                            agent.Move(agent, setts.BoardSize, agents);
                         }
                         break;
 
