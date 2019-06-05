@@ -168,7 +168,7 @@ namespace ZombieGame
                 Console.ResetColor();
 
             }
-            Console.SetCursorPosition(0,boardHeight * 2 + 1);
+            Console.SetCursorPosition(0, boardHeight * 2 + 1);
         }
 
         /// <summary>
@@ -177,7 +177,18 @@ namespace ZombieGame
         /// <param name="x">Agent's X</param>
         /// <param name="y">Agent's Y</param>
         /// <returns>Normalized Coordinates</returns>
-        private static int[] NormalizePosition(int x, int y) => 
+        private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-    }
+
+        // Print for error messages
+        public static void PressKey(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(msg +
+            "\nPress any key to continue...");
+            Console.ResetColor();
+            Console.ReadKey();
+            
+        }
+}
 }
