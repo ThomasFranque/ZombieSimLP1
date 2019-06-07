@@ -113,7 +113,6 @@ namespace ZombieGame
                     Console.Write("-");
 
                 Console.WriteLine();
-
             }
         }
 
@@ -132,7 +131,7 @@ namespace ZombieGame
                 int[] normalizedPos = NormalizePosition(agent.X, agent.Y);
 
                 // Check if it is a Zombie or human
-                identifier = (agent is Zombie) ? "z" : "h";
+                identifier = (agent is Zombie || agent.Infected) ? "z" : "h";
 
                 // Check if it is AI controlled
                 if (agent.Ai)
@@ -152,15 +151,13 @@ namespace ZombieGame
                         unitColor = ConsoleColor.DarkCyan;
                         break;
                     case "H":
-                        unitColor = ConsoleColor.DarkBlue;
+                        unitColor = ConsoleColor.Blue;
                         break;
                 }
                 Console.ForegroundColor = unitColor;
 
                 if (agent.X == targetUnit[0] && agent.Y == targetUnit[1])
-                {
                     Console.BackgroundColor = ConsoleColor.DarkGray;
-                }
 
                 Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
 
@@ -168,7 +165,7 @@ namespace ZombieGame
                 Console.ResetColor();
 
             }
-            Console.SetCursorPosition(0, boardHeight * 2 + 1);
+            Console.SetCursorPosition(0,boardHeight * 2 + 1);
         }
 
         /// <summary>
@@ -177,18 +174,7 @@ namespace ZombieGame
         /// <param name="x">Agent's X</param>
         /// <param name="y">Agent's Y</param>
         /// <returns>Normalized Coordinates</returns>
-        private static int[] NormalizePosition(int x, int y) =>
+        private static int[] NormalizePosition(int x, int y) => 
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
-        // Print for error messages
-        public static void PressKey(string msg)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(msg +
-            "\nPress any key to continue...");
-            Console.ResetColor();
-            Console.ReadKey();
-            
-        }
-}
+    }
 }
