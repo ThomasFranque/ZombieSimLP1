@@ -2,33 +2,38 @@
 
 namespace ZombieGame
 {
-    static class AI
+    class AI : Agents
     {
+        public AI(bool ai) : base(ai)
+        {
+        }
+
         /// <summary>
         /// Accepts a human agent and does it's movement accordingly
         /// </summary>
         /// <param name="agents"></param>
-        static public void CheckType(Node j)
+        public void CheckType(Agents j)
         {
             // Human, runs from zombie
             if (j is Human)
             {
-                MoveHumansAi(j);
+                //MoveHumansAi(j);
+                
             }
             // Zombie, runs towards human
             if (j is Zombie)
             {
                 MoveZombiesAi(j);
-                Thread.Sleep(2000);
+                Thread.Sleep(2000);               
             }
         }
 
-        static public void MoveHumansAi(Node i)
+        public void MoveHumansAi(Agents i)
         {
             // Check if there's zombies around, move way from them
         }
 
-        static public void MoveZombiesAi(Node i)
+        public void MoveZombiesAi(Agents i)
         {
             // Check if there's humans around, move towards them
         }
