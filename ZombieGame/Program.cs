@@ -18,20 +18,16 @@ namespace ZombieGame
             setts = new GameSettings(args);
 
             // Save the settings
-            FileManager.Save(setts.GetAllVars());
+            //FileManager.Save(setts.GetAllVars());
 
             // Load settings
-            setts = FileManager.LoadSetts();
+            //setts = FileManager.LoadSetts();
         }
 
         private static void Main(string[] args)
         {
-
             Program prgm = new Program(args);
             prgm.Start();
-
-
-
         }
 
         private void Start()
@@ -39,48 +35,7 @@ namespace ZombieGame
             //  Declare block variables
             string option;
 
-            //###############################################
-            // Debug ########################################
-            //###############################################
-            // Add AI h
-            for (int i = 0; i < setts.H; i++)
-            {
-                agents.Add(NewAgent(false, true));
-            }
-
-            // Add player controled h
-            for (int i = 0; i < setts.h; i++)
-            {
-                agents.Add(NewAgent(false, false));
-            }
-
-            // Add AI z
-            for (int i = 0; i < setts.Z; i++)
-            {
-                agents.Add(NewAgent(true, true));
-            }
-
-            // Add player controled z
-            for (int i = 0; i < setts.z; i++)
-            {
-                agents.Add(NewAgent(true, false));
-            }
-
-
-            int k = 0;  // Used for debugging list count
-            foreach (Agents a in agents)
-            {
-                Console.WriteLine($"{a.ToString()}; Count:{k}");
-                k++;
-            }
-
-            Console.WriteLine("List count:" + agents.Count);
-            Console.WriteLine("Map size:" + setts.x * setts.y);
-            Console.WriteLine();
-
-            //###############################################
-            // Debug ########################################
-            //###############################################
+            CreateAgents();
 
             // Ensure console doesn't get cluttered up
             Console.Clear();
@@ -155,6 +110,46 @@ namespace ZombieGame
                 tempA = new Human(true);
 
             return tempA;
+        }
+
+        private void CreateAgents()
+        {
+            // Add AI h
+            for (int i = 0; i < setts.H; i++)
+            {
+                agents.Add(NewAgent(false, true));
+            }
+
+            // Add player controled h
+            for (int i = 0; i < setts.h; i++)
+            {
+                agents.Add(NewAgent(false, false));
+            }
+
+            // Add AI z
+            for (int i = 0; i < setts.Z; i++)
+            {
+                agents.Add(NewAgent(true, true));
+            }
+
+            // Add player controled z
+            for (int i = 0; i < setts.z; i++)
+            {
+                agents.Add(NewAgent(true, false));
+            }
+
+
+            int k = 0;  // Used for debugging list count
+            foreach (Agents a in agents)
+            {
+                Console.WriteLine($"{a.ToString()}; Count:{k}");
+                k++;
+            }
+
+            // Show results
+            Console.WriteLine("List count:" + agents.Count);
+            Console.WriteLine("Map size:" + setts.x * setts.y);
+            Console.WriteLine();
         }
     }
 }
