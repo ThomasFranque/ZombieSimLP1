@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using static System.Console;
 
 namespace ZombieGame
 {
@@ -11,7 +12,7 @@ namespace ZombieGame
         /// </summary>
         public static void AskInput()
         {
-            Console.WriteLine("Choose where you want to move your agents...");
+            WriteLine("Choose where you want to move your agents...");
         }
 
         /// <summary>
@@ -25,10 +26,10 @@ namespace ZombieGame
             // Variable, saves user's input
             char choice;
 
-            Console.WriteLine("Press 'R' to return to simulation");
-            Console.WriteLine("Press 'I' for instructions");
-            Console.WriteLine("Press 'Q' to Quit simulation");
-            Console.WriteLine("Press 'S' to Save and Quit simulation");
+            WriteLine("Press 'R' to return to simulation");
+            WriteLine("Press 'I' for instructions");
+            WriteLine("Press 'Q' to Quit simulation");
+            WriteLine("Press 'S' to Save and Quit simulation");
 
             choice = Convert.ToChar(Console.ReadLine());
 
@@ -41,7 +42,7 @@ namespace ZombieGame
                 // Shows instructions
                 case 'i':
                     InstMove();
-                    Console.ReadKey(true);
+                    ReadKey(true);
                     break;
 
                 // Quits program
@@ -57,7 +58,7 @@ namespace ZombieGame
 
                 // Case user types an unkwon option goes back to game
                 default:
-                    Console.WriteLine
+                    WriteLine
                         ("Invalid choice, sending you back to the simulation");
                     break;
             }
@@ -69,15 +70,15 @@ namespace ZombieGame
         public static void InstMove()
         {
             // Shows user how to move
-            Console.WriteLine("To move use the following keys:");
-            Console.WriteLine("Q - Up Left");
-            Console.WriteLine("w - Up");
-            Console.WriteLine("E - Up Right");
-            Console.WriteLine("A - Left");
-            Console.WriteLine("S - Down");
-            Console.WriteLine("D - Right");
-            Console.WriteLine("Z - Down Left");
-            Console.WriteLine("C - Down Right");
+            WriteLine("To move use the following keys:");
+            WriteLine("Q - Up Left");
+            WriteLine("w - Up");
+            WriteLine("E - Up Right");
+            WriteLine("A - Left");
+            WriteLine("S - Down");
+            WriteLine("D - Right");
+            WriteLine("Z - Down Left");
+            WriteLine("C - Down Right");
         }
 
         /// <summary>
@@ -88,31 +89,31 @@ namespace ZombieGame
             // Plays death tune
             Songs.TuneDeath();
 
-            Console.WriteLine("All humans have died...");
+            WriteLine("All humans have died...");
             // Saves stats / why?
             Thread.Sleep(10000);
         }
 
         public static void PrintBoard(int length, int height)
         {
-            Console.Clear();
+            Clear();
             // For cicle to print map
             for (int k = 0; k < length * 4 + 1; k++)
-                Console.Write("-");
+                Write("-");
 
-            Console.WriteLine();
+            WriteLine();
 
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < length; j++)
-                    Console.Write("|   ");
+                    Write("|   ");
 
-                Console.WriteLine('|');
+                WriteLine('|');
 
                 for (int k = 0; k < length * 4 + 1; k++)
-                    Console.Write("-");
+                    Write("-");
 
-                Console.WriteLine();
+                WriteLine();
             }
         }
 
@@ -154,18 +155,18 @@ namespace ZombieGame
                         unitColor = ConsoleColor.Blue;
                         break;
                 }
-                Console.ForegroundColor = unitColor;
+                ForegroundColor = unitColor;
 
                 if (agent.X == targetUnit[0] && agent.Y == targetUnit[1])
-                    Console.BackgroundColor = ConsoleColor.DarkGray;
+                    BackgroundColor = ConsoleColor.DarkGray;
 
-                Console.SetCursorPosition(normalizedPos[0], normalizedPos[1]);
+                SetCursorPosition(normalizedPos[0], normalizedPos[1]);
 
-                Console.WriteLine(identifier);
-                Console.ResetColor();
+                WriteLine(identifier);
+                ResetColor();
 
             }
-            Console.SetCursorPosition(0,boardHeight * 2 + 1);
+            SetCursorPosition(0,boardHeight * 2 + 1);
         }
 
         /// <summary>
@@ -176,5 +177,12 @@ namespace ZombieGame
         /// <returns>Normalized Coordinates</returns>
         private static int[] NormalizePosition(int x, int y) => 
             new int[2] { x * 4 - 2, y * 2 - 1 };
+
+        public static void PressKey(string msg)
+        {
+            WriteLine($"{msg}\n" +
+                "Press any key to continue...");
+            ReadKey();
+        }
     }
 }
