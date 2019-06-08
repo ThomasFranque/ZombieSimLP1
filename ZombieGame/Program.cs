@@ -9,7 +9,6 @@ namespace ZombieGame
         // Declare class variables
         private List<Agents> agents;
         private GameSettings setts;
-        private Agents agent;
 
         private Program(string[] args)
         {
@@ -63,7 +62,24 @@ namespace ZombieGame
                             Console.WriteLine(agent.GetType());
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
-                            agent.Move(agent, setts.BoardSize, agents);
+
+                            char dir;
+                            do
+                            {
+                                // Asks for input, converts input  
+                                Render.AskInput();
+
+                                // Store input
+                                // Convert to lowercase
+                                // and convert to char
+                                dir = Convert.ToChar
+                                    (Console.ReadLine().ToLower()[0]);
+
+                            } while (dir != 'a' && dir != 'w' && dir != 's' &&
+                            dir != 'd' && dir != 'q' && dir != 'e' &&
+                                dir != 'z' && dir != 'c');
+
+                            agent.Move(agent, setts.BoardSize, agents, dir);
                         }
                         break;
 
