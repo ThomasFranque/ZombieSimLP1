@@ -8,7 +8,7 @@ namespace ZombieGame
     static class Render
     {
         /// <summary>
-        /// Asks for input, agents movement
+        /// Asks for input, agents movement.
         /// </summary>
         public static void AskInput()
         {
@@ -16,7 +16,7 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Shows options if pressed M
+        /// Shows options if M is pressed.
         /// </summary>
         public static void MenuOp()
         {
@@ -65,7 +65,7 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Instructions, Movement
+        /// Instructions, Movement.
         /// </summary>
         public static void InstMove()
         {
@@ -82,7 +82,7 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// When all humans die shows message and quits program
+        /// When all humans die shows message and quits program.
         /// </summary>
         public static void AllHumansDead()
         {
@@ -118,7 +118,7 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Will write the agents on the console
+        /// Will write the agents on the console.
         /// </summary>
         /// <param name="boardHeight">Height of the board</param>
         /// <param name="agents">List of agents to be placed</param>
@@ -170,7 +170,7 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Normalizes the agent X and Y for the console coordinates
+        /// Normalizes the agent X and Y for the console coordinates.
         /// </summary>
         /// <param name="x">Agent's X</param>
         /// <param name="y">Agent's Y</param>
@@ -178,11 +178,24 @@ namespace ZombieGame
         private static int[] NormalizePosition(int x, int y) => 
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
+
+        /// <summary>
+        /// Asks the user for a key before the program proceeds.
+        /// </summary>
+        public static void PressKey()
+        {
+            Console.WriteLine("Press any key to continue...");
+            ReadKey();
+        }
+
+        /// <summary>
+        /// Overload of PressKey() to display a message.
+        /// </summary>
+        /// <param name="msg">Message to display</param>
         public static void PressKey(string msg)
         {
-            WriteLine($"{msg}\n" +
-                "Press any key to continue...");
-            ReadKey();
+            WriteLine(msg);
+            PressKey();
         }
     }
 }
