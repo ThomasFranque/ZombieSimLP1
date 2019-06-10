@@ -8,7 +8,7 @@ namespace ZombieGame
         /// <summary>
         /// Checks all agents in world, accepts max x and y of map 
         /// </summary>
-        public static void CheckAgents(List<Node> nodes, int x, int y)
+        public static void CheckAgents(List<Agents> nodes, int x, int y)
         {
             // Go through nº of agents in world
             foreach (Agents k in nodes)
@@ -39,12 +39,12 @@ namespace ZombieGame
             // Human, runs from zombie
             if (j is Human)
             {
-                AI.MoveHumansAi(j);
+                //AI.MoveHumansAi(j);
             }
             // Zombie, runs towards human
             if (j is Zombie)
             {
-                AI.MoveZombiesAi(j);
+                //AI.MoveZombiesAi(j);
                 Thread.Sleep(2000);
             }
         }

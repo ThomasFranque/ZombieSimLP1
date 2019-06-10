@@ -99,11 +99,7 @@ namespace ZombieGame
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
 
-<<<<<<< HEAD
-=======
             BoardSize = new int[2] { x, y };
-
->>>>>>> mikeTesting
             //Thread.Sleep(3600);
         }
 
