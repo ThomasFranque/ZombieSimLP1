@@ -9,7 +9,6 @@ namespace ZombieGame
         // Declare class variables
         private List<Agents> agents;
         private GameSettings setts;
-        private Agents agent;
 
         private Program(string[] args)
         {
@@ -18,32 +17,21 @@ namespace ZombieGame
             setts = new GameSettings(args);
 
             // Save the settings
-<<<<<<< HEAD
             //FileManager.Save(setts.GetAllVars());
             // Load settings
             //setts = FileManager.LoadSetts();
-=======
-            FileManager.Save(setts.GetAllVars());
-
-            // Load settings
-            setts = FileManager.LoadSetts();
         }
 
         private static void Main(string[] args)
         {
-
             Program prgm = new Program(args);
             prgm.Start();
-
-
-
         }
 
         private void Start()
         {
             //  Declare block variables
             string option;
->>>>>>> mikeTesting
 
             //###############################################
             // Debug ########################################
@@ -72,9 +60,6 @@ namespace ZombieGame
                 agents.Add(NewAgent(true, false));
             }
 
-
-<<<<<<< HEAD
-=======
             int k = 0;  // Used for debugging list count
             foreach (Agents a in agents)
             {
@@ -82,7 +67,6 @@ namespace ZombieGame
                 k++;
             }
 
->>>>>>> mikeTesting
             Console.WriteLine("List count:" + agents.Count);
             Console.WriteLine("Map size:" + setts.x * setts.y);
             Console.WriteLine();
@@ -90,25 +74,26 @@ namespace ZombieGame
             //###############################################
             // Debug ########################################
             //###############################################
+            CreateAgents();
+
 
             // Ensure console doesn't get cluttered up
             Console.Clear();
 
-<<<<<<< HEAD
-            //map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
-            map.FillMap(agents);
-            map.ShowMap();
-            Console.ResetColor();
+            ////map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
+            //map.FillMap(agents);
+            //map.ShowMap();
+            //Console.ResetColor();
 
-            Console.WriteLine($"\nMap Lenght   x: {map.BoardX}");
-            Console.WriteLine($"Map Height   y: {map.BoardY}");
+            //Console.WriteLine($"\nMap Lenght   x: {map.BoardX}");
+            //Console.WriteLine($"Map Height   y: {map.BoardY}");
 
-            Console.WriteLine($"Zombies      z: {setts.z}");
-            Console.WriteLine($"Humans       h: {setts.h}");
+            //Console.WriteLine($"Zombies      z: {setts.z}");
+            //Console.WriteLine($"Humans       h: {setts.h}");
 
-            Console.WriteLine($"Your zombies Z: {setts.Z}");
-            Console.WriteLine($"Your humans  H: {setts.H}");
-=======
+            //Console.WriteLine($"Your zombies Z: {setts.Z}");
+            //Console.WriteLine($"Your humans  H: {setts.H}");
+
             do
             {
                 //PrintMap();
@@ -132,6 +117,23 @@ namespace ZombieGame
                             Console.WriteLine(agent.GetType());
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
+
+                            char dir;
+                            do
+                            {
+                                // Asks for input, converts input  
+                                Render.AskInput();
+
+                                // Store input
+                                // Convert to lowercase
+                                // and convert to char
+                                dir = Convert.ToChar
+                                    (Console.ReadLine().ToLower()[0]);
+
+                            } while (dir != 'a' && dir != 'w' && dir != 's' &&
+                            dir != 'd' && dir != 'q' && dir != 'e' &&
+                                dir != 'z' && dir != 'c');
+
                             agent.Move(agent, setts.BoardSize, agents);
                         }
                         break;
@@ -150,7 +152,6 @@ namespace ZombieGame
 
             } while (option != "4");
         }
->>>>>>> mikeTesting
 
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
         {
@@ -180,6 +181,46 @@ namespace ZombieGame
                 tempA = new Human(true);
 
             return tempA;
+        }
+
+        private void CreateAgents()
+        {
+            // Add AI h
+            for (int i = 0; i < setts.H; i++)
+            {
+                agents.Add(NewAgent(false, true));
+            }
+
+            // Add player controled h
+            for (int i = 0; i < setts.h; i++)
+            {
+                agents.Add(NewAgent(false, false));
+            }
+
+            // Add AI z
+            for (int i = 0; i < setts.Z; i++)
+            {
+                agents.Add(NewAgent(true, true));
+            }
+
+            // Add player controled z
+            for (int i = 0; i < setts.z; i++)
+            {
+                agents.Add(NewAgent(true, false));
+            }
+
+
+            int k = 0;  // Used for debugging list count
+            foreach (Agents a in agents)
+            {
+                Console.WriteLine($"{a.ToString()}; Count:{k}");
+                k++;
+            }
+
+            // Show results
+            Console.WriteLine("List count:" + agents.Count);
+            Console.WriteLine("Map size:" + setts.x * setts.y);
+            Console.WriteLine();
         }
     }
 }
