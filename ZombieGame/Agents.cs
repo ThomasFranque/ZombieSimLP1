@@ -57,7 +57,7 @@ namespace ZombieGame
                     // If agents are not AI
                     if (!k.Ai)
                     {
-                        Move(k, size, agents);
+                        //Move(k, size, agents);
                     }
                     else if (k.Ai)
                     {
@@ -80,16 +80,9 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public void Move(Agents j, int[] size, List<Agents> agents)
+        public void Move(Agents j, int[] size, List<Agents> agents, char dir)
         {
             // Variables
-            char dir;
-            string conv;
-
-            Render.AskInput();          // Asks for input, converts input           
-            conv = Console.ReadLine();  // Stores input
-            conv = conv.ToLower();      // Converts to lowercase
-            dir = Convert.ToChar(conv); // Converts to char
 
             //// Goes through list and verifies if exist an agent with said coordinates
 
@@ -264,7 +257,7 @@ namespace ZombieGame
                     }
                     else if (Y <= 1) // Up wall condition
                     {
-                        if (Occupied(new int[] { X + offSett,  offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X + offSett,  size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northeast position is occupied");
                         }

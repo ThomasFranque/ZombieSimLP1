@@ -18,6 +18,7 @@ namespace ZombieGame
 
             // Save the settings
             //FileManager.Save(setts.GetAllVars());
+
             // Load settings
             //setts = FileManager.LoadSetts();
         }
@@ -33,14 +34,7 @@ namespace ZombieGame
             //  Declare block variables
             string option;
 
-            //###############################################
-            // Debug ########################################
-            //###############################################
-            // Add AI h
-            for (int i = 0; i < setts.H; i++)
-            {
-                agents.Add(NewAgent(false, true));
-            }
+            CreateAgents();
 
             // Add player controled h
             for (int i = 0; i < setts.h; i++)
@@ -134,7 +128,7 @@ namespace ZombieGame
                             dir != 'd' && dir != 'q' && dir != 'e' &&
                                 dir != 'z' && dir != 'c');
 
-                            agent.Move(agent, setts.BoardSize, agents);
+                            agent.Move(agent, setts.BoardSize, agents, dir);
                         }
                         break;
 
