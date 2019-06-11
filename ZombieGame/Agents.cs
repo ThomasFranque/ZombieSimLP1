@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents : IEquatable<Agents>
+    abstract class Agents : IEquatable<Agents>, IComparable<Agents>
     {
         // Class variables
         private const int offSett = 1;
@@ -43,31 +43,6 @@ namespace ZombieGame
             Ai = ai;
         }
 
-        /// <summary>
-        /// Agents move, Calls CheckAgents
-        /// </summary>
-        public void CheckAgents(List<Agents> agents, int[] size)
-        {
-            // Go through list of agents in world
-            foreach (Agents k in agents)
-            {
-                // While nº of agents !AI move
-                for (int ap = 0; ap < agents.Count; ap++)
-                {
-                    // If agents are not AI
-                    if (!k.Ai)
-                    {
-                        //Move(k, size, agents);
-                    }
-                    else if (k.Ai)
-                    {
-                        AI artInt = new AI(k.Ai);
-                        artInt.CheckType(k);
-                    }
-                }
-            }
-        }
-
         // Method to infect humans and turn them to zombies
         public virtual void Turn()
         {
@@ -92,7 +67,7 @@ namespace ZombieGame
                 case 'w':
                     if (Y <= 1)
                     {
-                        if (Occupied(new int[] { X , size[1] }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X, size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("North position is occupied");
                         }
@@ -101,7 +76,7 @@ namespace ZombieGame
                     }
                     else
                     {
-                        if (Occupied(new int[] { X , Y - offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X, Y - offSett }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("North position is occupied");
                         }
@@ -114,7 +89,7 @@ namespace ZombieGame
                 case 'a':
                     if (X <= 1)
                     {
-                        if (Occupied(new int[] { size[0] , Y }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { size[0], Y }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("West position is occupied");
                         }
@@ -124,7 +99,7 @@ namespace ZombieGame
                     }
                     else
                     {
-                        if (Occupied(new int[] { X - offSett , Y }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X - offSett, Y }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("West position is occupied");
                         }
@@ -138,7 +113,7 @@ namespace ZombieGame
                 case 'd':
                     if (X >= size[0])
                     {
-                        if (Occupied(new int[] { offSett , Y }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { offSett, Y }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("East position is occupied");
                         }
@@ -148,7 +123,7 @@ namespace ZombieGame
                     }
                     else
                     {
-                        if (Occupied(new int[] { X + offSett , Y }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X + offSett, Y }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("East position is occupied");
                         }
@@ -162,7 +137,7 @@ namespace ZombieGame
                 case 's':
                     if (Y >= size[1])
                     {
-                        if (Occupied(new int[] { X , offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X, offSett }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("South position is occupied");
                         }
@@ -172,7 +147,7 @@ namespace ZombieGame
                     }
                     else
                     {
-                        if (Occupied(new int[] { X , Y + offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X, Y + offSett }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("South position is occupied");
                         }
@@ -187,7 +162,7 @@ namespace ZombieGame
                 case 'q':
                     if (Y <= 1 && X <= 1) // Corner condition
                     {
-                        if (Occupied(new int[] { size[0] , size[1] }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { size[0], size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northwest position is occupied");
                         }
@@ -200,7 +175,7 @@ namespace ZombieGame
                     }
                     else if (Y <= 1) // Up wall condition
                     {
-                        if (Occupied(new int[] { X - offSett , size[1] }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X - offSett, size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northwest position is occupied");
                         }
@@ -213,7 +188,7 @@ namespace ZombieGame
                     }
                     else if (X <= 1) // Left wall condition
                     {
-                        if (Occupied(new int[] { size[0] , Y - offSett }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { size[0], Y - offSett }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northwest position is occupied");
                         }
@@ -240,11 +215,12 @@ namespace ZombieGame
                     }
                     break;
 
+
                 // Up right
                 case 'e':
                     if (Y <= 1 && X >= size[0]) // Corner condition
                     {
-                        if (Occupied(new int[] { offSett , size[1] }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { offSett, size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northeast position is occupied");
                         }
@@ -257,7 +233,355 @@ namespace ZombieGame
                     }
                     else if (Y <= 1) // Up wall condition
                     {
-                        if (Occupied(new int[] { X + offSett,  size[1] }, agents)) // Lock agent j left movement
+                        if (Occupied(new int[] { X + offSett, size[1] }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y = size[1];
+                            X++;
+                        }
+
+                    }
+                    else if (X >= size[0]) // Right wall condition
+                    {
+                        if (Occupied(new int[] { offSett, Y - offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y--;
+                            X = 1;
+                        }
+                    }
+                    else // Other place in map
+                    {
+                        if (Occupied(new int[] { X + offSett, Y - offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y--;
+                            X++;
+                        }
+                    }
+                    break;
+
+
+                // Down left
+                case 'z':
+                    if (Y >= size[1] && X <= 1) // Corner
+                    {
+                        if (Occupied(new int[] { size[0], offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southwest position is occupied");
+                        }
+                        else
+                        {
+                            Y = 1;
+                            X = size[0];
+                        }
+                    }
+                    else if (Y >= size[1]) // Down
+                    {
+                        if (Occupied(new int[] { X - offSett, offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southwest position is occupied");
+                        }
+                        else
+                        {
+                            Y = 1;
+                            X--;
+                        }
+                    }
+                    else if (X <= 1) // Right side of map
+                    {
+                        if (Occupied(new int[] { size[0], Y + offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y++;
+                            X = size[0];
+                        }
+                    }
+                    else
+                    {
+                        if (Occupied(new int[] { X - offSett, Y + offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y++;
+                            X--;
+                        }
+                    }
+                    break;
+
+                // Down right
+                case 'c':
+                    // Corner
+                    if (Y >= size[1] && X >= size[0])
+                    {
+                        if (Occupied(new int[] { offSett, offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y = 1;
+                            X = 1;
+                        }
+
+                    }
+                    else if (Y >= size[1]) // Base
+                    {
+                        if (Occupied(new int[] { X + offSett, offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southeast position is occupied");
+                        }
+                        else
+                        {
+                            Y = 1;
+                            X++;
+                        }
+                    }
+
+                    else if (X >= size[0]) // Right
+                    {
+                        if (Occupied(new int[] { offSett, Y + offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southeast position is occupied");
+                        }
+                        else
+                        {
+                            Y++;
+                            X = 1;
+                        }
+                    }
+
+                    else
+                    {
+                        if (Occupied(new int[] { X + offSett, Y + offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Southeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y++;
+                            X++;
+                        }
+                    }
+                    break;
+
+                // Case input is invalid
+                default:
+
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// Overload to the method Move() to be used by AI
+        /// </summary>
+        /// <param name="j"></param>
+        /// <param name="size"></param>
+        /// <param name="agents"></param>
+        public void Move(Agents j, int[] size, List<Agents> agents)
+        {
+            // Variables
+            string options = "wasdqezc";
+            Random rnd = new Random();
+            char dir = options[rnd.Next(8)];
+
+
+            //// Goes through list and verifies if exist an agent with said coordinates
+            switch (dir)
+            {
+                // Up
+                case 'w':
+                    if (Y <= 1)
+                    {
+                        if (Occupied(new int[] { X, size[1] }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("North position is occupied");
+                        }
+                        else
+                            Y = size[1];
+                    }
+                    else
+                    {
+                        if (Occupied(new int[] { X, Y - offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("North position is occupied");
+                        }
+                        else
+                            Y--;
+                    }
+                    break;
+
+                // Left
+                case 'a':
+                    if (X <= 1)
+                    {
+                        if (Occupied(new int[] { size[0], Y }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("West position is occupied");
+                        }
+
+                        else
+                            X = size[0];
+                    }
+                    else
+                    {
+                        if (Occupied(new int[] { X - offSett, Y }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("West position is occupied");
+                        }
+
+                        else
+                            X--;
+                    }
+                    break;
+
+                // Right
+                case 'd':
+                    if (X >= size[0])
+                    {
+                        if (Occupied(new int[] { offSett, Y }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("East position is occupied");
+                        }
+
+                        else
+                            X = 1;
+                    }
+                    else
+                    {
+                        if (Occupied(new int[] { X + offSett, Y }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("East position is occupied");
+                        }
+
+                        else
+                            X++;
+                    }
+                    break;
+
+                // Down
+                case 's':
+                    if (Y >= size[1])
+                    {
+                        if (Occupied(new int[] { X, offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("South position is occupied");
+                        }
+
+                        else
+                            Y = 1;
+                    }
+                    else
+                    {
+                        if (Occupied(new int[] { X, Y + offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("South position is occupied");
+                        }
+
+                        else
+                            Y++;
+                    }
+                    break;
+
+                // Diagonals
+                // Up Left
+                case 'q':
+                    if (Y <= 1 && X <= 1) // Corner condition
+                    {
+                        if (Occupied(new int[] { size[0], size[1] }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y = size[1];
+                            X = size[0];
+                        }
+                    }
+                    else if (Y <= 1) // Up wall condition
+                    {
+                        if (Occupied(new int[] { X - offSett, size[1] }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y = size[1];
+                            X--;
+                        }
+                    }
+                    else if (X <= 1) // Left wall condition
+                    {
+                        if (Occupied(new int[] { size[0], Y - offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y--;
+                            X = size[0];
+                        }
+
+                    }
+                    else // Other place in map
+                    {
+                        if (Occupied(new int[] { X - offSett, Y - offSett }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northwest position is occupied");
+                        }
+
+                        else
+                        {
+                            Y--;
+                            X--;
+                        }
+                    }
+                    break;
+
+
+                // Up right
+                case 'e':
+                    if (Y <= 1 && X >= size[0]) // Corner condition
+                    {
+                        if (Occupied(new int[] { offSett, size[1] }, agents)) // Lock agent j left movement
+                        {
+                            Render.PressKey("Northeast position is occupied");
+                        }
+
+                        else
+                        {
+                            Y = size[1];
+                            X = 1;
+                        }
+                    }
+                    else if (Y <= 1) // Up wall condition
+                    {
+                        if (Occupied(new int[] { X + offSett, size[1] }, agents)) // Lock agent j left movement
                         {
                             Render.PressKey("Northeast position is occupied");
                         }
@@ -446,5 +770,12 @@ namespace ZombieGame
             }
             return false;
         }
+
+        // Check for distance for closest target
+        public int CompareTo(Agents other)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

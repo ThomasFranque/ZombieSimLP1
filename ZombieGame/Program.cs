@@ -82,23 +82,33 @@ namespace ZombieGame
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
 
-                            char dir;
-                            do
+
+                            if (agent.Ai)
                             {
-                                // Asks for input, converts input  
-                                Render.AskInput();
+                                agent.Move(agent, setts.BoardSize, agents);
+                                Thread.Sleep(2000);
+                            }
 
-                                // Store input
-                                // Convert to lowercase
-                                // and convert to char
-                                dir = Convert.ToChar
-                                    (Console.ReadLine().ToLower()[0]);
+                            else
+                            {
+                                char dir;
+                                do
+                                {
+                                    // Asks for input, converts input  
+                                    Render.AskInput();
 
-                            } while (dir != 'a' && dir != 'w' && dir != 's' &&
-                            dir != 'd' && dir != 'q' && dir != 'e' &&
-                                dir != 'z' && dir != 'c');
+                                    // Store input
+                                    // Convert to lowercase
+                                    // and convert to char
+                                    dir = Convert.ToChar
+                                        (Console.ReadLine().ToLower()[0]);
 
-                            agent.Move(agent, setts.BoardSize, agents, dir);
+                                } while (dir != 'a' && dir != 'w' && dir != 's' &&
+                                dir != 'd' && dir != 'q' && dir != 'e' &&
+                                    dir != 'z' && dir != 'c');
+
+                                agent.Move(agent, setts.BoardSize, agents, dir);
+                            }
                         }
                         break;
 
