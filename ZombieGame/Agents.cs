@@ -53,7 +53,7 @@ namespace ZombieGame
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public void Move(Agents j, int[] size, List<Agents> agents, char dir)
+        public void Move(Agents j, int[] size, IEnumerable<Agents> agents, char dir)
         {
             // Variables
             //// Goes through list and verifies if exist an agent with said coordinates
@@ -396,7 +396,7 @@ namespace ZombieGame
         /// <param name="j"></param>
         /// <param name="size"></param>
         /// <param name="agents"></param>
-        public void Move(Agents j, int[] size, List<Agents> agents)
+        public void Move(Agents j, int[] size, IEnumerable<Agents> agents)
         {
             // Variables
             string options = "wasdqezc";
@@ -425,7 +425,7 @@ namespace ZombieGame
 
 
         // Check if desired position is occupied by another agent
-        private bool Occupied(int[] newPos, List<Agents> agents)
+        private bool Occupied(int[] newPos, IEnumerable<Agents> agents)
         {
             foreach (Agents a in agents)
             {

@@ -44,6 +44,12 @@ namespace ZombieGame
             // Ensure console doesn't get cluttered up
             Console.Clear();
 
+            // Plays a simple tune
+            Songs.TuneHappy();
+            
+            // Show initial screen
+            Render.IntroScreen();
+
             do
             {
                 turns++;
@@ -110,13 +116,19 @@ namespace ZombieGame
                                 break;
                             }
                         }
+                        // Show last agent movement...
+                        PrintMap();
+                        // ... by filling
+                        foreach (Agents agent in agents)
+                        {
+                            FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y }); 
+                        }
+
+                        Render.IntroScreen();
                         break;
 
                     case "3":
                         // Insert option
-                        break;
-
-                    case "4":
                         break;
 
                     default:
@@ -127,8 +139,7 @@ namespace ZombieGame
                 // Continue loop while user doesn't select option 4...
                 //...or turns played is less than max turns or...
                 //... still exists agents that are not infected
-            } while (option != "4" ||
-                    turns < setts.T ||
+            } while (option != "4" || turns < setts.T ||
                     !agents.Exists(x => x.Infected == false));
         }
 

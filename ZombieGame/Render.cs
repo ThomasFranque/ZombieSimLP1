@@ -20,9 +20,6 @@ namespace ZombieGame
         /// </summary>
         public static void MenuOp()
         {
-            // Plays a simple tune
-            Songs.TuneHappy();
-
             // Variable, saves user's input
             char choice;
 
@@ -31,12 +28,12 @@ namespace ZombieGame
             WriteLine("Press 'Q' to Quit simulation");
             WriteLine("Press 'S' to Save and Quit simulation");
 
-            choice = Convert.ToChar(Console.ReadLine());
+            choice = Convert.ToChar(ReadLine());
 
             switch (choice)
             {
                 case 'r':
-                    // Back to gameloop
+                    IntroScreen();
                     break;
 
                 // Shows instructions
@@ -203,9 +200,17 @@ namespace ZombieGame
             PressKey();
         }
 
+
         public static void IsAi(Agents agent)
         {
             WriteLine($"Is Agent Ai? --> {agent.Ai}");
+        }
+
+        public static void IntroScreen()
+        {
+            WriteLine("Press 1 for simulation menu; \n" +
+                "Press 2 for movement; \n" +
+                "Press 3 to save game.\n");
         }
     }
 }
