@@ -182,7 +182,8 @@ namespace ZombieGame
             // Add player controled h
             for (int i = 0; i < setts.h; i++)
             {
-                agents.Add(NewAgent(false, false));
+                agents.Add(NewAgent(false, true));
+                //agents.Add(NewAgent(false, false));
             }
 
             // Add AI z
@@ -194,7 +195,8 @@ namespace ZombieGame
             // Add player controled z
             for (int i = 0; i < setts.z; i++)
             {
-                agents.Add(NewAgent(true, false));
+                agents.Add(NewAgent(true, true));
+                //agents.Add(NewAgent(true, false));
             }
 
             // Shuffle list

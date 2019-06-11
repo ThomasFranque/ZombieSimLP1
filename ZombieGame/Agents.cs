@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ZombieGame
 {
@@ -7,7 +8,10 @@ namespace ZombieGame
     abstract class Agents : IEquatable<Agents>, IComparable<Agents>
     {
         // Class variables
-        private const int offSett = 1;
+        private readonly int offSett;
+
+        //
+        internal bool canInfect;
 
         // Agents' Properties
         /// <summary>
@@ -39,6 +43,7 @@ namespace ZombieGame
             // Random is set for debugging
             X = r.Next(1, sizeX + 1);
             Y = r.Next(1, sizeY + 1);
+            offSett = 1;
 
             Ai = ai;
         }
@@ -454,12 +459,7 @@ namespace ZombieGame
         /// <param name="agents"></param>
         public void Move(Agents j, int[] size, List<Agents> agents)
         {
-            // Variables
-            string options = "wasdqezc";
-            Random rnd = new Random();
-            char dir = options[rnd.Next(8)];
-
-            Move(j, size, agents, dir);
+            Move(j, size, agents, FindNearest(agents, size));
         }
 
         /// <summary>
@@ -490,6 +490,220 @@ namespace ZombieGame
 
             }
             return false;
+        }
+
+
+        private char FindNearest(List<Agents> agents, int[] boardSize)
+        {
+            Console.WriteLine(this is Human);
+
+            // Direction
+            char dir = ' ';
+            // Radius of the circle
+            int n = 1;
+            // Used to determine where to check next
+            int[] posOffset = new int[2] { 1, 0 };
+
+            // Start place
+            int[] pos = new int[2] { X - 1, Y + 1 };
+
+            // Know how many to walk on each side
+            int side = 0;
+
+            bool oppositeX, oppositeY;
+            oppositeX = oppositeY = false;
+
+            // While direction is default
+            while (dir == ' ')
+            {
+                // In which of the agent we are 
+
+                // Loop for adjacent cells
+                for (int i = 0; i < n * 8; i++)
+                {
+
+                    if (pos[0] <= 0)
+                    {
+                        pos[0] = boardSize[0];
+                        oppositeX = !oppositeX;
+                    }
+                    else if (pos[0] > boardSize[0])
+                    {
+                        pos[0] = 1;
+                        oppositeX = !oppositeX;
+                    }
+
+                    if (pos[1] <= 0)
+                    {
+                        oppositeY = !oppositeY;
+                        pos[1] = boardSize[1];
+                    }
+                    else if (pos[1] > boardSize[1])
+                    {
+                        oppositeY = !oppositeY;
+                        pos[1] = 1;
+                    }
+
+
+                    // Run through all of the agents
+                    foreach (Agents a in agents)
+                    {
+                        // Not himself and a human
+                        if (this is Zombie && a is Human)
+                        {
+                            // Check if it is there
+                            if (a.X == pos[0] && a.Y == pos[1])
+                            {
+                                dir = ClosestChar(a, oppositeX, oppositeY);
+                                Console.WriteLine(a);
+                                // ADD INFECT LATER
+                                break;
+                            }
+                        }
+                        else if (this is Human && a is Zombie)
+                        {
+                            // Check if it is there
+                            if (a.X == pos[0] && a.Y == pos[1])
+                            {
+                                dir = ClosestChar(a, oppositeX, oppositeY);
+                                Console.WriteLine(a);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (dir != ' ') break;
+
+                    // Move the virtual cell
+                    // Change offset
+                    side++;
+                    if (side > n + 1 + (n - 1))
+                    {
+                        // Going Up
+                        if (posOffset[0] == 0 && posOffset[1] == -1)
+                        {
+                            posOffset[0] = -1;
+                            posOffset[1] = 0;
+                        }
+                        // Going Right
+                        else if (posOffset[0] == 1 && posOffset[1] == 0)
+                        {
+                            posOffset[0] = 0;
+                            posOffset[1] = -1;
+                        }
+                        // Going Down
+                        else if (posOffset[0] == 0 && posOffset[1] == 1)
+                        {
+                            posOffset[0] = 1;
+                            posOffset[1] = 0;
+                        }
+                        // Going left
+                        else if (posOffset[0] == -1 && posOffset[1] == 0)
+                        {
+                            posOffset[0] = 0;
+                            posOffset[1] = 1;
+                        }
+                        side = 1;
+                    }
+
+                    //Console.WriteLine($"OffsetX is {pos[0]}\nOffsetY is {pos[1]}\n");
+
+                    pos[0] += posOffset[0];
+                    pos[1] += posOffset[1];
+
+                    // IF POSOFFSET[0] > BOARD.X POSOFFSET = 0;
+                }
+                // Reset direction
+                posOffset[0] = 1;
+                posOffset[1] = 0;
+
+                // New position
+                pos = new int[2] { pos[0] - 1, pos[1] + 1 };
+                side = 0;
+                canInfect = false;
+                n++;
+            }
+
+            return dir;
+        }
+
+        public virtual char 
+            ClosestChar(Agents a, bool oppositeX, bool oppositeY)
+        {
+            char dir = ' ';
+            bool zombie = this is Zombie;
+
+            if (a.X > X && a.Y > Y)
+                dir = 'c';
+            if (a.X > X && a.Y < Y)
+                dir = 'e';
+            if (a.X < X && a.Y < Y)
+                dir = 'q';
+            if (a.X < X && a.Y > Y)
+                dir = 'z';
+            if (a.X >= X && a.Y == Y)
+                dir = 'd';
+            if (a.X <= X && a.Y == Y)
+                dir = 'a';
+            if (a.Y >= Y && a.X == X)
+                dir = 's';
+            if (a.Y <= Y && a.X == X)
+                dir = 'w';
+
+            switch (dir)
+            {
+                case 'a':
+                    if (oppositeX || !zombie)
+                        dir = 'd';
+                    break;
+                case 'd':
+                    if (oppositeX || !zombie)
+                        dir = 'a';
+                    break;
+                case 'w':
+                    if (oppositeY || !zombie)
+                        dir = 's';
+                    break;
+                case 's':
+                    if (oppositeY || !zombie)
+                        dir = 'w';
+                    break;
+                case 'q':
+                    if (oppositeX && oppositeY || !zombie)
+                        dir = 'c';
+                    else if (oppositeX)
+                        dir = 'e';
+                    else if (oppositeY)
+                        dir = 'z';
+                    break;
+                case 'e':
+                    if (oppositeX && oppositeY || !zombie)
+                        dir = 'z';
+                    else if (oppositeX)
+                        dir = 'q';
+                    else if (oppositeY)
+                        dir = 'c';
+                    break;
+                case 'z':
+                    if (oppositeX && oppositeY || !zombie)
+                        dir = 'e';
+                    else if (oppositeX)
+                        dir = 'c';
+                    else if (oppositeY)
+                        dir = 'q';
+                    break;
+                case 'c':
+                    if (oppositeX && oppositeY || !zombie)
+                        dir = 'q';
+                    else if (oppositeX)
+                        dir = 'z';
+                    else if (oppositeY)
+                        dir = 'e';
+                    break;
+            }
+
+
+            return dir;
         }
 
         // Check for distance for closest target
