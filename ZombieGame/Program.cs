@@ -36,8 +36,27 @@ namespace ZombieGame
 
             CreateAgents();
 
+            //###############################################
+            // Debug ########################################
+            //###############################################
+
+
             // Ensure console doesn't get cluttered up
             Console.Clear();
+
+            ////map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
+            //map.FillMap(agents);
+            //map.ShowMap();
+            //Console.ResetColor();
+
+            //Console.WriteLine($"\nMap Lenght   x: {map.BoardX}");
+            //Console.WriteLine($"Map Height   y: {map.BoardY}");
+
+            //Console.WriteLine($"Zombies      z: {setts.z}");
+            //Console.WriteLine($"Humans       h: {setts.h}");
+
+            //Console.WriteLine($"Your zombies Z: {setts.Z}");
+            //Console.WriteLine($"Your humans  H: {setts.H}");
 
             do
             {
