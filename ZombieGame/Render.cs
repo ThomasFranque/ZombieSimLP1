@@ -94,6 +94,11 @@ namespace ZombieGame
             Thread.Sleep(10000);
         }
 
+        /// <summary>
+        /// Print the board in ASCII
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
         public static void PrintBoard(int length, int height)
         {
             Clear();
@@ -184,7 +189,7 @@ namespace ZombieGame
         /// </summary>
         public static void PressKey()
         {
-            Console.WriteLine("Press any key to continue...");
+            WriteLine("Press any key to continue...");
             ReadKey();
         }
 
@@ -196,6 +201,11 @@ namespace ZombieGame
         {
             WriteLine(msg);
             PressKey();
+        }
+
+        public static void IsAi(Agents agent)
+        {
+            WriteLine($"Is Agent Ai? --> {agent.Ai}");
         }
     }
 }

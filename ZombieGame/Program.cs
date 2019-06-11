@@ -9,6 +9,7 @@ namespace ZombieGame
         // Declare class variables
         private List<Agents> agents;
         private GameSettings setts;
+        private int turns;
 
         private Program(string[] args)
         {
@@ -34,36 +35,18 @@ namespace ZombieGame
             //  Declare block variables
             string option;
 
+            // Inicialize turn counter
+            turns = 0;
+
+            // Create agents to store in a list
             CreateAgents();
-
-            //###############################################
-            // Debug ########################################
-            //###############################################
-
 
             // Ensure console doesn't get cluttered up
             Console.Clear();
 
-            ////map.ShowMap(setts.x, setts.y, setts.h, setts.z, setts.H, setts.Z);
-            //map.FillMap(agents);
-            //map.ShowMap();
-            //Console.ResetColor();
-
-            //Console.WriteLine($"\nMap Lenght   x: {map.BoardX}");
-            //Console.WriteLine($"Map Height   y: {map.BoardY}");
-
-            //Console.WriteLine($"Zombies      z: {setts.z}");
-            //Console.WriteLine($"Humans       h: {setts.h}");
-
-            //Console.WriteLine($"Your zombies Z: {setts.Z}");
-            //Console.WriteLine($"Your humans  H: {setts.H}");
-
-
             do
             {
-                //PrintMap();
-                //FillBoard(setts.y, agents);
-
+                turns++;
                 // Get user choice
                 option = Console.ReadLine();
 
@@ -80,16 +63,25 @@ namespace ZombieGame
                             FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
                             Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
                             Console.WriteLine(agent.GetType());
+                            Console.WriteLine(turns);
+
+
+                            /* 
+                             * -----DEBUG-----
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
 
+                            */
 
+                            // If agent is Ai controlled...
                             if (agent.Ai)
                             {
+                                Render.isAi(agent);
+                                Thread.Sleep(1000);
                                 agent.Move(agent, setts.BoardSize, agents);
-                                Thread.Sleep(2000);
                             }
 
+                            // ... or if is player controlled
                             else
                             {
                                 char dir;
@@ -110,6 +102,13 @@ namespace ZombieGame
 
                                 agent.Move(agent, setts.BoardSize, agents, dir);
                             }
+
+                            // Check if there aren't any agent...
+                            //... with bool infected as false
+                            if (!agents.Exists(x => x.Infected == false))
+                            {
+                                break;
+                            }
                         }
                         break;
 
@@ -125,7 +124,12 @@ namespace ZombieGame
                         break;
                 }
 
-            } while (option != "4");
+                // Continue loop while user doesn't select option 4...
+                //...or turns played is less than max turns or...
+                //... still exists agents that are not infected
+            } while (option != "4" ||
+                    turns < setts.T ||
+                    !agents.Exists(x => x.Infected == false));
         }
 
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
