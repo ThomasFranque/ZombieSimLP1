@@ -3,7 +3,8 @@
     class Zombie : Agents
     {
         // Zombie constructor
-        public Zombie(bool AIUnit) : base(AIUnit)
+        public Zombie(bool AIUnit, int sizeX, int sizeY) : 
+            base(AIUnit, sizeX, sizeY)
         {
             Infected = true;
         }    

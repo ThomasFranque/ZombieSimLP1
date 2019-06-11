@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents : IEquatable<Agents>
+    abstract class Agents : IEquatable<Agents>, IComparable<Agents>
     {
         // Class variables
         private const int offSett = 1;
@@ -32,40 +32,15 @@ namespace ZombieGame
 
 
         // Agent constructor
-        public Agents(bool ai)
+        public Agents(bool ai, int sizeX, int sizeY)
         {
             Random r = new Random();
             // Default position is x = 1 and y = 1
             // Random is set for debugging
-            X = r.Next(1, 8);
-            Y = r.Next(1, 8);
+            X = r.Next(1, sizeX + 1);
+            Y = r.Next(1, sizeY + 1);
 
             Ai = ai;
-        }
-
-        /// <summary>
-        /// Agents move, Calls CheckAgents
-        /// </summary>
-        public void CheckAgents(List<Agents> agents, int[] size)
-        {
-            // Go through list of agents in world
-            foreach (Agents k in agents)
-            {
-                // While nº of agents !AI move
-                for (int ap = 0; ap < agents.Count; ap++)
-                {
-                    // If agents are not AI
-                    if (!k.Ai)
-                    {
-                        //Move(k, size, agents);
-                    }
-                    else if (k.Ai)
-                    {
-                        AI artInt = new AI(k.Ai);
-                        artInt.CheckType(k);
-                    }
-                }
-            }
         }
 
         // Method to infect humans and turn them to zombies
@@ -83,7 +58,6 @@ namespace ZombieGame
         public void Move(Agents j, int[] size, List<Agents> agents, char dir)
         {
             //// Goes through list and verifies if exist an agent with said coordinates
-
             switch (dir)
             {
                 // Up
@@ -270,6 +244,7 @@ namespace ZombieGame
                         }
                     }
                     break;
+
 
                 // Up right
                 case 'e':
@@ -470,6 +445,23 @@ namespace ZombieGame
             }
         }
 
+
+        /// <summary>
+        /// Overload to the method Move() to be used by AI
+        /// </summary>
+        /// <param name="j"></param>
+        /// <param name="size"></param>
+        /// <param name="agents"></param>
+        public void Move(Agents j, int[] size, List<Agents> agents)
+        {
+            // Variables
+            string options = "wasdqezc";
+            Random rnd = new Random();
+            char dir = options[rnd.Next(8)];
+
+            Move(j, size, agents, dir);
+        }
+
         /// <summary>
         /// Returns Agent to string, 
         /// </summary>
@@ -499,5 +491,12 @@ namespace ZombieGame
             }
             return false;
         }
+
+        // Check for distance for closest target
+        public int CompareTo(Agents other)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
