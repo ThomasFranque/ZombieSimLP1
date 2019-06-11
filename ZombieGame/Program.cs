@@ -76,7 +76,7 @@ namespace ZombieGame
                             // If agent is Ai controlled...
                             if (agent.Ai)
                             {
-                                Render.isAi(agent);
+                                Render.IsAi(agent);
                                 Thread.Sleep(1000);
                                 agent.Move(agent, setts.BoardSize, agents);
                             }
