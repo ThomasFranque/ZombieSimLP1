@@ -106,6 +106,7 @@ namespace ZombieGame
             for (int k = 0; k < length * 4 + 1; k++)
                 Write("-");
 
+            // New line
             WriteLine();
 
             for (int i = 0; i < height; i++)
@@ -171,7 +172,7 @@ namespace ZombieGame
                 ResetColor();
 
             }
-            SetCursorPosition(0,boardHeight * 2 + 1);
+            SetCursorPosition(0, boardHeight * 2 + 1);
         }
 
         /// <summary>
@@ -180,9 +181,8 @@ namespace ZombieGame
         /// <param name="x">Agent's X</param>
         /// <param name="y">Agent's Y</param>
         /// <returns>Normalized Coordinates</returns>
-        private static int[] NormalizePosition(int x, int y) => 
+        private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
-
 
         /// <summary>
         /// Asks the user for a key before the program proceeds.
@@ -199,8 +199,19 @@ namespace ZombieGame
         /// <param name="msg">Message to display</param>
         public static void PressKey(string msg)
         {
+            ForegroundColor = ConsoleColor.Red;
             WriteLine(msg);
-            PressKey();
+            //PressKey();
+        }
+
+        public static void AI(int x, int y)
+        {
+            int[] a = NormalizePosition(x, y);
+            if (a[0] <= 0)
+                a[0] = 1;
+            if (a[1] <= 0)
+                a[1] = 1;
+            SetCursorPosition(a[0], a[1]);
         }
 
 

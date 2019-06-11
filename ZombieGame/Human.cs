@@ -7,6 +7,7 @@
             base(AIUnit, sizeX, sizeY)
         {
             Infected = false;
+            canInfect = false;
         }
 
         // Print symbol for human agents

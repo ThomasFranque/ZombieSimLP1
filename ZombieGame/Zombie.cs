@@ -7,6 +7,7 @@
             base(AIUnit, sizeX, sizeY)
         {
             Infected = true;
+            canInfect = true;
         }    
 
         // Print symbols for zombie agents
