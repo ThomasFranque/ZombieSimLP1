@@ -100,7 +100,6 @@ namespace ZombieGame
             Console.ResetColor();
 
             BoardSize = new int[2] { x, y };
-
             //Thread.Sleep(3600);
         }
 
