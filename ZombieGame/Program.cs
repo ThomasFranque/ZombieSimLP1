@@ -58,6 +58,7 @@ namespace ZombieGame
             //Console.WriteLine($"Your zombies Z: {setts.Z}");
             //Console.WriteLine($"Your humans  H: {setts.H}");
 
+
             do
             {
                 //PrintMap();
@@ -147,13 +148,17 @@ namespace ZombieGame
         {
             Agents tempA;
             if (zombie)
-                tempA = new Zombie(ai);
+            {
+                tempA = new Zombie(ai, setts.x, setts.y);
+                while (agents.Contains(tempA))
+                    tempA = new Zombie(ai, setts.x, setts.y);
+            }
             else
-                tempA = new Human(ai);
-
-            while (agents.Contains(tempA))
-                tempA = new Human(true);
-
+            {
+                tempA = new Human(ai, setts.x, setts.y);
+                while (agents.Contains(tempA))
+                    tempA = new Human(ai, setts.x, setts.y);
+            }
             return tempA;
         }
 
@@ -183,18 +188,27 @@ namespace ZombieGame
                 agents.Add(NewAgent(true, false));
             }
 
-
-            int k = 0;  // Used for debugging list count
-            foreach (Agents a in agents)
-            {
-                Console.WriteLine($"{a.ToString()}; Count:{k}");
-                k++;
-            }
+            // Shuffle list
+            agents = ShuffleAgentsList(agents);
 
             // Show results
             Console.WriteLine("List count:" + agents.Count);
             Console.WriteLine("Map size:" + setts.x * setts.y);
             Console.WriteLine();
+        }
+
+        public List<Agents> ShuffleAgentsList(List<Agents> lst)
+        {
+            Random r = new Random();
+            for (int size = lst.Count; size > 1; size--)
+            {
+                int randN = r.Next(0, size);
+
+                Agents val = lst[randN];
+                lst[randN] = lst[size - 1];
+                lst[size - 1] = val;
+            }
+            return lst;
         }
     }
 }

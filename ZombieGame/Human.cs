@@ -3,7 +3,8 @@
     class Human : Agents
     {
         // Human constructor
-        public Human (bool AIUnit) :base(AIUnit)
+        public Human (bool AIUnit, int sizeX, int sizeY) :
+            base(AIUnit, sizeX, sizeY)
         {
             Infected = false;
         }
