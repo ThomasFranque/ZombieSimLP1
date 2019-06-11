@@ -94,6 +94,11 @@ namespace ZombieGame
             Thread.Sleep(10000);
         }
 
+        /// <summary>
+        /// Print the board in ASCII
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
         public static void PrintBoard(int length, int height)
         {
             Clear();
@@ -197,6 +202,11 @@ namespace ZombieGame
             ForegroundColor = ConsoleColor.Red;
             WriteLine(msg);
             PressKey();
+        }
+
+        public static void IsAi(Agents agent)
+        {
+            WriteLine($"Is Agent Ai? --> {agent.Ai}");
         }
     }
 }
