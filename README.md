@@ -16,6 +16,14 @@
 
 ### Quem fez o quê:
 
+`João:` Criação de classes, Render (alguns métodos desta), 
+Agents(Lógica e movimento inicial dos agentes, CheckAgents), 
+Humans, Zombies, Songs, Documentação (Readme, Fluxogramas).
+
+`Miguel:` Listas, implementação de interfaces, Lógica de ()...), 
+continuação e conclusão de movimento dos agentes, Gameloop (...)
+
+`Tomás:` Gamesettings, Save Files, AI, cores (...).
 
 
 ## Descrição da Solução:
@@ -29,6 +37,7 @@
 ### Diagrama UML
 
 ### Fluxograma
+![](FluxogramZombieSim.png)
 
 ### Conclusões
 
@@ -36,7 +45,7 @@
 
 ### Referências
 
-- Discussões com o Professor Fachada e João David*.
+- Discussões com o Professor Fachada e João David (mas não chegamos a utilizar as lógicas discutidas com este).
 
 *Webgrafia*:
 - *[Stack overflow](https://stackoverflow.com/)*
