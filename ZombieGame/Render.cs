@@ -31,7 +31,7 @@ namespace ZombieGame
             WriteLine("Press 'Q' to Quit simulation");
             WriteLine("Press 'S' to Save and Quit simulation");
 
-            choice = Convert.ToChar(Console.ReadLine());
+            choice = Convert.ToChar(ReadLine());
 
             switch (choice)
             {
@@ -101,6 +101,7 @@ namespace ZombieGame
             for (int k = 0; k < length * 4 + 1; k++)
                 Write("-");
 
+            // New line
             WriteLine();
 
             for (int i = 0; i < height; i++)
@@ -178,13 +179,12 @@ namespace ZombieGame
         private static int[] NormalizePosition(int x, int y) => 
             new int[2] { x * 4 - 2, y * 2 - 1 };
 
-
         /// <summary>
         /// Asks the user for a key before the program proceeds.
         /// </summary>
         public static void PressKey()
         {
-            Console.WriteLine("Press any key to continue...");
+            WriteLine("Press any key to continue...");
             ReadKey();
         }
 
@@ -194,6 +194,7 @@ namespace ZombieGame
         /// <param name="msg">Message to display</param>
         public static void PressKey(string msg)
         {
+            ForegroundColor = ConsoleColor.Red;
             WriteLine(msg);
             PressKey();
         }

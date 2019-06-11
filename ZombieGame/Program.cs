@@ -133,6 +133,12 @@ namespace ZombieGame
             Console.ResetColor();
         }
 
+        /// <summary>
+        /// Sets faction to agents and ai
+        /// </summary>
+        /// <param name="zombie"></param>
+        /// <param name="ai"></param>
+        /// <returns></returns>
         private Agents NewAgent(bool zombie, bool ai)
         {
             Agents tempA;
@@ -147,6 +153,9 @@ namespace ZombieGame
             return tempA;
         }
 
+        /// <summary>
+        /// Adds agents in list
+        /// </summary>
         private void CreateAgents()
         {
             // Add AI h
