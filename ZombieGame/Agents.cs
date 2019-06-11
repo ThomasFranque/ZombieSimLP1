@@ -458,7 +458,7 @@ namespace ZombieGame
         /// <param name="j"></param>
         /// <param name="size"></param>
         /// <param name="agents"></param>
-        public void Move(Agents j, int[] size, IEnumerable<Agents> agents)
+        public void Move(Agents j, int[] size, List<Agents> agents)
         {
             Move(j, size, agents, FindNearest(agents, size));
         }
