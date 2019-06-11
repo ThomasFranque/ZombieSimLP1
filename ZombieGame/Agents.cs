@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents : IEquatable<Agents>, IComparable<Agents>
+    abstract class Agents : IEquatable<Agents>
     {
         // Class variables
         private const int offSett = 1;
@@ -44,11 +44,9 @@ namespace ZombieGame
         }
 
         // Method to infect humans and turn them to zombies
-        public virtual void Turn()
+        public virtual void Infect(Agents human)
         {
-            // if zombie pos adjacente ou == a human pos
-            // Remove/Insert(new.Zombie in human pos)
-            // nHumans--; Remove from list
+            human.Infected = true;
         }
 
         /// <summary>
@@ -437,12 +435,5 @@ namespace ZombieGame
             }
             return false;
         }
-
-        // Check for distance for closest target
-        public int CompareTo(Agents other)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
