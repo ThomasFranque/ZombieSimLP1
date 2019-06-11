@@ -33,13 +33,16 @@ namespace ZombieGame
             switch (choice)
             {
                 case 'r':
+                    Clear();
                     IntroScreen();
                     break;
 
                 // Shows instructions
                 case 'i':
+                    Clear();
                     InstMove();
                     ReadKey(true);
+                    IntroScreen();
                     break;
 
                 // Quits program
@@ -145,13 +148,13 @@ namespace ZombieGame
                 switch (identifier)
                 {
                     case "z":
-                        unitColor = ConsoleColor.DarkGreen;
+                        unitColor = ConsoleColor.Green;
                         break;
                     case "Z":
-                        unitColor = ConsoleColor.DarkYellow;
+                        unitColor = ConsoleColor.Yellow;
                         break;
                     case "h":
-                        unitColor = ConsoleColor.DarkCyan;
+                        unitColor = ConsoleColor.Cyan;
                         break;
                     case "H":
                         unitColor = ConsoleColor.Blue;

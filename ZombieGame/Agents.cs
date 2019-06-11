@@ -43,7 +43,10 @@ namespace ZombieGame
             Ai = ai;
         }
 
-        // Method to infect humans and turn them to zombies
+        /// <summary>
+        /// Method to infect humans
+        /// </summary>
+        /// <param name="human"></param>
         public virtual void Infect(Agents human)
         {
             human.Infected = true;

@@ -59,10 +59,12 @@ namespace ZombieGame
                 switch (option)
                 {
                     case "1":
+                        Console.Clear();
                         Render.MenuOp();
                         break;
 
                     case "2":
+                        Console.Clear();
                         foreach (Agents agent in agents)
                         {
                             PrintMap();
@@ -83,7 +85,7 @@ namespace ZombieGame
                             if (agent.Ai)
                             {
                                 Render.IsAi(agent);
-                                Thread.Sleep(1000);
+                                Thread.Sleep(750);
                                 agent.Move(agent, setts.BoardSize, agents);
                             }
 
@@ -140,7 +142,7 @@ namespace ZombieGame
                 //...or turns played is less than max turns or...
                 //... still exists agents that are not infected
             } while (option != "4" || turns < setts.T ||
-                    !agents.Exists(x => x.Infected == false));
+                    !agents.Exists(x => x.Infected == false)); // CANNOT REMOVE !OPTION 4, LOOP DOESN'T WORK
         }
 
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
