@@ -148,11 +148,20 @@ namespace ZombieGame
                         break;
                 }
 
+                // Shuffle list
+                agents = ShuffleAgentsList(agents);
+
+                if (!agents.Exists(x => x.Infected == false))
+                {
+                    turns = setts.T;
+                }
+
+
                 // Continue loop while user doesn't select option 4...
                 //...or turns played is less than max turns or...
                 //... still exists agents that are not infected
-            } while (option != "4" || turns < setts.T ||
-                    !agents.Exists(x => x.Infected == false)); // CANNOT REMOVE !OPTION 4, LOOP DOESN'T WORK
+            } while (turns > setts.T); // CANNOT REMOVE !OPTION 4, LOOP DOESN'T WORK
+            Render.AllHumansDead();
         }
 
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)

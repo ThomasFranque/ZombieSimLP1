@@ -552,7 +552,7 @@ namespace ZombieGame
                         if (!a.Infected) nonInfectedInGame = true;
 
                         // found a human
-                        if ((this is Zombie || Infected) && (a is Human && 
+                        if ((this is Zombie || Infected) && (a is Human &&
                             !a.Infected))
                         {
                             // Check if it is there
@@ -566,7 +566,7 @@ namespace ZombieGame
                                     continue;
                                 }
 
-                                Console.WriteLine("\nGOING TOWARDS: \n" + a + 
+                                Console.WriteLine("\nGOING TOWARDS: \n" + a +
                                     "\n\n");
 
                                 dir = ClosestChar(a, oppositeX, oppositeY);
@@ -647,7 +647,7 @@ namespace ZombieGame
             return dir;
         }
 
-        public virtual char 
+        public virtual char
             ClosestChar(Agents a, bool oppositeX, bool oppositeY)
         {
             char dir = ' ';
