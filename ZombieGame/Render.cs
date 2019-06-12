@@ -20,9 +20,6 @@ namespace ZombieGame
         /// </summary>
         public static void MenuOp()
         {
-            // Plays a simple tune
-            Songs.TuneHappy();
-
             // Variable, saves user's input
             char choice;
 
@@ -36,13 +33,16 @@ namespace ZombieGame
             switch (choice)
             {
                 case 'r':
-                    // Back to gameloop
+                    Clear();
+                    IntroScreen();
                     break;
 
                 // Shows instructions
                 case 'i':
+                    Clear();
                     InstMove();
                     ReadKey(true);
+                    IntroScreen();
                     break;
 
                 // Quits program
@@ -94,6 +94,11 @@ namespace ZombieGame
             Thread.Sleep(10000);
         }
 
+        /// <summary>
+        /// Print the board in ASCII
+        /// </summary>
+        /// <param name="length"></param>
+        /// <param name="height"></param>
         public static void PrintBoard(int length, int height)
         {
             Clear();
@@ -144,13 +149,13 @@ namespace ZombieGame
                 switch (identifier)
                 {
                     case "z":
-                        unitColor = ConsoleColor.DarkGreen;
+                        unitColor = ConsoleColor.Green;
                         break;
                     case "Z":
-                        unitColor = ConsoleColor.DarkYellow;
+                        unitColor = ConsoleColor.Yellow;
                         break;
                     case "h":
-                        unitColor = ConsoleColor.DarkCyan;
+                        unitColor = ConsoleColor.Cyan;
                         break;
                     case "H":
                         unitColor = ConsoleColor.Blue;
@@ -207,6 +212,19 @@ namespace ZombieGame
             if (a[1] <= 0)
                 a[1] = 1;
             SetCursorPosition(a[0], a[1]);
+        }
+
+
+        public static void IsAi(Agents agent)
+        {
+            WriteLine($"Is Agent Ai? --> {agent.Ai}");
+        }
+
+        public static void IntroScreen()
+        {
+            WriteLine("Press 1 for simulation menu; \n" +
+                "Press 2 for movement; \n" +
+                "Press 3 to save game.\n");
         }
     }
 }

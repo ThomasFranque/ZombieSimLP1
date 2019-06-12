@@ -5,7 +5,7 @@ using System.Threading;
 namespace ZombieGame
 {
     // All derived class' contain these methods!
-    abstract class Agents : IEquatable<Agents>, IComparable<Agents>
+    abstract class Agents : IEquatable<Agents>
     {
         // Class variables
         private readonly int offSett;
@@ -48,19 +48,20 @@ namespace ZombieGame
             Ai = ai;
         }
 
-        // Method to infect humans and turn them to zombies
-        public virtual void Turn()
+        /// <summary>
+        /// Method to infect humans
+        /// </summary>
+        /// <param name="human"></param>
+        public virtual void Infect(Agents human)
         {
-            // if zombie pos adjacente ou == a human pos
-            // Remove/Insert(new.Zombie in human pos)
-            // nHumans--; Remove from list
+            human.Infected = true;
         }
 
         /// <summary>
         /// Player moves agents with keys
         /// </summary>
         /// <param name="j"></param>
-        public void Move(Agents j, int[] size, List<Agents> agents, char dir)
+        public void Move(Agents j, int[] size, IEnumerable<Agents> agents, char dir)
         {
             //// Goes through list and verifies if exist an agent with said coordinates
             switch (dir)
@@ -481,7 +482,7 @@ namespace ZombieGame
 
 
         // Check if desired position is occupied by another agent
-        private bool Occupied(int[] newPos, List<Agents> agents)
+        private bool Occupied(int[] newPos, IEnumerable<Agents> agents)
         {
             foreach (Agents a in agents)
             {
@@ -705,12 +706,5 @@ namespace ZombieGame
 
             return dir;
         }
-
-        // Check for distance for closest target
-        public int CompareTo(Agents other)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
