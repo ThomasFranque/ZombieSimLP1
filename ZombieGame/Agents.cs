@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace ZombieGame
 {
@@ -488,7 +487,6 @@ namespace ZombieGame
             {
                 if (newPos[0] == a.X && newPos[1] == a.Y)
                     return true;
-
             }
             return false;
         }
@@ -496,8 +494,6 @@ namespace ZombieGame
 
         private char FindNearest(List<Agents> agents, int[] boardSize)
         {
-            Console.WriteLine(this is Human);
-
             // Direction
             char dir = ' ';
             // Radius of the circle
@@ -511,8 +507,12 @@ namespace ZombieGame
             // Know how many to walk on each side
             int side = 0;
 
+            if (Infected) canInfect = true;
+
             bool oppositeX, oppositeY;
             oppositeX = oppositeY = false;
+
+            bool nonInfectedInGame = false;
 
             // While direction is default
             while (dir == ' ')
@@ -549,25 +549,40 @@ namespace ZombieGame
                     // Run through all of the agents
                     foreach (Agents a in agents)
                     {
-                        // Not himself and a human
-                        if (this is Zombie && a is Human)
+                        if (!a.Infected) nonInfectedInGame = true;
+
+                        // found a human
+                        if ((this is Zombie || Infected) && (a is Human && 
+                            !a.Infected))
                         {
                             // Check if it is there
                             if (a.X == pos[0] && a.Y == pos[1])
                             {
+                                if (!a.Infected && canInfect)
+                                {
+                                    Console.WriteLine("INFECTED: " + a);
+
+                                    a.Infected = true;
+                                    continue;
+                                }
+
+                                Console.WriteLine("\nGOING TOWARDS: \n" + a + 
+                                    "\n\n");
+
                                 dir = ClosestChar(a, oppositeX, oppositeY);
-                                Console.WriteLine(a);
                                 // ADD INFECT LATER
                                 break;
                             }
                         }
-                        else if (this is Human && a is Zombie)
+                        else if ((this is Human && !Infected) && (a.Infected ||
+                            a is Zombie))
                         {
                             // Check if it is there
                             if (a.X == pos[0] && a.Y == pos[1])
                             {
+                                Console.WriteLine("\nRUNNING FROM: \n" + a +
+                                    "\n\n");
                                 dir = ClosestChar(a, oppositeX, oppositeY);
-                                Console.WriteLine(a);
                                 break;
                             }
                         }
@@ -614,6 +629,9 @@ namespace ZombieGame
 
                     // IF POSOFFSET[0] > BOARD.X POSOFFSET = 0;
                 }
+
+                if (!nonInfectedInGame) dir = 'd';
+
                 // Reset direction
                 posOffset[0] = 1;
                 posOffset[1] = 0;
@@ -621,10 +639,11 @@ namespace ZombieGame
                 // New position
                 pos = new int[2] { pos[0] - 1, pos[1] + 1 };
                 side = 0;
+                nonInfectedInGame = false;
                 canInfect = false;
+
                 n++;
             }
-
             return dir;
         }
 
@@ -632,7 +651,7 @@ namespace ZombieGame
             ClosestChar(Agents a, bool oppositeX, bool oppositeY)
         {
             char dir = ' ';
-            bool zombie = this is Zombie;
+            bool zombie = !(this is Human && !Infected);
 
             if (a.X > X && a.Y > Y)
                 dir = 'c';
@@ -702,8 +721,6 @@ namespace ZombieGame
                         dir = 'e';
                     break;
             }
-
-
             return dir;
         }
     }

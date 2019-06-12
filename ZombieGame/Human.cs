@@ -26,7 +26,8 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Human" +
+        public override string ToString() => (!Infected) ? base.ToString() + "Human" +
+            $" X: {X}\tY: {Y}" : base.ToString() + "Zombie" +
             $" X: {X}\tY: {Y}";
     }
 }

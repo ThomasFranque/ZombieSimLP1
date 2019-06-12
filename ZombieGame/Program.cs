@@ -46,7 +46,15 @@ namespace ZombieGame
 
             // Plays a simple tune
             Songs.TuneHappy();
-            
+
+            // show map
+            PrintMap();
+            // by filling
+            foreach (Agents agent in agents)
+            {
+                FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
+            }
+
             // Show initial screen
             Render.IntroScreen();
 
@@ -55,6 +63,8 @@ namespace ZombieGame
                 turns++;
                 // Get user choice
                 option = Console.ReadLine();
+
+                Console.WriteLine(!agents.Exists(x => x.Infected == false));
 
                 switch (option)
                 {
@@ -87,6 +97,8 @@ namespace ZombieGame
                                 Render.IsAi(agent);
                                 Thread.Sleep(750);
                                 agent.Move(agent, setts.BoardSize, agents);
+                                Thread.Sleep(1500);
+
                             }
 
                             // ... or if is player controlled
@@ -114,16 +126,14 @@ namespace ZombieGame
                             // Check if there aren't any agent...
                             //... with bool infected as false
                             if (!agents.Exists(x => x.Infected == false))
-                            {
                                 break;
-                            }
                         }
-                        // Show last agent movement...
+                        // Show last agent movement
                         PrintMap();
-                        // ... by filling
+                        // fill
                         foreach (Agents agent in agents)
                         {
-                            FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y }); 
+                            FillBoard(setts.y, agents, new int[2] { agent.X, agent.Y });
                         }
 
                         Render.IntroScreen();
@@ -164,8 +174,8 @@ namespace ZombieGame
         /// <summary>
         /// Sets faction to agents and ai
         /// </summary>
-        /// <param name="zombie"></param>
-        /// <param name="ai"></param>
+        /// <param name="zombie"> </param>
+        /// <param name="ai"> </param>
         /// <returns></returns>
         private Agents NewAgent(bool zombie, bool ai)
         {
