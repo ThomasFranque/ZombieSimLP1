@@ -90,54 +90,52 @@ namespace ZombieGame
                 }
             }
 
-            //
-            // Create board state file if doesnt exist
-            if (!File.Exists(boardStateFilePath))
-            {
-                // Create a file to write to
-                using (FileStream fs = File.Create(boardStateFilePath))
-                {
-                    // Write on it
-                    // Write the vars in file
-                    foreach(Agents a in agents)
-                    {
-                        string aType = a is Zombie ? "z" : "h";
+            ////
+            //// Create board state file if doesnt exist
+            //if (!File.Exists(boardStateFilePath))
+            //{
+            //    // Create a file to write to
+            //    using (FileStream fs = File.Create(boardStateFilePath))
+            //    {
+            //        // Write on it
+            //        // Write the vars in file
+            //        foreach (Agents a in agents)
+            //        {
+            //            string aType = a is Zombie ? "z" : "h";
 
-                        if (a.Ai)
-                            aType = aType.ToUpper();
+            //            if (a.Ai)
+            //                aType = aType.ToUpper();
 
-                        // Add some text to file    
-                        byte[] toWrite =
-                            new UTF8Encoding(true).GetBytes
-                            ($"{aType} -X {a.X} -Y {a.Y} " +
-                            Environment.NewLine);
-                        fs.Write(toWrite, 0, toWrite.Length);
-                    }
-                }
-            }
-            else
-            {
-                using (StreamWriter sw = new StreamWriter(boardStateFilePath))
-                {
-                        // Write on it
-                        // Write the vars in file
-                        foreach (Agents a in agents)
-                        {
-                            string aType = a is Zombie ? "z" : "h";
+            //            // Add some text to file    
+            //            byte[] toWrite =
+            //                new UTF8Encoding(true).GetBytes
+            //                ($"{aType} -X {a.X} -Y {a.Y} " +
+            //                Environment.NewLine);
+            //            fs.Write(toWrite, 0, toWrite.Length);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    using (StreamWriter sw = new StreamWriter(boardStateFilePath))
+            //    {
+            //        // Write on it
+            //        // Write the vars in file
+            //        foreach (Agents a in agents)
+            //        {
+            //            string aType = a is Zombie ? "z" : "h";
 
-                            if (a.Ai)
-                                aType = aType.ToUpper();
+            //            if (a.Ai)
+            //                aType = aType.ToUpper();
 
-                            // Add some text to file    
-                            string toWrite =
-                                ($"{aType} -X {a.X} -Y {a.Y} " + 
-                                Environment.NewLine);
-                            sw.Write(toWrite);
-                        }
-                        }
-            }
-
-
+            //            // Add some text to file    
+            //            string toWrite =
+            //                ($"{aType} -X {a.X} -Y {a.Y} " +
+            //                Environment.NewLine);
+            //            sw.Write(toWrite);
+            //        }
+            //    }
+            //}
 
             Console.WriteLine("The save file was stored on\n" +
                 $"{dirPath}");
@@ -172,38 +170,6 @@ namespace ZombieGame
                     Console.WriteLine("Error, no save file created.");
             }
             return new GameSettings(sav);
-        }
-
-        public static List<Agents> LoadBoardState()
-        {
-            List<Agents> loadedA = new List<Agents>();
-
-            using (StreamReader sr = File.OpenText(settsFilePath))
-            {
-            //    string s;
-            //    if ((s = sr.ReadLine()) != null)
-            //    {
-            //        string arg = "";
-            //        int counter = 0;
-            //        foreach (char c in s)
-            //        {
-            //            if (c != ' ')
-            //            {
-            //                arg += c;
-            //            }
-            //            else
-            //            {
-            //                sav[counter] += arg;
-            //                counter++;
-            //                arg = "";
-            //            }
-            //        }
-            //    }
-            //    else
-            //        Console.WriteLine("Error, no save file created.");
-            }
-
-            return loadedA;
         }
 
         private static char CheckChar(int check)
