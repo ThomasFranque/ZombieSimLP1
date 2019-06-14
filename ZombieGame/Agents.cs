@@ -47,6 +47,14 @@ namespace ZombieGame
             Ai = ai;
         }
 
+        public Agents(string ai, string X, string Y)
+        {
+            this.X = Convert.ToInt32(X);
+            this.Y = Convert.ToInt32(Y);
+            Ai = Convert.ToBoolean(ai);
+            Console.WriteLine($"AI: {Ai}\tX: {this.X}\tY:{this.Y}");
+        }
+
         /// <summary>
         /// Method to infect humans
         /// </summary>
@@ -466,7 +474,7 @@ namespace ZombieGame
         /// Returns Agent to string, 
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => $"Ai: {Ai}; Agent: ";
+        public override string ToString() => $"Ai: {Ai} Agent: ";
 
 
         // Check if Agent exist in list

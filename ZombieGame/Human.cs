@@ -10,6 +10,13 @@
             canInfect = false;
         }
 
+        public Human(string ai, string X, string Y) : 
+            base(ai, X, Y)
+        {
+            Infected = false;
+            canInfect = false;
+        }
+
         // Print symbol for human agents
         public char PrintPart()
         {
@@ -26,8 +33,10 @@
             }
         }
 
-        public override string ToString() => (!Infected) ? base.ToString() + "Human" +
-            $" X: {X}\tY: {Y}" : base.ToString() + "Zombie" +
-            $" X: {X}\tY: {Y}";
+        public override string ToString() => (!Infected) ? base.ToString() + 
+            "Human;" +
+            $" X: {X} Y: {Y}" : base.ToString() + 
+            "Zombie;" +
+            $" X: {X} Y: {Y}";
     }
 }

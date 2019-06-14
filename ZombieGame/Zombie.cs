@@ -8,7 +8,14 @@
         {
             Infected = true;
             canInfect = true;
-        }    
+        }
+
+        public Zombie(string ai, string X, string Y) :
+            base(ai, X, Y)
+        {
+            Infected = true;
+            canInfect = true;
+        }
 
         // Print symbols for zombie agents
         public char PrintPart()
@@ -26,7 +33,7 @@
             }
         }
 
-        public override string ToString() => base.ToString() + "Zombie" +
-            $" X: {X}\tY: {Y}";
+        public override string ToString() => base.ToString() + "Zombie;" +
+            $" X: {X} Y: {Y}";
     }
 }
