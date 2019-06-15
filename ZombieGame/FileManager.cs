@@ -10,7 +10,6 @@ namespace ZombieGame
     {
         private static string dirPath;
         private static string settsFilePath;
-        private static string settsFileName;
 
         /// <summary>
         /// 
@@ -111,11 +110,11 @@ namespace ZombieGame
                 }
             }
 
-            Console.WriteLine("The save file was stored on\n" +
+            Render.PressKey("The save file was stored on\n" +
                 $"{dirPath}");
         }
 
-        public static void LoadSetts(string[] args, out GameSettings gs,
+        public static void Load(string[] args, out GameSettings gs,
             out List<Agents> agents)
         {
             settsFilePath = dirPath + @"\" + @args[1];
@@ -173,14 +172,11 @@ namespace ZombieGame
 
                         gs = new GameSettings(sav);
                         agents = newAgents;
+                        Render.PressKey("Save file successfully loaded.");
 
-                        //for(int i = 1; i < s.ToString().Length; i++)
-                        //{
-
-                        //}
                     }
                     else
-                        Console.WriteLine("Error, no save file created.");
+                        Render.PressKey("Error, no save file loaded.");
                 }
 
             }

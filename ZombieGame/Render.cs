@@ -199,9 +199,8 @@ namespace ZombieGame
         /// <param name="msg">Message to display</param>
         public static void PressKey(string msg)
         {
-            ForegroundColor = ConsoleColor.Red;
             WriteLine(msg);
-            //PressKey();
+            PressKey();
         }
 
         public static void AI(int x, int y)

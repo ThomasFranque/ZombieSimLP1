@@ -21,13 +21,10 @@ namespace ZombieGame
             if (args.Length > 0)
                 if(args[0].ToCharArray().Length > 0)
                     if (args[0][1] == 's')
-                        FileManager.LoadSetts(args, out setts, out agents);
+                        FileManager.Load(args, out setts, out agents);
 
             if (setts == null)
                 setts = new GameSettings(args);
-
-
-            Console.ReadKey(true);
 
             // Save the settings
             //FileManager.Save(setts.GetAllVars());
@@ -94,24 +91,22 @@ namespace ZombieGame
                             FillBoard(setts.y, agents, new int[2]
                             { agent.X, agent.Y });
                             Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
-                            Console.WriteLine(agent.GetType());
-                            Console.WriteLine(turns);
+                            //Console.WriteLine(agent.GetType());
+                            Console.WriteLine($"turn number: {turns}");
 
 
-                            /* 
-                             * -----DEBUG-----
+                            // //* -----DEBUG-----
                             //foreach (Agents agent1 in agents)
                             //    Console.WriteLine(agent1);
 
-                            */
 
                             // If agent is Ai controlled...
                             if (agent.Ai)
                             {
-                                Render.IsAi(agent);
-                                Thread.Sleep(750);
+                                Console.WriteLine(agent);
                                 agent.Move(agent, setts.BoardSize, agents);
-                                //Thread.Sleep(1500);
+                                
+                                Thread.Sleep(1200);
 
                             }
 
