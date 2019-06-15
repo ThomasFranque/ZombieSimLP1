@@ -90,7 +90,7 @@ namespace ZombieGame
             Songs.TuneDeath();
 
             WriteLine("All humans have died...");
-            // Saves stats / why?
+
             Thread.Sleep(10000);
         }
 
@@ -199,9 +199,8 @@ namespace ZombieGame
         /// <param name="msg">Message to display</param>
         public static void PressKey(string msg)
         {
-            ForegroundColor = ConsoleColor.Red;
             WriteLine(msg);
-            //PressKey();
+            PressKey();
         }
 
         public static void AI(int x, int y)
@@ -224,7 +223,7 @@ namespace ZombieGame
         {
             WriteLine("Press 1 for simulation menu; \n" +
                 "Press 2 for movement; \n" +
-                "Press 3 to save game.\n");
+                "Press 3 to save the game.\n");
         }
     }
 }
