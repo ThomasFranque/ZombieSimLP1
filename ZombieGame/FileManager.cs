@@ -1,18 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Collections;
 using System.Text;
 
 namespace ZombieGame
 {
     static class FileManager
     {
+        // instance variables
         private static string dirPath;
         private static string settsFilePath;
 
         /// <summary>
-        /// 
+        /// Static File manager constructor
         /// </summary>
         static FileManager()
         {
@@ -60,7 +60,6 @@ namespace ZombieGame
                 // Create a file to write to
                 using (FileStream fs = File.Create(settsFilePath))
                 {
-                    // Write on it
                     // Write the vars in file
                     for (int i = 0; i < gameVars.Length; i++)
                     {
@@ -95,16 +94,19 @@ namespace ZombieGame
                     {
                         char varName = CheckChar(counter);
 
-                        // Add some text to file    
+                        // Add game vars    
                         string toWrite = "-" + varName +
                             " " + gameVars[counter] + " ";
 
+                        // write added var
                         sw.Write(toWrite);
                         counter++;
                     }
 
+                    // Write a new line
                     sw.WriteLine();
 
+                    // Write all the agents on the file
                     foreach (Agents a in agents)
                         sw.WriteLine(a);
                 }
@@ -128,12 +130,14 @@ namespace ZombieGame
                 // Open the file to read from
                 using (StreamReader sr = File.OpenText(settsFilePath))
                 {
+                    // Temp vars
                     string s;
                     List<Agents> newAgents = new List<Agents>();
                     string[] agentsInfo;
 
                     if ((s = sr.ReadLine()) != null)
                     {
+                        // Counters
                         string arg = "";
                         int counter = 0;
                         foreach (char c in s)
@@ -150,18 +154,22 @@ namespace ZombieGame
                             }
                         }
 
+                        // Get all agents
                         agentsInfo = File.ReadAllLines(settsFilePath);
 
+                        // Run through all the agent lines
                         for (int i = 1; i < agentsInfo.Length; i++)
                         {
                             string[] values = agentsInfo[i].Split(' ');
 
+                            // Add new zombies
                             if (values[3][0] == 'Z')
                                 newAgents.Add(
                                     new Zombie(
                                         ai: values[1],
                                         X: values[5], 
                                         Y: values[7]));
+                            // add new humans
                             else
                                 newAgents.Add(
                                     new Human(
@@ -170,11 +178,15 @@ namespace ZombieGame
                                         Y: values[7]));
                         }
 
+                        // Assign out variables
                         gs = new GameSettings(sav);
                         agents = newAgents;
+
+                        // Success message
                         Render.PressKey("Save file successfully loaded.");
 
                     }
+                    // Error message
                     else
                         Render.PressKey("Error, no save file loaded.");
                 }
@@ -182,12 +194,18 @@ namespace ZombieGame
             }
             else
             {
+                // Defaults if save file not found
                 gs = new GameSettings(args);
                 agents = null;
                 Console.WriteLine($"Save File: {args[1]} not found.");
             }
         }
 
+        /// <summary>
+        /// Get the correspondent char
+        /// </summary>
+        /// <param name="check">Number to check</param>
+        /// <returns>Argument char</returns>
         private static char CheckChar(int check)
         {
             char varName = ' ';

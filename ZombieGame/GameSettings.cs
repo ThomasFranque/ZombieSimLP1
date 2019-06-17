@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 
 namespace ZombieGame
 {
@@ -9,7 +8,7 @@ namespace ZombieGame
     /// </summary>
     class GameSettings
     {
-        /*
+        /* Argument example
         * dotnet run -- -x 20 -y 20 -z 10 -h 30 -Z 1 -H 2 -t 1000
         */
 
@@ -54,7 +53,7 @@ namespace ZombieGame
         public int T { get; set; }
 
         /// <summary>
-        /// Get 
+        /// Get the board size
         /// </summary>
         public int[] BoardSize { get; }
 
@@ -91,16 +90,18 @@ namespace ZombieGame
                 }
             }
 
+            // Check the arguments for mistakes
             CheckArgs();
 
+            // Success message
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nSuccessfully initialized game settings...");
             Console.WriteLine($"| Agents: {z + h + Z + H}\n" +
                 $"| Playing Area: {x * y}\n");
             Console.ResetColor();
 
+            // Assign board size
             BoardSize = new int[2] { x, y };
-            //Thread.Sleep(3600);
         }
 
         /// <summary>
@@ -113,41 +114,42 @@ namespace ZombieGame
             // Will check for the target number ID
             switch (idArg[1])
             {
-                // Fill these
+                // Board lengh
                 case 'x':
                     x = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // Board Height
                 case 'y':
                     y = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // player zombies
                 case 'z':
                     z = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // player humans
                 case 'h':
                     h = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // AI zombies
                 case 'Z':
                     Z = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // AI humans
                 case 'H':
                     H = Convert.ToInt32(numArg);
                     break;
 
-                // 
+                // total turns
                 case 't':
                     t = Convert.ToInt32(numArg);
                     break;
 
+                // current turns
                 case 'T':
                     T = Convert.ToInt32(numArg);
                     break;
@@ -224,8 +226,9 @@ namespace ZombieGame
             // Check if the board is valid
             while (x * y <= z + h || BoardWarning())
             {
-                Console.WriteLine($"\nUps...\nTotal Agents: {z + h + Z + H}\n" +
-                    $"Board Area: {x * y}");
+                // Ask if player wants to continue with the oversized board
+                Console.WriteLine($"\nUps...\nTotal Agents: {z + h + Z + H}\n" 
+                    + $"Board Area: {x * y}");
                 Console.WriteLine("It seems that what you are trying to " +
                     "do surpasses the board capabilities.\n");
 
@@ -241,13 +244,16 @@ namespace ZombieGame
         /// <param name="rand">Random object previously created</param>
         private void InvalidArgs(Random rand)
         {
+            // Var
             char decision;
 
+            // Message
             Console.Write("Do you wish to generate a new board or " +
              "generate new agents?\n" +
              "Generate New Board ......... <b>\n" +
              "Generate New Agents ........ <a>\n>");
 
+            // Get input
             decision = PlayerInput();
 
             // While not a valid input
@@ -263,6 +269,7 @@ namespace ZombieGame
                 // Set board x and y using agents
                 do
                 {
+                    // Prevent min and max random exeption
                     try
                     {
                         x = rand.Next(h / 2, z / 2);
@@ -317,7 +324,6 @@ namespace ZombieGame
             return restart;
         }
 
-        // VVVVVVVVVVV THIS MIGHT AND SHOULD GO TO ANOTHER CLASS VVVVVVVVVVVV
         /// <summary>
         /// Gets the player intention
         /// </summary>
@@ -340,9 +346,9 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// 
+        /// Used to get all of the game settings variables
         /// </summary>
-        /// <returns>An array with all the values</returns>
+        /// <returns>An array with all the variables</returns>
         public int[] GetAllVars() => new int[8] { x, y, h, z, Z, H, t, T };
     }
 }
