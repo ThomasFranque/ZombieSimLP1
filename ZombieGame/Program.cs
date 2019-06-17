@@ -115,7 +115,7 @@ namespace ZombieGame
 
                                 agent.Move
                                     (agent, setts.BoardSize, agents, dir);
-                                Render.PressKey();
+                                //Render.PressKey();
                             }
 
                             // Check if there aren't any agent...
