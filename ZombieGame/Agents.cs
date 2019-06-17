@@ -7,9 +7,9 @@ namespace ZombieGame
     abstract class Agents : IEquatable<Agents>
     {
         // Class variables
-        private readonly int offSett;
+        private const int offSett = 1;
 
-        //
+        // Know if the agent can infect
         internal bool canInfect;
 
         // Agents' Properties
@@ -42,7 +42,6 @@ namespace ZombieGame
             // Random is set for debugging
             X = r.Next(1, sizeX + 1);
             Y = r.Next(1, sizeY + 1);
-            offSett = 1;
 
             Ai = ai;
         }
@@ -52,7 +51,6 @@ namespace ZombieGame
             this.X = Convert.ToInt32(X);
             this.Y = Convert.ToInt32(Y);
             Ai = Convert.ToBoolean(ai);
-            offSett = 1;
             //Console.WriteLine($"AI: {Ai}\tX: {this.X}\tY:{this.Y}");
         }
 
