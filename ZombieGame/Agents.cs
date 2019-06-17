@@ -19,22 +19,29 @@ namespace ZombieGame
         public bool Ai { get; }
 
         /// <summary>
-        /// Is infected?
+        /// Bool property to define if an agent is infected or not
         /// </summary>
         public bool Infected { get; protected set; }
 
         /// <summary>
-        /// Readonly property of the position of the agent on the X axis
+        /// Read-only property of the position of the agent on the X axis
         /// </summary>
         public int X { get; private set; }
 
         /// <summary>
-        /// Readonly property of the position of the agent on the Y axis
+        /// Read-only property of the position of the agent on the Y axis
         /// </summary>
         public int Y { get; private set; }
 
-
-        // Agent constructor
+        /// <summary>
+        /// Agent constructor, to be used by every derived class.
+        /// </summary>
+        /// <param name="AIUnit"> Defines if Agent is AI controlled or 
+        /// not. </param>
+        /// <param name="sizeX"> Uses board size to 
+        /// give x position to agent </param>
+        /// <param name="sizeY">Uses board size to 
+        /// give y position to agent</param>
         public Agents(bool ai, int sizeX, int sizeY)
         {
             Random r = new Random();
@@ -46,37 +53,53 @@ namespace ZombieGame
             Ai = ai;
         }
 
+        /// <summary>
+        /// Agent constructor to be used if user loads save file
+        /// </summary>
+        /// <param name="ai"> Defines if Agent is AI controlled or 
+        /// not.</param>
+        /// <param name="X"> Uses board size to 
+        /// give x position to agent. </param>
+        /// <param name="Y"> Uses board size to 
+        /// give y position to agent. </param>
         public Agents(string ai, string X, string Y)
         {
             this.X = Convert.ToInt32(X);
             this.Y = Convert.ToInt32(Y);
             Ai = Convert.ToBoolean(ai);
-            //Console.WriteLine($"AI: {Ai}\tX: {this.X}\tY:{this.Y}");
+            offSett = 1;
         }
 
         /// <summary>
-        /// Method to infect humans
+        /// Method to infect Human agents. To be used only when 
+        /// human agents are involved
         /// </summary>
-        /// <param name="human"></param>
+        /// <param name="human">Uses a given Human Agent</param>
         public virtual void Infect(Agents human)
         {
             human.Infected = true;
         }
 
         /// <summary>
-        /// Player moves agents with keys
+        /// Method for Agent movement, mo  with keys
         /// </summary>
-        /// <param name="j"></param>
-        public void Move(Agents j, int[] size, IEnumerable<Agents> agents, char dir)
+        /// <param name="j"> Agent that will be moved. </param>
+        /// <param name="size"> Max board size. </param>
+        /// <param name="agents"> List of Agents in game. </param>
+        /// <param name="dir"> Chosen direction. </param>
+        public void Move(Agents j, int[] size, IEnumerable<Agents> agents,
+            char dir)
         {
-            //// Goes through list and verifies if exist an agent with said coordinates
+            // Goes through list...
+            //...and verifies if exist an agent with said coordinates
             switch (dir)
             {
                 // Up
                 case 'w':
                     if (Y <= 1)
                     {
-                        // Lock agent j up movement, other side of map is occupied
+                        // Lock agent j up movement if bottom side of map...
+                        // ...is occupied
                         if (Occupied(new int[] { X, size[1] }, agents))
                         {
                             Console.WriteLine("North position is occupied");
@@ -89,7 +112,8 @@ namespace ZombieGame
                     }
                     else
                     {
-                        // Lock agent j up movement, up position is occupied
+                        // Lock agent j up movement, if position above
+                        // is occupied.
                         if (Occupied(new int[] { X, Y - offSett }, agents))
                         {
                             Console.WriteLine("North position is occupied");

@@ -25,21 +25,15 @@ namespace ZombieGame
 
             if (setts == null)
                 setts = new GameSettings(args);
-
-            // Save the settings
-            //FileManager.Save(setts.GetAllVars());
-
-            // Load settings
-            //setts = FileManager.LoadSetts();
         }
 
         private static void Main(string[] args)
         {
             Program prgm = new Program(args);
-            prgm.Start();
+            prgm.Loop();
         }
 
-        private void Start()
+        private void Loop()
         {
             //  Declare block variables
             string option;
@@ -154,6 +148,7 @@ namespace ZombieGame
                     case "3":
                         // Insert option
                         FileManager.Save(setts.GetAllVars(), agents);
+                        Render.IntroScreen();
                         break;
 
                     default:
@@ -169,11 +164,10 @@ namespace ZombieGame
                     turns = setts.T;
                 }
 
-
                 // Continue loop while user doesn't select option 4...
                 //...or turns played is less than max turns or...
                 //... still exists agents that are not infected
-            } while (turns > setts.T); // CANNOT REMOVE !OPTION 4, LOOP DOESN'T WORK
+            } while (turns > setts.T);
             Render.AllHumansDead();
         }
 
