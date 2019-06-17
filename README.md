@@ -16,6 +16,14 @@
 
 ### Quem fez o quê:
 
+`João:` Criação de classes, Render (alguns métodos desta), 
+Agents (Lógica e movimento inicial dos agentes e AI, CheckAgents), 
+Humans, Zombies, Songs, Documentação (Readme, Fluxogramas).
+
+`Miguel:` Listas, implementação de interfaces, Lógica de (...), 
+continuação e conclusão de movimento dos agentes, *Gameloop* (...).
+
+`Tomás:` *Gamesettings*, *Save Files*, AI, cores (...).
 
 
 ## Descrição da Solução:
@@ -28,7 +36,11 @@
 
 ### Diagrama UML
 
+![](UMLZombieSim.png)
+
 ### Fluxograma
+
+![](FluxogramZombieSim.png)
 
 ### Conclusões
 
