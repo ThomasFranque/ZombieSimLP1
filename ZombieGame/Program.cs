@@ -13,10 +13,6 @@ namespace ZombieGame
 
         private Program(string[] args)
         {
-            // This temporary line is used for debugging
-            // Test load files by changing file name
-            args = new string[] { "-s", "TestSave.sav" };
-
             // Instanciate classes;
             if (args.Length > 0)
                 if(args[0].ToCharArray().Length > 0)
@@ -25,21 +21,15 @@ namespace ZombieGame
 
             if (setts == null)
                 setts = new GameSettings(args);
-
-            // Save the settings
-            //FileManager.Save(setts.GetAllVars());
-
-            // Load settings
-            //setts = FileManager.LoadSetts();
         }
 
         private static void Main(string[] args)
         {
             Program prgm = new Program(args);
-            prgm.Start();
+            prgm.Loop();
         }
 
-        private void Start()
+        private void Loop()
         {
             //  Declare block variables
             string option;
@@ -70,11 +60,11 @@ namespace ZombieGame
 
             do
             {
+                // Counts number of turns that passed
                 turns++;
+
                 // Get user choice
                 option = Console.ReadLine();
-
-                //Console.WriteLine(!agents.Exists(x => x.Infected == false));
 
                 switch (option)
                 {
@@ -91,14 +81,7 @@ namespace ZombieGame
                             FillBoard(setts.y, agents, new int[2]
                             { agent.X, agent.Y });
                             Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
-                            //Console.WriteLine(agent.GetType());
                             Console.WriteLine($"turn number: {turns}");
-
-
-                            // //* -----DEBUG-----
-                            //foreach (Agents agent1 in agents)
-                            //    Console.WriteLine(agent1);
-
 
                             // If agent is Ai controlled...
                             if (agent.Ai)
@@ -132,6 +115,7 @@ namespace ZombieGame
 
                                 agent.Move
                                     (agent, setts.BoardSize, agents, dir);
+                                Render.PressKey();
                             }
 
                             // Check if there aren't any agent...
@@ -154,10 +138,12 @@ namespace ZombieGame
                     case "3":
                         // Insert option
                         FileManager.Save(setts.GetAllVars(), agents);
+                        Render.IntroScreen();
                         break;
 
                     default:
                         Console.WriteLine("Invalid");
+                        Render.IntroScreen();
                         break;
                 }
 
@@ -169,19 +155,26 @@ namespace ZombieGame
                     turns = setts.T;
                 }
 
-
-                // Continue loop while user doesn't select option 4...
-                //...or turns played is less than max turns or...
-                //... still exists agents that are not infected
-            } while (turns > setts.T); // CANNOT REMOVE !OPTION 4, LOOP DOESN'T WORK
+               // Continue loop while turns played is less than max turns or...
+               //... still exists agents that are not infected
+            } while (turns > setts.T);
             Render.AllHumansDead();
         }
 
+        /// <summary>
+        /// Method to call Render static method to fill board with Agents.
+        /// </summary>
+        /// <param name="y"> Board height. </param>
+        /// <param name="agents"> List of Agents to be printed. </param>
+        /// <param name="targetUnit"> Specific Agent to be placed. </param>
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
         {
             Render.PlaceAgents(y, agents, targetUnit);
         }
 
+        /// <summary>
+        /// Method to call Render static method to print board.
+        /// </summary>
         private void PrintMap()
         {
             Console.ResetColor();
@@ -232,7 +225,7 @@ namespace ZombieGame
             // Add player controled h
             for (int i = 0; i < setts.h; i++)
             {
-                agents.Add(NewAgent(false, true));
+                agents.Add(NewAgent(false, false));
                 //agents.Add(NewAgent(false, false));
             }
 
@@ -245,7 +238,7 @@ namespace ZombieGame
             // Add player controled z
             for (int i = 0; i < setts.z; i++)
             {
-                agents.Add(NewAgent(true, true));
+                agents.Add(NewAgent(true, false));
                 //agents.Add(NewAgent(true, false));
             }
 
@@ -258,6 +251,11 @@ namespace ZombieGame
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Method to shuffle order of Agents in list
+        /// </summary>
+        /// <param name="lst"> List of Agents to be shuffled. </param>
+        /// <returns> Shuffled list. </returns>
         public List<Agents> ShuffleAgentsList(List<Agents> lst)
         {
             Random r = new Random();
