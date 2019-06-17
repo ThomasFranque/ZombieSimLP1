@@ -60,6 +60,8 @@ namespace ZombieGame
                 default:
                     WriteLine
                         ("Invalid choice, sending you back to the simulation");
+                    WriteLine();
+                    IntroScreen();
                     break;
             }
         }
@@ -79,6 +81,7 @@ namespace ZombieGame
             WriteLine("D - Right");
             WriteLine("Z - Down Left");
             WriteLine("C - Down Right");
+            WriteLine("Press any key to continue...");
         }
 
         /// <summary>
@@ -95,10 +98,10 @@ namespace ZombieGame
         }
 
         /// <summary>
-        /// Print the board in ASCII
+        /// Print the board in ASCII.
         /// </summary>
-        /// <param name="length"></param>
-        /// <param name="height"></param>
+        /// <param name="length"> Board X size. </param>
+        /// <param name="height"> Board Y size. </param>
         public static void PrintBoard(int length, int height)
         {
             Clear();
@@ -126,8 +129,9 @@ namespace ZombieGame
         /// <summary>
         /// Will write the agents on the console.
         /// </summary>
-        /// <param name="boardHeight">Height of the board</param>
-        /// <param name="agents">List of agents to be placed</param>
+        /// <param name="boardHeight"> Height of the board. </param>
+        /// <param name="agents"> List of agents to be placed. </param>
+        /// <param name="targetUnit"> Specific Agent position. </param>
         public static void PlaceAgents
             (int boardHeight, IEnumerable<Agents> agents, int[] targetUnit)
         {
@@ -178,8 +182,8 @@ namespace ZombieGame
         /// <summary>
         /// Normalizes the agent X and Y for the console coordinates.
         /// </summary>
-        /// <param name="x">Agent's X</param>
-        /// <param name="y">Agent's Y</param>
+        /// <param name="x"> Agent's X position. </param>
+        /// <param name="y"> Agent's Y position. </param>
         /// <returns>Normalized Coordinates</returns>
         private static int[] NormalizePosition(int x, int y) =>
             new int[2] { x * 4 - 2, y * 2 - 1 };
@@ -196,13 +200,18 @@ namespace ZombieGame
         /// <summary>
         /// Overload of PressKey() to display a message.
         /// </summary>
-        /// <param name="msg">Message to display</param>
+        /// <param name="msg"> Message to display. </param>
         public static void PressKey(string msg)
         {
             WriteLine(msg);
             PressKey();
         }
 
+        /// <summary>
+        /// Normalize positions for AI Agents.
+        /// </summary>
+        /// <param name="x"> AI Agent's X position. </param>
+        /// <param name="y"> AI Agent's Y position. </param>
         public static void AI(int x, int y)
         {
             int[] a = NormalizePosition(x, y);
@@ -213,12 +222,18 @@ namespace ZombieGame
             SetCursorPosition(a[0], a[1]);
         }
 
-
+        /// <summary>
+        /// Show if Agent is AI controlled.
+        /// </summary>
+        /// <param name="agent"> Agent to be checked. </param>
         public static void IsAi(Agents agent)
         {
             WriteLine($"Is Agent Ai? --> {agent.Ai}");
         }
 
+        /// <summary>
+        /// Display initial menu
+        /// </summary>
         public static void IntroScreen()
         {
             WriteLine("Press 1 for simulation menu; \n" +

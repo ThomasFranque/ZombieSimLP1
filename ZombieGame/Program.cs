@@ -13,10 +13,6 @@ namespace ZombieGame
 
         private Program(string[] args)
         {
-            // This temporary line is used for debugging
-            // Test load files by changing file name
-            args = new string[] { "-s", "TestSave.sav" };
-
             // Instanciate classes;
             if (args.Length > 0)
                 if(args[0].ToCharArray().Length > 0)
@@ -64,11 +60,11 @@ namespace ZombieGame
 
             do
             {
+                // Counts number of turns that passed
                 turns++;
+
                 // Get user choice
                 option = Console.ReadLine();
-
-                //Console.WriteLine(!agents.Exists(x => x.Infected == false));
 
                 switch (option)
                 {
@@ -85,14 +81,7 @@ namespace ZombieGame
                             FillBoard(setts.y, agents, new int[2]
                             { agent.X, agent.Y });
                             Console.WriteLine($"X: {agent.X}\nY: {agent.Y}");
-                            //Console.WriteLine(agent.GetType());
                             Console.WriteLine($"turn number: {turns}");
-
-
-                            // //* -----DEBUG-----
-                            //foreach (Agents agent1 in agents)
-                            //    Console.WriteLine(agent1);
-
 
                             // If agent is Ai controlled...
                             if (agent.Ai)
@@ -153,6 +142,7 @@ namespace ZombieGame
 
                     default:
                         Console.WriteLine("Invalid");
+                        Render.IntroScreen();
                         break;
                 }
 
@@ -164,18 +154,26 @@ namespace ZombieGame
                     turns = setts.T;
                 }
 
-                // Continue loop while user doesn't select option 4...
-                //...or turns played is less than max turns or...
-                //... still exists agents that are not infected
+               // Continue loop while turns played is less than max turns or...
+               //... still exists agents that are not infected
             } while (turns > setts.T);
             Render.AllHumansDead();
         }
 
+        /// <summary>
+        /// Method to call Render static method to fill board with Agents.
+        /// </summary>
+        /// <param name="y"> Board height. </param>
+        /// <param name="agents"> List of Agents to be printed. </param>
+        /// <param name="targetUnit"> Specific Agent to be placed. </param>
         private void FillBoard(int y, List<Agents> agents, int[] targetUnit)
         {
             Render.PlaceAgents(y, agents, targetUnit);
         }
 
+        /// <summary>
+        /// Method to call Render static method to print board.
+        /// </summary>
         private void PrintMap()
         {
             Console.ResetColor();
@@ -252,6 +250,11 @@ namespace ZombieGame
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Method to shuffle order of Agents in list
+        /// </summary>
+        /// <param name="lst"> List of Agents to be shuffled. </param>
+        /// <returns> Shuffled list. </returns>
         public List<Agents> ShuffleAgentsList(List<Agents> lst)
         {
             Random r = new Random();
